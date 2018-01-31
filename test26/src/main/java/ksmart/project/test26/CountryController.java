@@ -23,6 +23,6 @@ public class CountryController {
 		List<Country> list = CountryDao.selectCountryList(); 		
 		model.addAttribute("list", list);
 		
-		return "countryList";		
+		return "country/countryList";		
 	}
 }
