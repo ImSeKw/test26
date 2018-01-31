@@ -18,6 +18,6 @@ public class IdolController {
 	public String idolList(Model model) {
 		List<Idol> list = idolDao.selectIdolList();
 		model.addAttribute("list", list);
-		return "idol/idolList";
+		return "idol/idolList"; 
 	}
 }
