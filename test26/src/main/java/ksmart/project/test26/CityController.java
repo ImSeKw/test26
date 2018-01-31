@@ -20,6 +20,6 @@ public class CityController {
 	public String cityList(Model model) {
 		List<City> list = cityDao.selectCityList();
 		model.addAttribute("list", list);
-		return "cityList";
+		return "city/cityList";
 	}
 }
