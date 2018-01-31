@@ -9,7 +9,7 @@
 </head>
 <body>
 <h1>companyList</h1>
-<div>
+
 
 	<table border="1">
 		<c:forEach var="company" items="${list}">
@@ -26,7 +26,6 @@
 			</tr>
 		</tbody>
 		</c:forEach>
-</div>
 	</table>
 
 </body>

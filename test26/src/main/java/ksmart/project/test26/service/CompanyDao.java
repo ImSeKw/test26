@@ -14,9 +14,6 @@ public class CompanyDao {
 	
 	public List<Company>selectCompanyList(){
 		return sst.selectList("ksmart.project.test26.service.CompanyMapper.selectCompanyList");
-		
-	
-		
 	}
 
 }

@@ -3,6 +3,7 @@ package ksmart.project.test26.service;
 public class Company {
 	private int companyId;
 	private String companyName;
+	
 	public int getCompanyId() {
 		return companyId;
 	}

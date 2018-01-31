@@ -4,8 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="ksmart.project.test26.service.CompanyMapper">
-<select id="selectCompanyList" resultType="ksmart.project.test26.service.Company">
-	SELECT company_id as companyId,company_name as companyName FROM company
-</select>
-
+	<select id="selectCompanyList" resultType="ksmart.project.test26.service.Company">
+		SELECT company_id as companyId,company_name as companyName FROM company
+	</select>
 </mapper>

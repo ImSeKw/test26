@@ -16,13 +16,9 @@ public class CompanyController {
 	private CompanyDao companyDao;
 	
 	@RequestMapping(value="/company/companyList")
-	public String companylist(Model model) {
-	List<Company> list =companyDao.selectCompanyList();
-	model.addAttribute("list",list);
-	return "companyList";
-	
+	public String companyList(Model model) {
+		List<Company> list =companyDao.selectCompanyList();
+		model.addAttribute("list",list);
+		return "companyList";
 	}
-	
-	
-
 }
