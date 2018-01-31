@@ -19,6 +19,6 @@ public class CompanyController {
 	public String companyList(Model model) {
 		List<Company> list =companyDao.selectCompanyList();
 		model.addAttribute("list",list);
-		return "companyList";
+		return "company/companyList";
 	}
 }
