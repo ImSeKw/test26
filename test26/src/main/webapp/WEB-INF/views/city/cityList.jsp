@@ -10,7 +10,8 @@
 	rel="stylesheet">
 <link href="<c:url value="/resources/css-color/bootstrap.min.css" />"
 	rel="stylesheet">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
@@ -24,7 +25,7 @@
 				</div>
 			</div>
 		</div>
-	</div>	
+	</div>
 	<div class="row justify-content-md-center">
 		<div class="col-lg-4"></div>
 		<div class="col col-md-auto col-lg-4 text-center">
@@ -51,8 +52,9 @@
 	<div class="row">
 		<div class="col-lg-4"></div>
 		<div class="col col-xs-12 col-sm-12 col-md-auto col-lg-4 text-center">
-			<a href="${pageContext.request.contextPath}/" class="btn rgba-pink-strong"
-				role="button"><i class="fa fa-home" aria-hidden="true"></i></a>
+			<a href="${pageContext.request.contextPath}/"
+				class="btn rgba-pink-strong" role="button"><i class="fa fa-home"
+				aria-hidden="true"></i></a>
 		</div>
 		<div class="col-lg-4"></div>
 	</div>

@@ -6,23 +6,17 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<!-- spring에서 부트스트랩 경로설정 -->
-<link href="<c:url value="/resources/css/bootstrap.min.css" />"
+<link href="<c:url value="/resources/css-color/mdb.min.css" />"
 	rel="stylesheet">
-
-<!-- 부트스트랩 테마적용 -->
+<link href="<c:url value="/resources/css-color/bootstrap.min.css" />"
+	rel="stylesheet">
 <link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<!-- 부트스트랩 테마적용 -->
-
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
 	<div class="jumbotron jumbotron-sm">
-		<div class="container">
+		<div class="container-fluid">
 			<div class="row">
 				<div class="col-sm-12 col-lg-12">
 					<h1 class="h1">
@@ -32,12 +26,13 @@
 			</div>
 		</div>
 	</div>
-	<div class="container">
-		<div class="col-md-2 col-lg-2"></div>
-		<div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 text-center">
+	<div class="row justify-content-md-center">
+		<div class="col-lg-4"></div>
+		<div class="col col-md-auto col-lg-4 text-center">
+			<h2 class="text-center"></h2>
 			<table class="table table-hover">
-				<thead>
-					<tr>
+				<thead class="mdb-color darken-3">
+					<tr class="text-white">
 						<td><strong>No.</strong></td>
 						<td><strong>MOVIE</strong></td>
 					</tr>
@@ -52,15 +47,16 @@
 				</tbody>
 			</table>
 		</div>
-		<div class="col-md-2 col-lg-2"></div>
+		<div class="col-lg-4"></div>
 	</div>
-	<div class="container">
-		<div class="col-md-4 col-lg-4"></div>
-		<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 text-center">
-			<a href="${pageContext.request.contextPath}/" class="btn btn-info"
-				role="button"><span class="glyphicon glyphicon-home"></span></a>
+	<div class="row">
+		<div class="col-lg-4"></div>
+		<div class="col col-xs-12 col-sm-12 col-md-auto col-lg-4 text-center">
+			<a href="${pageContext.request.contextPath}/"
+				class="btn rgba-pink-strong" role="button"><i class="fa fa-home"
+				aria-hidden="true"></i></a>
 		</div>
-		<div class="col-md-4 col-lg-4"></div>
+		<div class="col-lg-4"></div>
 	</div>
 	<%-- <div class="container">
 		<h2>MOVIE LIST</h2>
