@@ -5,7 +5,7 @@
 
 <mapper namespace="ksmart.project.test26.service.CityMapper">
 	<!-- delete 도시삭제 -->
-	<delete id="deleteCityName" parameterType="int">
+	<delete id="deleteCity" parameterType="ksmart.project.test26.service.City">
 		DELETE FROM city
 		WHERE city_id = #{cityId}
 	</delete>
@@ -16,7 +16,7 @@
 		WHERE city_id = #{cityId}
 	</update>
 	<!-- update view 도시조회 -->
-	<select id="selectCityName" parameterType="int" resultType="ksmart.project.test26.service.City">
+	<select id="selectCityName" parameterType="ksmart.project.test26.service.City" resultType="ksmart.project.test26.service.City">
 		SELECT
 			city_id as cityId
 			, city_name as cityName
