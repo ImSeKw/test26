@@ -1,7 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -34,6 +33,8 @@
 					<tr class="text-white">
 						<td><strong>No.</strong></td>
 						<td><strong>COMPANY</strong></td>
+						<td><strong>수정</strong></td>
+						<td><strong>삭제</strong></td>
 					</tr>
 				</thead>
 				<tbody>
@@ -41,6 +42,9 @@
 						<tr>
 							<td>${company.companyId}</td>
 							<td>${company.companyName}</td>
+							<td><a href="${pageContext.request.contextPath}/company/updateCompany?companyId=${company.companyId}" type="button">수정</a></td>
+							<td><a href="${pageContext.request.contextPath}/company/deleteCompany?companyId=${company.companyId}" type="button">삭제</a></td>
+							
 						</tr>
 					</c:forEach>
 				</tbody>
@@ -53,7 +57,7 @@
 		<div class="col col-xs-12 col-sm-12 col-md-auto col-lg-4 text-center">
 			<a href="${pageContext.request.contextPath}/" class="btn rgba-pink-strong"
 				role="button"><i class="fa fa-home" aria-hidden="true"></i></a>
-			<a href="${pageContext.request.contextPath}/company/companyadd" class="btn rgba-pink-strong"
+			<a href="${pageContext.request.contextPath}/company/insertcompany" class="btn rgba-pink-strong"
 				role="button"><i class="fa fa-calendar-plus-o" aria-hidden="true"></i></a>	
 		</div>
 		<div class="col-lg-4"></div>

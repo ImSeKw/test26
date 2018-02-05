@@ -20,5 +20,19 @@ public class CompanyDao {
 	public int insertCompany(Company company) {
 		return sqlsessiontemplate.insert(ms+"insertCompany",company);
 	}
+	//회사수정을위한 아이디 가져오기 DAo
+	public Company selectCompanyId(int companyId) {
+		return sqlsessiontemplate.selectOne(ms+"selectCompanyId",  companyId);
+	}
+	//회사수정
+	public int updateCompany(Company company) {
+		return sqlsessiontemplate.update(ms+"updateCompany",company);
+		
+	}
+	//회사삭제
+	public int deleteCompany(Company company) {
+		return sqlsessiontemplate.delete(ms+"deleteCompany", company);
+		
+	}
 
 }
