@@ -31,7 +31,7 @@
 					<tr class="text-white">
 						<td><strong>No.</strong></td>
 						<td><strong>CITY</strong></td>
-						<td colspan="2"><a href="${pageContext.request.contextPath}/city/insertCityForm">도시 추가</a></td>
+						<td colspan="2"><a href="${pageContext.request.contextPath}/city/insertCity">도시 추가</a></td>
 					</tr>
 				</thead>
 				<tbody>
@@ -39,8 +39,8 @@
 						<tr>
 							<td>${cityList.cityId}</td>
 							<td>${cityList.cityName}</td>
-							<td><a href="${pageContext.request.contextPath}/city/updateCityForm?cityId=${cityList.cityId}&cityName=${cityList.cityName}">수정</a></td>
-							<td><a href="${pageContext.request.contextPath}/city/deleteCityAction?cityId=${cityList.cityId}">삭제</a></td>
+							<td><a href="${pageContext.request.contextPath}/city/updateCity?cityId=${cityList.cityId}&cityName=${cityList.cityName}">수정</a></td>
+							<td><a href="${pageContext.request.contextPath}/city/deleteCity?cityId=${cityList.cityId}">삭제</a></td>
 						</tr>
 					</c:forEach>
 				</tbody>

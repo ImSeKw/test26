@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import ksmart.project.test26.service.City;
 import ksmart.project.test26.service.CityDao;
@@ -17,38 +18,38 @@ public class CityController {
 	CityDao cityDao;
 	
 	// 도시 삭제
-	@RequestMapping(value = "/city/deleteCityAction", method = RequestMethod.GET)
+	@RequestMapping(value = "/city/deleteCity", method = RequestMethod.GET)
 	public String deleteCity(City city) {
 		cityDao.deleteCity(city);
 		return "redirect:/city/cityList";
 	}
 	
 	// 도시 수정 Action
-	@RequestMapping(value = "/city/updateCityAction", method = RequestMethod.POST)
+	@RequestMapping(value = "/city/updateCity", method = RequestMethod.POST)
 	public String updateCity(City city) {
 		cityDao.updateCity(city);
 		return "redirect:/city/cityList";
 	}
 	
 	// 도시 수정 Form
-	@RequestMapping(value = "/city/updateCityForm", method = RequestMethod.GET)
-	public String selectCityId(City city, Model model) {
-		City reCity = cityDao.selectCityId(city);
+	@RequestMapping(value = "/city/updateCity", method = RequestMethod.GET)
+	public String updateCity(Model model, @RequestParam(value = "cityId") int cityId) {
+		City reCity = cityDao.updateCity(cityId);
 		model.addAttribute("city", reCity);
-		return "city/updateCityForm";
+		return "city/updateCity";
 	}
 	
 	// 도시 입력 Action
-	@RequestMapping(value = "/city/insertCityAction", method = RequestMethod.POST)
+	@RequestMapping(value = "/city/insertCity", method = RequestMethod.POST)
 	public String insertCity(City city) {
 		cityDao.insertCity(city);
 		return "redirect:/city/cityList";
 	}
 	
 	// 도시 입력 Form
-	@RequestMapping(value = "/city/insertCityForm", method = RequestMethod.GET)
+	@RequestMapping(value = "/city/insertCity", method = RequestMethod.GET)
 	public String insertCity() {
-		return "city/insertCityForm";
+		return "city/insertCity";
 	}
 	
 	// 도시 전체 조회

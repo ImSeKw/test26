@@ -6,15 +6,14 @@
 	<title>Insert title here</title>
 </head>
 <body>
-	<form action="${pageContext.request.contextPath}/city/updateCityAction" method="post">
-		<input type="hidden" name="cityId" value="${city.cityId}">
+	<form action="${pageContext.request.contextPath}/city/insertCity" method="post">
 		<table>
 			<tr>
 				<td>도시 이름</td>
-				<td><input type="text" name="cityName" value="${city.cityName}"></td>
+				<td><input type="text" name="cityName"></td>
 			</tr>
 		</table>
-		<button type="submit">도시수정</button>
+		<button type="submit">도시입력</button>
 	</form>
 </body>
 </html>

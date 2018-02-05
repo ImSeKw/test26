@@ -18,7 +18,7 @@
 	</update>
 	
 	<!-- update view 도시 조회 (수정) -->
-	<select id="selectCityId" parameterType="ksmart.project.test26.service.City" resultType="ksmart.project.test26.service.City">
+	<select id="selectCityId" parameterType="int" resultType="ksmart.project.test26.service.City">
 		SELECT
 			city_id as cityId
 			, city_name as cityName
