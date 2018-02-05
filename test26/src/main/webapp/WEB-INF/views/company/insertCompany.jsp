@@ -20,7 +20,7 @@
 			<div class="row">
 				<div class="col-sm-12 col-lg-12">
 					<h1 class="h1">
-						COMPANY<small>INSERT</small>
+						COMPANY<small> INSERT</small>
 					</h1>
 				</div>
 			</div>
@@ -50,7 +50,5 @@
 		</div>
 		<div class="col-lg-4"></div>
 	</div>
-
-
 </body>
 </html>

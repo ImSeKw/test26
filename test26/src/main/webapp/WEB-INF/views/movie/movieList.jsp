@@ -31,17 +31,17 @@
 					<tr class="text-white">
 						<td><strong>No.</strong></td>
 						<td><strong>MOVIE</strong></td>
-						<td></td>
-						<td></td>
+						<td><strong>UPDATE</strong></td>
+						<td><strong>DELETE</strong></td>
 					</tr>
 				</thead>
 				<tbody>
 					<c:forEach var="movieList" items="${list}">
 						<tr>
-							<td>${movieList.movieId}</td>
-							<td>${movieList.movieName}</td>
-							<td><a href="${pageContext.request.contextPath}/movie/updateMovie?movieId=${movieList.movieId}">수정</a></td>
-							<td><a href="${pageContext.request.contextPath}/movie/deleteMovie?movieId=${movieList.movieId}">삭제</a></td>
+							<td><strong>${movieList.movieId}</strong></td>
+							<td><strong>${movieList.movieName}</strong></td>
+							<td><a href="${pageContext.request.contextPath}/movie/updateMovie?movieId=${movieList.movieId}" class="btn rgba-teal-strong"role="button"><i class="fa fa-wrench fa-3x" aria-hidden="true"></i></a></td>
+							<td><a href="${pageContext.request.contextPath}/movie/deleteMovie?movieId=${movieList.movieId}" class="btn rgba-red-strong"role="button"><i class="fa fa-times-circle fa-1g" aria-hidden="true"></i></a></td>
 						</tr>
 					</c:forEach>
 				</tbody>
@@ -52,10 +52,10 @@
 	<div class="row">
 		<div class="col-lg-4"></div>
 		<div class="col col-xs-12 col-sm-12 col-md-auto col-lg-4 text-center">
-			<a href="${pageContext.request.contextPath}/" class="btn rgba-pink-strong" role="button">
-				<i class="fa fa-home" aria-hidden="true"></i>
-			</a>
-			<a href="${pageContext.request.contextPath}/movie/insertMovie">입력</a>
+			<a href="${pageContext.request.contextPath}/" class="btn rgba-pink-strong"
+				role="button"><i class="fa fa-home" aria-hidden="true"></i></a>
+			<a href="${pageContext.request.contextPath}/movie/insertMovie" class="btn rgba-blue-strong"
+				role="button"><i class="fa fa-plus-circle" aria-hidden="true"></i></a>	
 		</div>
 		<div class="col-lg-4"></div>
 	</div>
