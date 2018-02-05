@@ -33,17 +33,17 @@
 					<tr class="text-white">
 						<td><strong>No.</strong></td>
 						<td><strong>COMPANY</strong></td>
-						<td><strong>수정</strong></td>
-						<td><strong>삭제</strong></td>
+						<td><strong>UPDATE</strong></td>
+						<td><strong>DELETE</strong></td>
 					</tr>
 				</thead>
 				<tbody>
 					<c:forEach var="company" items="${list}">
 						<tr>
-							<td>${company.companyId}</td>
-							<td>${company.companyName}</td>
-							<td><a href="${pageContext.request.contextPath}/company/updateCompany?companyId=${company.companyId}" type="button">수정</a></td>
-							<td><a href="${pageContext.request.contextPath}/company/deleteCompany?companyId=${company.companyId}" type="button">삭제</a></td>
+							<td><strong>${company.companyId}</strong></td>
+							<td><strong>${company.companyName}</strong></td>
+							<td><a href="${pageContext.request.contextPath}/company/updateCompany?companyId=${company.companyId}" class="btn rgba-teal-strong"role="button"><i class="fa fa-wrench fa-3x" aria-hidden="true"></i></a></td>
+							<td><a href="${pageContext.request.contextPath}/company/deleteCompany?companyId=${company.companyId}" class="btn rgba-red-strong"role="button"><i class="fa fa-times-circle fa-1g" aria-hidden="true"></i></a></td>
 							
 						</tr>
 					</c:forEach>
@@ -57,8 +57,8 @@
 		<div class="col col-xs-12 col-sm-12 col-md-auto col-lg-4 text-center">
 			<a href="${pageContext.request.contextPath}/" class="btn rgba-pink-strong"
 				role="button"><i class="fa fa-home" aria-hidden="true"></i></a>
-			<a href="${pageContext.request.contextPath}/company/insertcompany" class="btn rgba-pink-strong"
-				role="button"><i class="fa fa-calendar-plus-o" aria-hidden="true"></i></a>	
+			<a href="${pageContext.request.contextPath}/company/insertcompany" class="btn rgba-blue-strong"
+				role="button"><i class="fa fa-plus-circle" aria-hidden="true"></i></a>	
 		</div>
 		<div class="col-lg-4"></div>
 	</div>
