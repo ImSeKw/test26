@@ -50,6 +50,7 @@ public class CityController {
 	public String insertCity() {
 		return "city/insertCityForm";
 	}
+	
 	// 도시 전체 조회
 	@RequestMapping(value = "/city/cityList", method = RequestMethod.GET)
 	public String cityList(Model model) {
