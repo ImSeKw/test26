@@ -17,21 +17,26 @@ public class IdolDao {
 	
 	// idolList 조회
 	public List<Idol> selectIdolList() {
-		return sqlSessionTemplate.selectList(Route + "selectIdolListDAO"); 
+		return sqlSessionTemplate.selectList(Route + "selectIdolList"); 
 	}
 	
 	// idol추가입력
 	public void insertIdol(Idol idol) {
-		sqlSessionTemplate.insert(Route + "insertIdolDAO");
+		sqlSessionTemplate.insert(Route + "insertIdol", idol);
 	}
 	
 	// idol수정처리
 	public void updateIdol(Idol idol) {
-		sqlSessionTemplate.update(Route + "updateIdolDAO");
+		sqlSessionTemplate.update(Route + "updateIdol", idol);
+	}
+	
+	// idol 수정처리 id값조회
+	public Idol selectAndupdateIdol(int idolID) {
+		return sqlSessionTemplate.selectOne(Route + "selectAndupdateIdol", idolID);
 	}
 	
 	// idol삭제처리
 	public void deleteIdol(Idol idol) {
-		sqlSessionTemplate.delete(Route + "deleteIdolDAO");
+		sqlSessionTemplate.delete(Route + "deleteIdol", idol);
 	}
 }
