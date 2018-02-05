@@ -12,22 +12,27 @@
 			,country_name as countryName
 		FROM country;
 	</select>
+	<!--COUNTRY 수정 폼 SELECT   -->
+	<select id="selectCountryName" 
+		parameterType="int" 
+		resultType="ksmart.project.test26.service.Country">
+		SELECT 
+			country_name as countryName
+		FROM country
+		WHERE country_id = #{countryId};
+	</select>	
 	<!--COUNTRY INSERT-->
 	<insert id="insertCountry"
-		parameterType="ksmart.project.test26.service.Country">
-		INSERT INTO country(
-			country_id
-			,country_name) 
-		VALUES (
-			#{countryId}
-			,#{countryName}
-		);
+		parameterType="ksmart.project.test26.service.Country">		
+	INSERT INTO 
+		test.country (country_name) 
+	VALUES (#{countryName});	
 	</insert>
 	<!--COUNTRY DELETE-->
 	<delete id="deleteCountry"
 		parameterType="ksmart.project.test26.service.Country">
 		DELETE FROM 
-			country 
+			test.country 
 		WHERE country_id = #{countryId};
 	</delete>
 	<!--COUNTRY UPDATE  -->
@@ -39,4 +44,5 @@
 			,country_name = #{countryName} 
 		WHERE country_id = #{countryId}
 	</update>
+	<!--  -->
 </mapper>
