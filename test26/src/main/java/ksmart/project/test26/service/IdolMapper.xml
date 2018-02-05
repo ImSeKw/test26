@@ -10,4 +10,27 @@
 			, idol_name AS idolName
 		FROM idol;
 	</select>
+	<!-- idolInsert 쿼리문 -->
+	<insert id="insertIdol" parameterType="ksmart.project.test26.service.Idol">
+		INSERT 
+		INTO idol(
+			idol_name
+		) VALUES(
+			#{idolName}
+		)
+	</insert>
+	<!-- idol수정 쿼리문 -->
+	<update id="updateIdol" parameterType="ksmart.project.test26.service.Idol">
+		UPDATE idol
+		SET 
+			idol_name = #{idolName}
+		WHERE 
+			idol_id = #{idolID}
+	</update>
+	<!-- idol삭제 쿼리문 -->
+	<delete id="dateIdol" parameterType="ksmart.project.test26.service.Idol">
+		DELETE FROM idol
+		WHERE
+			idol_id = #{idolID}
+	</delete>
 </mapper>
