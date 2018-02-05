@@ -17,34 +17,39 @@ public class CityController {
 	CityDao cityDao;
 	
 	// 도시 삭제
-	@RequestMapping(value = "/city/deleteCity", method = RequestMethod.POST)
+	@RequestMapping(value = "/city/deleteCityAction", method = RequestMethod.POST)
 	public String deleteCity(City city) {
 		cityDao.deleteCity(city);
 		return "redirect:/city/cityList";
 	}
 	
-	// 도시 수정
-	@RequestMapping(value = "/city/updateCity", method = RequestMethod.POST)
+	// 도시 수정 Action
+	@RequestMapping(value = "/city/updateCityAction", method = RequestMethod.POST)
 	public String updateCity(City city) {
 		cityDao.updateCity(city);
 		return "redirect:/city/cityList";
 	}
 	
-	// 도시 조회 (수정)
-	@RequestMapping(value = "/city/selectCity", method = RequestMethod.GET)
+	// 도시 수정 Form
+	@RequestMapping(value = "/city/updateCityForm", method = RequestMethod.GET)
 	public String selectCityId(City city, Model model) {
 		City reCity = cityDao.selectCityId(city);
 		model.addAttribute("city", reCity);
-		return "city/selectCity";
+		return "city/updateCityForm";
 	}
 	
-	// 도시 입력
-	@RequestMapping(value = "/city/insertCity", method = RequestMethod.POST)
+	// 도시 입력 Action
+	@RequestMapping(value = "/city/insertCityAction", method = RequestMethod.POST)
 	public String insertCity(City city) {
 		cityDao.insertCity(city);
 		return "redirect:/city/cityList";
 	}
 	
+	// 도시 입력 Form
+	@RequestMapping(value = "/city/insertCityForm", method = RequestMethod.GET)
+	public String insertCity() {
+		return "city/insertCityForm";
+	}
 	// 도시 전체 조회
 	@RequestMapping(value = "/city/cityList", method = RequestMethod.GET)
 	public String cityList(Model model) {
