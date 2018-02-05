@@ -10,7 +10,7 @@
 			, idol_name AS idolName
 		FROM idol;
 	</select>
-	<!-- idolInsert 쿼리문 -->
+	<!-- idol추가 쿼리문 -->
 	<insert id="insertIdol" parameterType="ksmart.project.test26.service.Idol">
 		INSERT 
 		INTO idol(
