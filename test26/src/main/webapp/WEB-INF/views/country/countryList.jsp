@@ -35,15 +35,23 @@
 					<tr class="text-white">
 						<td><strong>No.</strong></td>
 						<td><strong>COUNTRY</strong></td>
+						<td><strong>UPDATE</strong></td>
+						<td><strong>DELETE</strong></td>						
 					</tr>
+					
 				</thead>
 				<tbody>
 					<c:forEach var="countryList" items="${list}">
 						<tr>
 							<td>${countryList.countryId}</td>
 							<td>${countryList.countryName}</td>
+							<td><a href="${pageContext.request.contextPath}/country/countryUpdateForm?countryId=${countryList.countryId}">수정</a></td>
+							<td><a href="${pageContext.request.contextPath}/country/countryDelete?countryId=${countryList.countryId}">삭제</a></td>
+						</tr>	
+					</c:forEach>		
+						<tr>
+						<td><input type= "button"><a href="${pageContext.request.contextPath}/country/countryInsertForm">입력</a></td>
 						</tr>
-					</c:forEach>
 				</tbody>
 			</table>
 		</div>
@@ -57,6 +65,7 @@
 				aria-hidden="true"></i></a>
 		</div>
 		<div class="col-lg-4"></div>
+		
 	</div>
 	<%-- <table class="table">
 		<thead>
