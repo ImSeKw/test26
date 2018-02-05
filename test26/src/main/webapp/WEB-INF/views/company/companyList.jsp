@@ -53,6 +53,8 @@
 		<div class="col col-xs-12 col-sm-12 col-md-auto col-lg-4 text-center">
 			<a href="${pageContext.request.contextPath}/" class="btn rgba-pink-strong"
 				role="button"><i class="fa fa-home" aria-hidden="true"></i></a>
+			<a href="${pageContext.request.contextPath}/company/companyadd" class="btn rgba-pink-strong"
+				role="button"><i class="fa fa-calendar-plus-o" aria-hidden="true"></i></a>	
 		</div>
 		<div class="col-lg-4"></div>
 	</div>

@@ -6,22 +6,37 @@
 <mapper namespace="ksmart.project.test26.service.CompanyMapper">
 	<!--전체 회사list조회   -->
 	<select id="selectCompanyList" resultType="ksmart.project.test26.service.Company">
-		SELECT company_id as companyId,company_name as companyName FROM company
+		SELECT 
+			company_id as companyId
+			,company_name as companyName 
+		FROM company
 	</select>
+	
 	<!--회사 추가 -->
 	<insert id="insertCompany" parameterType="ksmart.project.test26.service.Company">
-		INSERT INTO company(company_id as companyId,company_name as companyName) VALUES(#{companyId},#{companyName})
+		INSERT INTO company (company_name) VALUES (#{companyName})
 	</insert>
+	
 	<!--회사 수정을 위해 아이디값을 조회 -->
 	<select id="selectCompanyId" parameterType="int" resultType="ksmart.project.test26.service.Company">
-		SELECT company_id as companyId,company_name as companyName FROM company WHERE company_id=#{companyID}
+		SELECT 
+			company_id as companyId
+			,company_name as companyName 
+		FROM company 
+		WHERE company_id=#{companyId}
 	</select>
+	
 	<!-- 회사 수정 -->
 	<update id="updateCompany" parameterType="ksmart.project.test26.service.Company">
-		UPDATE company SET company_name=#{companyName} WHERE company_id=#{companyId}
+		UPDATE company 
+		SET company_name=#{companyName} 
+		WHERE company_id=#{companyId}
 	</update>
+	
 	<!--회사 삭제  -->
-	<delete id="deleteCompany" parameterType="int">
-		DELETE FROM company WHERE company_id=#{companyId} 
+	<delete id="deleteCompany" parameterType="ksmart.project.test26.service.Company">
+		DELETE 
+		FROM company 
+		WHERE company_id=#{companyId} 
 	</delete>
 </mapper>
