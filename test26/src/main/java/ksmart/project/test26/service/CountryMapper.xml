@@ -32,7 +32,7 @@
 	</delete>
 	<!--COUNTRY UPDATE  -->
 	<update id="updateCountry"
-		parameterType="ksmart.project.test26.service.Country">
+		parameterType ="ksmart.project.test26.service.Country">
 		UPDATE 
 			country 
 		SET 
