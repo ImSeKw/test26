@@ -17,7 +17,7 @@ public class CityController {
 	CityDao cityDao;
 	
 	// 도시 삭제
-	@RequestMapping(value = "/city/deleteCityAction", method = RequestMethod.POST)
+	@RequestMapping(value = "/city/deleteCityAction", method = RequestMethod.GET)
 	public String deleteCity(City city) {
 		cityDao.deleteCity(city);
 		return "redirect:/city/cityList";
