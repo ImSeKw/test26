@@ -4,10 +4,37 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="ksmart.project.test26.service.CityMapper">
+	<!-- delete 도시삭제 -->
+	<delete id="deleteCity" parameterType="ksmart.project.test26.service.City">
+		DELETE FROM city
+		WHERE city_id = #{cityId}
+	</delete>
+	<!-- update 도시수정 -->
+	<update id="updateCity" parameterType="ksmart.project.test26.service.City">
+		UPDATE city
+		SET city_name = #{cityName}
+		WHERE city_id = #{cityId}
+	</update>
+	<!-- update view 도시조회 -->
+	<select id="selectCityName" parameterType="ksmart.project.test26.service.City" resultType="ksmart.project.test26.service.City">
+		SELECT
+			city_id as cityId
+			, city_name as cityName
+		FROM city
+		WHERE city_id = #{cityId}
+	</select>
+	<!-- insert 도시추가 -->
+	<insert id="insertCity" parameterType="ksmart.project.test26.service.City">
+		INSERT INTO city
+			(city_name)
+		VALUES
+			(#{cityName})
+	</insert>
+	<!-- select 도시전체조회 -->
 	<select id="selectCityList" resultType="ksmart.project.test26.service.City">
 		SELECT 
 			city_id as cityId
 			, city_name as cityName
-		 From city;
+		 FROM city
 	</select>
 </mapper>
