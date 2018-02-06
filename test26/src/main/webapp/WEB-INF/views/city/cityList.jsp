@@ -28,16 +28,17 @@
 					<tr class="text-white">
 						<td><strong>No.</strong></td>
 						<td><strong>CITY</strong></td>
-						<td colspan="2"><a href="${pageContext.request.contextPath}/city/insertCity">도시 추가</a></td>
+						<td><strong>UPDATE</strong></td>
+						<td><strong>DELETE</strong></td>
 					</tr>
 				</thead>
 				<tbody>
 					<c:forEach var="cityList" items="${list}">
 						<tr>
-							<td>${cityList.cityId}</td>
-							<td>${cityList.cityName}</td>
-							<td><a href="${pageContext.request.contextPath}/city/updateCity?cityId=${cityList.cityId}&cityName=${cityList.cityName}">수정</a></td>
-							<td><a href="${pageContext.request.contextPath}/city/deleteCity?cityId=${cityList.cityId}">삭제</a></td>
+							<td><strong>${cityList.cityId}</strong></td>
+							<td><strong>${cityList.cityName}</strong></td>
+							<td><a href="${pageContext.request.contextPath}/city/updateCity?cityId=${cityList.cityId}" class="btn rgba-teal-strong"role="button"><i class="fa fa-wrench fa-3x" aria-hidden="true"></i></a></td>
+							<td><a href="${pageContext.request.contextPath}/city/deleteCity?cityId=${cityList.cityId}" class="btn rgba-red-strong"role="button"><i class="fa fa-times-circle fa-1g" aria-hidden="true"></i></a></td>
 						</tr>
 					</c:forEach>
 				</tbody>
@@ -51,42 +52,11 @@
 			<a href="${pageContext.request.contextPath}/" class="btn rgba-pink-strong" role="button">
 				<i class="fa fa-home" aria-hidden="true"></i>
 			</a>
+			<a href="${pageContext.request.contextPath}/city/insertCity" class="btn rgba-blue-strong" role="button">
+				<i class="fa fa-plus-circle" aria-hidden="true"></i>
+			</a>
 		</div>
 		<div class="col-lg-4"></div>
 	</div>
-	<%-- <div class="container">
-		<div class="col-md-4"></div>
-		<div class="col-md-4">
-			<h3 class="text-center">도시 목록</h3>
-		</div>
-		<div class="col-md-4"></div>
-	</div>
-	<div class="container">
-		<div class="col-md-4"></div>
-		<div class="col-md-4">
-			<table class="table table-hover text-center">
-				<thead class="text-center">
-					<tr>
-						<th>번호</th>
-						<th>도시</th>
-					</tr>
-				</thead>
-				<tbody>
-					<c:forEach var="cityList" items="${list}">
-					<tr>
-						<td>${cityList.cityId}</td>
-						<td>${cityList.cityName}</td>
-					</tr>
-					</c:forEach>
-				</tbody>
-			</table>
-		</div>
-		<div class="col-md-4"></div>
-		<div class="col-md-4 col-lg-4"></div>
-        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 text-center">
-        <a href="${pageContext.request.contextPath}/" class="btn btn-danger" role="button"><span class="glyphicon glyphicon-home"></span></a>	
-    	</div>
-    	<div class="col-md-4 col-lg-4"></div>
-	</div> --%>
 </body>
 </html>

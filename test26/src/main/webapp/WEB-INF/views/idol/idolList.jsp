@@ -1,18 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
-<link href="<c:url value="/resources/css-color/mdb.min.css" />"
-	rel="stylesheet">
-<link href="<c:url value="/resources/css-color/bootstrap.min.css" />"
-	rel="stylesheet">
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>Insert title here</title>
+	<%@ include file="/WEB-INF/views/module/head.jsp" %>
 </head>
 <body>
 	<div class="jumbotron jumbotron-sm">
@@ -44,8 +37,8 @@
 						<tr>
 							<td>${idolList.idolID}</td>
 							<td>${idolList.idolName}</td>
-							<td><a href="${pageContext.request.contextPath}/idol/updateIdol?idolID=${idolList.idolID}&idolName=${idolList.idolName}" class="btn rgba-teal-strong"role="button"><i class="fa fa-wrench fa-3x" aria-hidden="true"></i></a></td>
-							<td><a href="${pageContext.request.contextPath}/idol/deleteIdol?idolID=${idolList.idolID}" class="btn rgba-red-strong"role="button"><i class="fa fa-times-circle fa-1g" aria-hidden="true"></i></a></td>
+							<td><a href="${pageContext.request.contextPath}/idol/updateIdol?idolID=${idolList.idolID}&idolName=${idolList.idolName}" class="btn rgba-teal-strong" role="button"><i class="fa fa-wrench fa-3x" aria-hidden="true"></i></a></td>
+							<td><a href="${pageContext.request.contextPath}/idol/deleteIdol?idolID=${idolList.idolID}" class="btn rgba-red-strong" role="button"><i class="fa fa-times-circle fa-1g" aria-hidden="true"></i></a></td>
 						</tr>
 					</c:forEach>
 				</tbody>
@@ -63,24 +56,5 @@
 		</div>
 		<div class="col-lg-4"></div>
 	</div>
-	<%-- <div class="container">
-		<table class="table">
-			<thead>
-				<tr>
-					<th>no.</th>
-					<th>IDOL</th>
-				</tr>
-			</thead>
-			<tbody>
-				<c:forEach var="idolList" items="${list}">
-					<tr>
-						<td>${idolList.idolID}</td>
-						<td>${idolList.idolName}</td>
-					</tr>
-				</c:forEach>
-			</tbody>
-		</table>
-	</div> --%>
-
 </body>
 </html>

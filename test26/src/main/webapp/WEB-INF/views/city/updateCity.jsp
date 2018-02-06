@@ -4,6 +4,7 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>Insert title here</title>
+	<%@ include file="/WEB-INF/views/module/head.jsp" %>
 </head>
 <body>
 	<form action="${pageContext.request.contextPath}/city/updateCity" method="post">
