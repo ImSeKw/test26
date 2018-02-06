@@ -16,6 +16,9 @@
 					$('#cityAdd').submit();	
 				}
 			})
+			$('#cancelButton').click(function(){
+				document.location.href='<%= request.getContextPath() %>/city/cityList';
+			});
 		});
 	</script>
 </head>
@@ -47,7 +50,14 @@
 							<td><input type="text" name="cityName" id="cityName" placeholder="이곳에 도시 이름을 입력하세요"></td>
 						</tr>
 						<tr>
-							<td><button type="button" id="insertButton" class="btn rgba-blue-strong"><i class="fa fa-check-circle" aria-hidden="true"></i></button></td>
+							<td>
+								<button type="button" id="insertButton" class="btn rgba-blue-strong">
+									<i class="fa fa-check-circle" aria-hidden="true"></i>
+								</button>
+								<button type="button" id="cancelButton" class="btn rgba-blue-strong">
+									<i class="fa fa-times-circle" aria-hidden="true"></i>
+								</button>
+							</td>
 						</tr>
 					</tbody>
 				</table>
