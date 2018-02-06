@@ -18,6 +18,10 @@
 					$('#idolAdd').submit();	
 				}
 			})
+			$('#cancelleButton').click(function(event) {
+				event.preventDefault();
+				self.location = "/test26/idol/idolList"
+			})
 		});
 	</script>
 </head>
@@ -38,7 +42,7 @@
 		<div class="col col-md-auto col-lg-4 text-center">
 			<h2 class="text-center"></h2>
 			<form action="${pageContext.request.contextPath}/idol/updateIdol" id="idolAdd" method = "post">
-				<input type="hidden" name="idolID" value="${idol.idolID}">
+				<input type="hidden" name="idolID" id=" idolID"value="${idol.idolID}">
 				<table class="table table-hover">
 					<thead class="mdb-color darken-3">
 						<tr class="text-white">
@@ -51,8 +55,13 @@
 						</tr>
 						<tr>
 							<td>
+								<!-- 확인버튼 -->
 								<button type="button" id="updateButton" class="btn rgba-blue-strong">
 								<i class="fa fa-check-circle" aria-hidden="true"></i>
+								</button>
+								<!-- 취소버튼 -->
+								<button type="button" id="cancelleButton" class="btn rgba-blue-strong">
+								<i class="fa fa-times-circle" aria-hidden="true"></i>
 								</button>
 							</td>
 						</tr>
