@@ -25,8 +25,8 @@
 		<div class="col-lg-4"></div>
 		<div class="col col-md-auto col-lg-4 text-center">
 			<h2 class="text-center"></h2>
-			<form
-				action="${pageContext.request.contextPath}/company/updateCompany" method="post">
+			<form action="${pageContext.request.contextPath}/company/updateCompany" method="post">
+				<input type="hidden" name="companyId" value="${company.companyId}">
 				<table class="table table-hover">
 					<thead class="mdb-color darken-3">
 						<tr class="text-white">
@@ -34,9 +34,6 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<td><input type="text" name="companyId" value="${company.companyId}" readonly></td>
-						</tr>
 						<tr>	
 							<td><input type="text" name="companyName" value="${company.companyName}"></td>
 						</tr>
