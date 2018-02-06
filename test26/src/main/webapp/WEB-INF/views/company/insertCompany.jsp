@@ -4,15 +4,22 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
-<link href="<c:url value="/resources/css-color/mdb.min.css" />"
-	rel="stylesheet">
-<link href="<c:url value="/resources/css-color/bootstrap.min.css" />"
-	rel="stylesheet">
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>Insert title here</title>
+	<%@ include file="/WEB-INF/views/module/head.jsp" %>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script>
+		$(document).ready(function() {
+			$('#insertButton').click(function() {
+				if ($('#companyName').val() == '') {
+					alert('회사를 입력해주세요.')
+					$('#companyName').focus();
+				} else {
+					$('#companyAdd').submit();	
+				}
+			})
+		});
+	</script>
 </head>
 <body>
 	<div class="jumbotron jumbotron-sm">
@@ -39,10 +46,10 @@
 					</thead>
 					<tbody>
 						<tr>
-							<td><input type="text" name="companyName" placeholder="이곳에 회사 이름을 입력하세요"></td>
+							<td><input type="text" name="companyName" id="companyName" placeholder="이곳에 회사 이름을 입력하세요"></td>
 						</tr>
 						<tr>
-							<td><button type="submit" class="btn rgba-blue-strong"><i class="fa fa-check-circle" aria-hidden="true"></i></button></td>
+							<td><button type="submit" id="insertButton" class="btn rgba-blue-strong"><i class="fa fa-check-circle" aria-hidden="true"></i></button></td>
 						</tr>
 					</tbody>
 				</table>
