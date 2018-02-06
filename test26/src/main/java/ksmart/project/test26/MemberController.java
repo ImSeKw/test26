@@ -8,8 +8,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
 
 import ksmart.project.test26.service.Member;
 import ksmart.project.test26.service.MemberDao;
@@ -46,12 +48,35 @@ public class MemberController {
 	public String loginMember() {
 		return "member/loginMember";
 	}
+	
 	//회원가입화면
+	@RequestMapping(value="/member/insertMember",method=RequestMethod.GET)
+	public String insertMember() {
+		return "member/insertMember";
+	}
 	
 	//회원가입처리
 	@RequestMapping(value="/member/insertMember",method=RequestMethod.POST)
-	public String insertMember() {
+	public String insertMember(Member member) {
+		memberDao.insertMember(member);
 		return "redirect:/member/loginMember";
+		
+	}
+	
+	//개인회원정보검색처리
+	@RequestMapping(value="/member/selectMemberInfo",method=RequestMethod.GET)
+	public String selectMemberInfo(HttpSession httpSession, Model model) {
+		Member member = (Member)httpSession.getAttribute("loginMember");
+		Member reMember = memberDao.selectMemberInfo(member.getMemberNo());
+		model.addAttribute("member", reMember);
+		return "member/selectMemberInfo";
+	}
+	
+	//개인회원정보수정화면
+	@RequestMapping(value="/member/updateMember",method=RequestMethod.GET)
+	public String updateMember(HttpSession httpSession,Model model) {
+		
+		return "/";
 		
 	}
 }

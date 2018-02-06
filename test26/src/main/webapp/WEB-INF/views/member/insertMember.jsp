@@ -18,6 +18,7 @@
 				<td><input type="text" name="memberPw"></td>
 			</tr>	
 		</table>
+		<button type="submit">확인</button>
 	</form>
 </body>
 </html>

@@ -22,8 +22,29 @@
 			(member_id
 			,member_pw)
 		VALUES(
-			#{memeberId}
+			#{memberId}
 			,#{memberPw}
 			)	
 	</insert>
+	<!--개인회원정보검색 -->
+	<select id="selectMemberInfo" parameterType="int" resultType="ksmart.project.test26.service.Member">
+	SELECT
+		member_no as memberNo
+		,member_id as memberId
+		,member_pw as memberPw
+		,member_level as memberLevel
+	FROM member
+	WHERE member_no=#{memberNo} 
+	</select>
+	<update id="updateMember" parameterType="int">
+		UPDATE member
+		SET 
+		(member_id=#{memberId}
+		,member_pw=#{memberPw}
+		)
+		WHERE member_no=#{memberNo}
+	</update>
+	<delete id="deleteMember" parameterType="ksmart.project.test26.service.Member">
+		DELELTE  FROM member WHERE member_no=#{memberNo}
+	</delete>
 </mapper>

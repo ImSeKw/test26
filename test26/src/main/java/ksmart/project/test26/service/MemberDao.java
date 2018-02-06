@@ -21,9 +21,18 @@ public class MemberDao {
 	}
 	//회원가입
 	public int insertMember(Member member) {
-		
-		return 0;
-		
+		return sqlSessionTemplate.insert(NAMESPACE + "insertMember", member);
 	}
+	
+	//개인회원정보검색
+	public Member selectMemberInfo(int memberNo) {
+		return sqlSessionTemplate.selectOne(NAMESPACE +"selectMemberInfo", memberNo);
+	}
+	
+	//회원수정
+	public int updateMember(int memberNo) {
+		return sqlSessionTemplate.update(NAMESPACE +"updateMember",memberNo);
+	}
+	
 	
 }
