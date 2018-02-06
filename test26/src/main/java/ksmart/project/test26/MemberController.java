@@ -46,4 +46,12 @@ public class MemberController {
 	public String loginMember() {
 		return "member/loginMember";
 	}
+	//회원가입화면
+	
+	//회원가입처리
+	@RequestMapping(value="/member/insertMember",method=RequestMethod.POST)
+	public String insertMember() {
+		return "redirect:/member/loginMember";
+		
+	}
 }
