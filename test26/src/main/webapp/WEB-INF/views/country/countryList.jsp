@@ -1,18 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
-<link href="<c:url value="/resources/css-color/mdb.min.css" />"
-	rel="stylesheet">
-<link href="<c:url value="/resources/css-color/bootstrap.min.css" />"
-	rel="stylesheet">
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>COMPANY LIST</title>
+	<%@ include file="/WEB-INF/views/module/head.jsp" %>
 </head>
 <body>
 	<div class="jumbotron jumbotron-sm">
@@ -20,7 +14,7 @@
 			<div class="row">
 				<div class="col-sm-12 col-lg-12">
 					<h1 class="h1">
-						COUNTRY<small> LIST</small>
+						COUNTRY <small> LIST</small>
 					</h1>
 				</div>
 			</div>
@@ -38,21 +32,17 @@
 						<td><strong>UPDATE</strong></td>
 						<td><strong>DELETE</strong></td>						
 					</tr>
-					
 				</thead>
 				<tbody>
 					<c:forEach var="countryList" items="${list}">
 						<tr>
-							<td>${countryList.countryId}</td>
-							<td>${countryList.countryName}</td>
-							<td><a href="${pageContext.request.contextPath}/country/countryUpdateForm?countryId=${countryList.countryId}">수정</a></td>
-							<td><a href="${pageContext.request.contextPath}/country/countryDelete?countryId=${countryList.countryId}">삭제</a></td>
+							<td><strong>${countryList.countryId}</strong></td>
+							<td><strong>${countryList.countryName}</strong></td>
+							<td><a href="${pageContext.request.contextPath}/country/updateCountry?countryId=${countryList.countryId}"class="btn rgba-teal-strong"role="button"><i class="fa fa-wrench fa-3x" aria-hidden="true"></i></a></td>
+							<td><a href="${pageContext.request.contextPath}/country/deleteCountry?countryId=${countryList.countryId}"class="btn rgba-red-strong"role="button"><i class="fa fa-times-circle fa-1g" aria-hidden="true"></i></a></td>
 						</tr>	
 					</c:forEach>		
-						<tr>
-						<td><input type= "button"><a href="${pageContext.request.contextPath}/country/countryInsertForm">입력</a></td>
-						</tr>
-				</tbody>
+						</tbody>
 			</table>
 		</div>
 		<div class="col-lg-4"></div>
@@ -60,12 +50,14 @@
 	<div class="row">
 		<div class="col-lg-4"></div>
 		<div class="col col-xs-12 col-sm-12 col-md-auto col-lg-4 text-center">
-			<a href="${pageContext.request.contextPath}/"
-				class="btn rgba-pink-strong" role="button"><i class="fa fa-home"
-				aria-hidden="true"></i></a>
+			<a href="${pageContext.request.contextPath}/" class="btn rgba-pink-strong" role="button">
+				<i class="fa fa-home" aria-hidden="true"></i>
+			</a>
+			<a href="${pageContext.request.contextPath}/country/insertCountry" class="btn rgba-blue-strong" role="button">
+				<i class="fa fa-plus-circle" aria-hidden="true"></i>
+			</a>	
 		</div>
 		<div class="col-lg-4"></div>
-		
 	</div>
 	<%-- <table class="table">
 		<thead>

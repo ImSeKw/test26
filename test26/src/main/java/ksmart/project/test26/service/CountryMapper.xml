@@ -38,10 +38,8 @@
 	<!--COUNTRY UPDATE  -->
 	<update id="updateCountry"
 		parameterType ="ksmart.project.test26.service.Country">
-		UPDATE 
-			country 
-		SET 
-			,country_name = #{countryName} 
+		UPDATE country 
+		SET country_name = #{countryName} 
 		WHERE country_id = #{countryId}
 	</update>
 	<!--  -->

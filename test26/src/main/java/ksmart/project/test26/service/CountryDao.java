@@ -13,7 +13,7 @@ public class CountryDao {
 	String namespace = "ksmart.project.test26.service.CountryMapper.";
 	
 	public List<Country> selectCountryList(){
-		System.out.println("01-02 CountryDao.java selectCountryList 메서드 호출");			
+		System.out.println("01-02 CountryDao.java selectCountryList 硫붿꽌�뱶 �샇異�");			
 		return sqlSessionTemplate.selectList(namespace+"selectCountryList");		
 	}
 	//insertCountry
@@ -24,9 +24,14 @@ public class CountryDao {
     public int deleteCountry(int countryId) {    	
         return sqlSessionTemplate.delete(namespace+"deleteCountry",countryId);
     }
-    //updateForm(selectName)
+    //updateCountry(selectName)
     public Country selectCountryName(int countryId) {    	    	
     	System.out.println(countryId+" :CountryDao.java selectCountryName countryId");
 		return sqlSessionTemplate.selectOne(namespace+"selectCountryName", countryId);
     }
+    //updateCountry
+    public int updateCountry(Country country) {
+		return sqlSessionTemplate.update(namespace+"updateCountry",country);
+		
+	}
 }
