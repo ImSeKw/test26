@@ -5,39 +5,33 @@
 
 <mapper namespace="ksmart.project.test26.service.CountryMapper">
 	<!--COUNTRY SELECT-->
-	<select id="selectCountryList"
-		resultType="ksmart.project.test26.service.Country">
+	<select id="selectCountryList" resultType="ksmart.project.test26.service.Country">
 		SELECT 
 			country_id as countryId
 			,country_name as countryName
 		FROM country;
 	</select>
 	<!--COUNTRY 수정 폼 SELECT   -->
-	<select id="selectCountryName" 
-		parameterType="int" 
-		resultType="ksmart.project.test26.service.Country">
+	<select id="selectCountryName" parameterType="int" resultType="ksmart.project.test26.service.Country">
 		SELECT 
 			country_name as countryName
 		FROM country
 		WHERE country_id = #{countryId};
 	</select>	
 	<!--COUNTRY INSERT-->
-	<insert id="insertCountry"
-		parameterType="ksmart.project.test26.service.Country">		
+	<insert id="insertCountry" parameterType="ksmart.project.test26.service.Country">		
 	INSERT INTO 
 		test.country (country_name) 
-	VALUES (#{countryName});	
+	VALUES (#{countryName});
 	</insert>
 	<!--COUNTRY DELETE-->
-	<delete id="deleteCountry"
-		parameterType="ksmart.project.test26.service.Country">
+	<delete id="deleteCountry" parameterType="ksmart.project.test26.service.Country">
 		DELETE FROM 
 			test.country 
 		WHERE country_id = #{countryId};
 	</delete>
 	<!--COUNTRY UPDATE  -->
-	<update id="updateCountry"
-		parameterType ="ksmart.project.test26.service.Country">
+	<update id="updateCountry" parameterType ="ksmart.project.test26.service.Country">
 		UPDATE country 
 		SET country_name = #{countryName} 
 		WHERE country_id = #{countryId}

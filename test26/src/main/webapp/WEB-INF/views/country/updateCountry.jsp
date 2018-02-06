@@ -13,7 +13,7 @@
 					alert('나라를 입력해주세요.')
 					$('#countryName').focus();
 				} else {
-					$('#countryUpdate').submit();	
+					$('#countryUpdate').submit();
 				}
 			})
 		});
