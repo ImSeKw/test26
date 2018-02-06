@@ -24,17 +24,9 @@
 	</script>
 </head>
 <body>
-	<div class="jumbotron jumbotron-sm">
-		<div class="container-fluid">
-			<div class="row">
-				<div class="col-sm-12 col-lg-12">
-					<h1 class="h1">
-						COUNTRY <small>UPDATE</small>
-					</h1>
-				</div>
-			</div>
-		</div>
-	</div>
+	<jsp:include page="/WEB-INF/views/module/top1.jsp"></jsp:include>
+		COUNTRY <small>UPDATE</small>
+	<jsp:include page="/WEB-INF/views/module/top2.jsp"></jsp:include>
 	<div class="row justify-content-md-center">
 		<div class="col-lg-4"></div>
 		<div class="col col-md-auto col-lg-4 text-center">
