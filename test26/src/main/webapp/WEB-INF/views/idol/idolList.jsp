@@ -44,8 +44,8 @@
 						<tr>
 							<td>${idolList.idolID}</td>
 							<td>${idolList.idolName}</td>
-							<td><a href="${pageContext.request.contextPath}/idol/updateIdol?idolID=${idolList.idolID}&idolName=${idolList.idolName}">수정</a></td>
-							<td><a href="${pageContext.request.contextPath}/idol/deleteIdol?idolID=${idolList.idolID}">삭제</a></td>
+							<td><a href="${pageContext.request.contextPath}/idol/updateIdol?idolID=${idolList.idolID}&idolName=${idolList.idolName}" class="btn rgba-teal-strong"role="button"><i class="fa fa-wrench fa-3x" aria-hidden="true"></i></a></td>
+							<td><a href="${pageContext.request.contextPath}/idol/deleteIdol?idolID=${idolList.idolID}" class="btn rgba-red-strong"role="button"><i class="fa fa-times-circle fa-1g" aria-hidden="true"></i></a></td>
 						</tr>
 					</c:forEach>
 				</tbody>
@@ -56,11 +56,10 @@
 	<div class="row">
 		<div class="col-lg-4"></div>
 		<div class="col col-xs-12 col-sm-12 col-md-auto col-lg-4 text-center">
-			<a href="${pageContext.request.contextPath}/" class="btn rgba-pink-strong" role="button">
-				<i class="fa fa-home" aria-hidden="true"></i></a>
-			<a href="${pageContext.request.contextPath}/idol/insertIdol" class="btn rgba-pink-strong" role="button">
-				<i class="fa fa-calendar-plus-o" aria-hidden="true"></i>
-			</a>
+			<a href="${pageContext.request.contextPath}/" class="btn rgba-pink-strong"
+				role="button"><i class="fa fa-home" aria-hidden="true"></i></a>
+			<a href="${pageContext.request.contextPath}/company/insertcompany" class="btn rgba-blue-strong"
+				role="button"><i class="fa fa-plus-circle" aria-hidden="true"></i></a>	
 		</div>
 		<div class="col-lg-4"></div>
 	</div>
