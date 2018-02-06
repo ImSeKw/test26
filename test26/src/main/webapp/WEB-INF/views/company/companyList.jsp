@@ -4,9 +4,8 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>Insert title here</title>
+	<title>COMPANY LIST</title>
 	<%@ include file="/WEB-INF/views/module/head.jsp" %>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
 	<div class="jumbotron jumbotron-sm">
@@ -14,7 +13,7 @@
 			<div class="row">
 				<div class="col-sm-12 col-lg-12">
 					<h1 class="h1">
-						COMPANY<small> LIST</small>
+						COMPANY <small>LIST</small>
 					</h1>
 				</div>
 			</div>
@@ -40,7 +39,6 @@
 							<td><strong>${company.companyName}</strong></td>
 							<td><a href="${pageContext.request.contextPath}/company/updateCompany?companyId=${company.companyId}" class="btn rgba-teal-strong"role="button"><i class="fa fa-wrench fa-3x" aria-hidden="true"></i></a></td>
 							<td><a href="${pageContext.request.contextPath}/company/deleteCompany?companyId=${company.companyId}" class="btn rgba-red-strong"role="button"><i class="fa fa-times-circle fa-1g" aria-hidden="true"></i></a></td>
-							
 						</tr>
 					</c:forEach>
 				</tbody>
@@ -51,13 +49,14 @@
 	<div class="row">
 		<div class="col-lg-4"></div>
 		<div class="col col-xs-12 col-sm-12 col-md-auto col-lg-4 text-center">
-			<a href="${pageContext.request.contextPath}/" class="btn rgba-pink-strong"
-				role="button"><i class="fa fa-home" aria-hidden="true"></i></a>
-			<a href="${pageContext.request.contextPath}/company/insertcompany" class="btn rgba-blue-strong"
-				role="button"><i class="fa fa-plus-circle" aria-hidden="true"></i></a>	
+			<a href="${pageContext.request.contextPath}/" class="btn rgba-pink-strong" role="button">
+				<i class="fa fa-home" aria-hidden="true"></i>
+			</a>
+			<a href="${pageContext.request.contextPath}/company/insertcompany" class="btn rgba-blue-strong" role="button">
+				<i class="fa fa-plus-circle" aria-hidden="true"></i>
+			</a>	
 		</div>
 		<div class="col-lg-4"></div>
 	</div>
-	
 </body>
 </html>

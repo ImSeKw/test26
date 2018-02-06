@@ -4,11 +4,8 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>무비 리스트</title>
-	<link href="<c:url value="/resources/css-color/mdb.min.css" />" rel="stylesheet">
-	<link href="<c:url value="/resources/css-color/bootstrap.min.css" />" rel="stylesheet">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>MOVIE LIST</title>
+	<%@ include file="/WEB-INF/views/module/head.jsp" %>
 </head>
 <body>
 	<div class="jumbotron jumbotron-sm">
@@ -16,7 +13,7 @@
 			<div class="row">
 				<div class="col-sm-12 col-lg-12">
 					<h1 class="h1">
-						MOVIE<small> LIST</small>
+						MOVIE <small>LIST</small>
 					</h1>
 				</div>
 			</div>

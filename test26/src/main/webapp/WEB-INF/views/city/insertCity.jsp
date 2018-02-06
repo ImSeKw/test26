@@ -1,10 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>Insert title here</title>
+	<title>CITY INSERT</title>
 	<%@ include file="/WEB-INF/views/module/head.jsp" %>
 	<script>
 		$(document).ready(function() {
@@ -25,7 +25,7 @@
 			<div class="row">
 				<div class="col-sm-12 col-lg-12">
 					<h1 class="h1">
-						COMPANY<small> INSERT</small>
+						CITY <small>INSERT</small>
 					</h1>
 				</div>
 			</div>
