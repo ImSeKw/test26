@@ -17,7 +17,7 @@
 			<div class="row">
 				<div class="col-sm-12 col-lg-12">
 					<h1 class="h1">
-						LIST<small>BOA</small>
+						LIST <small>BOA</small>
 					</h1>
 				</div>
 			</div>
