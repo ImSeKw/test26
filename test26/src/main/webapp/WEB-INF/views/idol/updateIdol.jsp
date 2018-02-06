@@ -10,6 +10,7 @@
 	<!-- JQUERY 공백시 경고창  -->
 	<script>
 		$(document).ready(function() {
+			/* 공백이 있고 버튼클릭시 경고창 */
 			$('#updateButton').click(function() {
 				if ($('#idolName').val() == '') {
 					alert('수정 할 아이돌명을 입력해주세요.')
@@ -18,10 +19,10 @@
 					$('#idolAdd').submit();	
 				}
 			})
-			$('#cancelleButton').click(function(event) {
-				event.preventDefault();
-				self.location = "/test26/idol/idolList"
-			})
+			/* 취소버튼 경로 설정 */
+			$('#cancelButton').click(function(){
+				document.location.href="<%= request.getContextPath() %>/idol/idolList"
+			});
 		});
 	</script>
 </head>
@@ -57,11 +58,11 @@
 							<td>
 								<!-- 확인버튼 -->
 								<button type="button" id="updateButton" class="btn rgba-blue-strong">
-								<i class="fa fa-check-circle" aria-hidden="true"></i>
+									<i class="fa fa-check-circle" aria-hidden="true"></i>
 								</button>
 								<!-- 취소버튼 -->
-								<button type="button" id="cancelleButton" class="btn rgba-blue-strong">
-								<i class="fa fa-times-circle" aria-hidden="true"></i>
+								<button type="button" id="cancelButton" class="btn danger-color-dark">
+									<i class="fa fa-times-circle" aria-hidden="true"></i>
 								</button>
 							</td>
 						</tr>

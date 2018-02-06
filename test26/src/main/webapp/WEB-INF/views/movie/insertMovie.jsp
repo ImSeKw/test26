@@ -16,6 +16,10 @@
 					$('#movieAdd').submit();	
 				}
 			})
+			/* 취소버튼 경로 설정 */
+			$('#cancelButton').click(function(){
+				document.location.href="<%= request.getContextPath() %>/movie/movieList"
+			});
 		});
 	</script>
 </head>
@@ -50,6 +54,10 @@
 							<td>
 								<button type="button" id="insertButton" class="btn rgba-blue-strong">
 									<i class="fa fa-check-circle" aria-hidden="true"></i>
+								</button>
+								<!-- 취소버튼 -->
+								<button type="button" id="cancelButton" class="btn danger-color-dark">
+									<i class="fa fa-times-circle" aria-hidden="true"></i>
 								</button>
 							</td>
 						</tr>

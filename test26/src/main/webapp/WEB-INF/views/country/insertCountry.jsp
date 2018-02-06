@@ -17,6 +17,10 @@
 					$('#countryAdd').submit();	
 				}
 			})
+			/* 취소버튼 경로 설정 */
+			$('#cancelButton').click(function(){
+				document.location.href="<%= request.getContextPath() %>/country/countryList"
+			});
 		});
 	</script>
 </head>
@@ -48,7 +52,15 @@
 							<td><input type="text" name="countryName" id="countryName" placeholder="이곳에 나라 이름을 입력하세요"></td>
 						</tr>
 						<tr>
-							<td><button type="submit" id="insertButton" class="btn rgba-blue-strong"><i class="fa fa-check-circle" aria-hidden="true"></i></button></td>
+							<td>
+								<button type="submit" id="insertButton" class="btn rgba-blue-strong">
+									<i class="fa fa-check-circle" aria-hidden="true"></i>
+								</button>
+								<!-- 취소버튼 -->
+								<button type="button" id="cancelButton" class="btn danger-color-dark">
+									<i class="fa fa-times-circle" aria-hidden="true"></i>
+								</button>
+							</td>
 						</tr>
 					</tbody>
 				</table>

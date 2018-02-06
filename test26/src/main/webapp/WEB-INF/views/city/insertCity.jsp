@@ -17,7 +17,7 @@
 				}
 			})
 			$('#cancelButton').click(function(){
-				document.location.href='<%= request.getContextPath() %>/city/cityList';
+				document.location.href='<%= request.getContextPath() %>/city/cityList'
 			});
 		});
 	</script>
@@ -54,7 +54,8 @@
 								<button type="button" id="insertButton" class="btn rgba-blue-strong">
 									<i class="fa fa-check-circle" aria-hidden="true"></i>
 								</button>
-								<button type="button" id="cancelButton" class="btn rgba-blue-strong">
+								<!-- 취소버튼 -->
+								<button type="button" id="cancelButton" class="btn danger-color-dark">
 									<i class="fa fa-times-circle" aria-hidden="true"></i>
 								</button>
 							</td>
