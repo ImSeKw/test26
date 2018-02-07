@@ -13,7 +13,7 @@ public class CountryDao {
 	String namespace = "ksmart.project.test26.service.CountryMapper.";
 	
 	public List<Country> selectCountryList(){
-		System.out.println("01-02 CountryDao.java selectCountryList 硫붿꽌�뱶 �샇異�");			
+		System.out.println("01-02 CountryDao.java selectCountryList ");			
 		return sqlSessionTemplate.selectList(namespace+"selectCountryList");		
 	}
 	//insertCountry

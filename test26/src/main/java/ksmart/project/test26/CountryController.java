@@ -6,6 +6,8 @@ import ksmart.project.test26.service.CountryDao;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +19,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class CountryController {
 	@Autowired
 	private CountryDao countryDao;
+	private static final Logger logger = LoggerFactory.getLogger(CountryController.class);
+
 	//나라리스트
 	@RequestMapping(value="/country/countryList")		
 	public String CountryList(Model model) {		
@@ -49,12 +53,18 @@ public class CountryController {
 	public String CountryUpdate(Model model,@RequestParam(value="countryId",required=true)int countryId) {
 		Country country = countryDao.selectCountryName(countryId);
 		model.addAttribute("country", country);	
+		logger.debug("{} : country.getMemberId() CountryUpdate CountryController.java GET", country.getCountryId());
+		logger.debug("{} : country.getCountryName() CountryUpdate CountryController.java GET", country.getCountryName());
+
 		return "country/updateCountry";		
 	}
 	//나라수정
 	@RequestMapping(value="/country/updateCountry",method = RequestMethod.POST)
 	public String CountryUpdate(Country country) {
+		logger.debug("{} : country.getMemberId() CountryUpdate CountryController.java POST", country.getCountryId());
+		logger.debug("{} : country.getCountryName() CountryUpdate CountryController.java POST", country.getCountryName());
 		countryDao.updateCountry(country);
+
 		return "redirect:/country/countryList";
 	}
 }
