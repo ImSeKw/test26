@@ -36,15 +36,10 @@
 	FROM member
 	WHERE member_no=#{memberNo} 
 	</select>
-	<update id="updateMember" parameterType="int">
-		UPDATE member
-		SET 
-		(member_id=#{memberId}
-		,member_pw=#{memberPw}
-		)
-		WHERE member_no=#{memberNo}
+	<update id="updateMember" parameterType="ksmart.project.test26.service.Member">
+		UPDATE member SET member_id=#{memberId},member_pw=#{memberPw} WHERE member_no=#{memberNo}
 	</update>
 	<delete id="deleteMember" parameterType="ksmart.project.test26.service.Member">
-		DELELTE  FROM member WHERE member_no=#{memberNo}
+		DELETE FROM member WHERE member_no=#{memberNo}
 	</delete>
 </mapper>
