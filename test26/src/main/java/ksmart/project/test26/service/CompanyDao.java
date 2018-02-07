@@ -11,28 +11,30 @@ import org.springframework.stereotype.Repository;
 public class CompanyDao {
 	@Autowired
 	private SqlSessionTemplate sqlsessiontemplate;
-	private String ms ="ksmart.project.test26.service.CompanyMapper.";//¹Ýº¹µÇ´Â StringÀ» msº¯¼ö·Î Ã³¸®
-	//È¸»çlist¸¦¹Þ´Â Dao 
+	private final String NAMESPACE ="ksmart.project.test26.service.CompanyMapper.";
+	
+	// íšŒì‚¬ ì „ì²´ ì¡°íšŒ
 	public List<Company>selectCompanyList(){
-		return sqlsessiontemplate.selectList(ms+"selectCompanyList");
+		return sqlsessiontemplate.selectList(NAMESPACE + "selectCompanyList");
 	}
-	//È¸»çÃß°¡ Dao
+	
+	// íšŒì‚¬ ì¶”ì‚¬ Action
 	public int insertCompany(Company company) {
-		return sqlsessiontemplate.insert(ms+"insertCompany",company);
+		return sqlsessiontemplate.insert(NAMESPACE + "insertCompany",company);
 	}
-	//È¸»ç¼öÁ¤À»À§ÇÑ ¾ÆÀÌµð °¡Á®¿À±â DAo
+	
+	// íšŒì‚¬ ìˆ˜ì •  Form
 	public Company selectCompanyId(int companyId) {
-		return sqlsessiontemplate.selectOne(ms+"selectCompanyId",  companyId);
+		return sqlsessiontemplate.selectOne(NAMESPACE + "selectCompanyId",  companyId);
 	}
-	//È¸»ç¼öÁ¤
+	
+	// íšŒì‚¬ ìˆ˜ì • Form
 	public int updateCompany(Company company) {
-		return sqlsessiontemplate.update(ms+"updateCompany",company);
-		
+		return sqlsessiontemplate.update(NAMESPACE + "updateCompany",company);
 	}
-	//È¸»ç»èÁ¦
+	
+	// íšŒì‚¬ ì‚­ì œ Action
 	public int deleteCompany(Company company) {
-		return sqlsessiontemplate.delete(ms+"deleteCompany", company);
-		
+		return sqlsessiontemplate.delete(NAMESPACE + "deleteCompany", company);
 	}
-
 }
