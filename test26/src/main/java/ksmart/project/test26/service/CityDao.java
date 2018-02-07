@@ -13,7 +13,7 @@ public class CityDao {
 	@Autowired
 	SqlSessionTemplate sqlSessionTemplate;
 	private static final Logger logger = LoggerFactory.getLogger(CityDao.class);
-	// 경로설정 중복처리
+	// 경로설정 중복처리 
 	private final String NAMESPACE = "ksmart.project.test26.mapper.CityMapper.";
 	
 	// 도시 삭제 Action
