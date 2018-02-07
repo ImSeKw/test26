@@ -75,26 +75,45 @@ public class MemberController {
 	// 회원 수정 Form
 	@RequestMapping(value="/member/selectMemberInfo", method = RequestMethod.GET)
 	public String selectMemberInfo(HttpSession httpSession, Model model) {
-		Member member = (Member)httpSession.getAttribute("loginMember");
-		Member reMember = memberDao.selectMemberInfo(member.getMemberNo());
-		model.addAttribute("member", reMember);
-		return "member/selectMemberInfo";
+		String view = null;
+		if(httpSession.getAttribute("loginMember") != null) {
+			Member member = (Member)httpSession.getAttribute("loginMember");
+			Member reMember = memberDao.selectMemberInfo(member.getMemberNo());
+			model.addAttribute("member", reMember);
+			view = "/member/selectMemberInfo";
+		}else if(httpSession.getAttribute("loginMember") == null) {
+			view="redirect:/";
+		}
+		return view;
 	}
 	
 	// 회원 수정 Action
 	@RequestMapping(value="/member/updateMember", method = RequestMethod.POST)
 	public String updateMember(HttpSession httpSession, Member member) {
-		memberDao.updateMember(member);
-		httpSession.setAttribute("loginMember", member);
-		return "redirect:/";
+		String view = null;
+		if(httpSession.getAttribute("loginMember") != null) {
+			memberDao.updateMember(member);
+			httpSession.setAttribute("loginMember", member);
+			view="redirect:/";
+		}else if(httpSession.getAttribute("loginMember") == null) {
+			view="redirect:/";
+		}
+		return view;
+		
 	}
 	
 	// 회원 삭제
 	@RequestMapping(value="/member/deleteMember", method = RequestMethod.GET)
 	public String deleteMember(HttpSession httpSession, Member member) {
-		int result = memberDao.deleteMember(member);
-		logger.debug("{} : result deleteMember MemberController.java", result);
-		httpSession.invalidate();
-		return "redirect:/";
+		String view = null;
+		if(httpSession.getAttribute("loginMember") != null){
+			int result = memberDao.deleteMember(member);
+			logger.debug("{} : result deleteMember MemberController.java", result);
+			httpSession.invalidate();
+			view = "redirect:/";
+		}else if(httpSession.getAttribute("loginMember") == null) {
+			view ="redirect:/";
+		}
+		return view;
 	}
 }
