@@ -27,8 +27,13 @@
 		http://fruitdev.tistory.com/131
 	 -->
 	<c:set var="loginMember" value='${httpSession.getAttribute("loginMember")}'/>
+	
 	<a href="${pageContext.request.contextPath}/member/selectMemberInfo">나의정보</a>
 	<a href="${pageContext.request.contextPath}/member/selectMemberInfo">나의정보</a>
+	
+	<a href="${pageContext.request.contextPath}/member/selectMemberInfo">나의정보</a>
+	<a href="${pageContext.request.contextPath}/member/selectMemberInfo">나의정보</a>
+	
 	<div class="container">
 		<div class="row" style="padding-top: 50px">
 			<div class="col-md-4 col-lg-4"></div>
