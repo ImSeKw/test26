@@ -8,7 +8,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class MovieDao {
-	
 	@Autowired
 	private SqlSessionTemplate sqlSessionTemplate;
 	// 중복을 피하기 위한 namespace

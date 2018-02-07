@@ -14,12 +14,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import ksmart.project.test26.service.Movie;
-import ksmart.project.test26.service.MovieDao;
+import ksmart.project.test26.service.MovieService;
 
 @Controller
 public class MovieController {
 	@Autowired
-	private MovieDao movieDao;
+	private MovieService movieService;
 	private static final Logger logger = LoggerFactory.getLogger(MovieController.class);
 	
 	// 영화 삭제 처리
@@ -28,7 +28,7 @@ public class MovieController {
 		// 로그인 접근 처리
 			if(httpSession.getAttribute("loginMember") != null) {
 				logger.debug("Yes deleteMovie MovieController.java");
-				movieDao.deleteMovie(movieId);
+				movieService.deleteMovie(movieId);
 			} else {
 				logger.debug("No deleteMovie MovieController.java");
 			}
@@ -38,7 +38,7 @@ public class MovieController {
 	// 영화 수정 처리
 	@RequestMapping(value="/movie/updateMovie", method=RequestMethod.POST)
 	public String updateMovie(Movie movie) {
-		movieDao.updateMovie(movie);
+		movieService.updateMovie(movie);
 		return "redirect:/movie/movieList";
 	}
 	
@@ -50,7 +50,7 @@ public class MovieController {
 		if(httpSession.getAttribute("loginMember") == null) {
 			view = "redirect:/movie/movieList";
 		} else if(httpSession.getAttribute("loginMember") != null) {
-			Movie movie = movieDao.updateMovie(movieId);
+			Movie movie = movieService.updateMovie(movieId);
 			model.addAttribute("movie", movie);
 			view = "movie/updateMovie";
 		}
@@ -61,7 +61,7 @@ public class MovieController {
 	// 영화 입력 처리
 	@RequestMapping(value="/movie/insertMovie", method=RequestMethod.POST)
 	public String insertMovie(@RequestParam(value="movieName") String movieName) {
-		movieDao.insertMovie(movieName);
+		movieService.insertMovie(movieName);
 		return "redirect:/movie/movieList";
 	}
 	
@@ -82,7 +82,7 @@ public class MovieController {
 	// 영화 전체 목록
 	@RequestMapping(value="/movie/movieList")
 	public String movieList(Model model) {
-		List<Movie> list = movieDao.selectMovieList();
+		List<Movie> list = movieService.selectMovieList();
 		model.addAttribute("list", list);
 		return "movie/movieList";
 	}
