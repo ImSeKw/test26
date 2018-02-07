@@ -14,12 +14,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import ksmart.project.test26.service.City;
-import ksmart.project.test26.service.CityDao;
+import ksmart.project.test26.service.CityService;
 
 @Controller
 public class CityController {
 	@Autowired
-	CityDao cityDao;
+	CityService cityService;
 	private static final Logger logger = LoggerFactory.getLogger(CityController.class);
 	
 	// 도시 삭제
@@ -28,7 +28,7 @@ public class CityController {
 		// 로그인 처리
 		if(httpSession.getAttribute("loginMember") != null) {
 			logger.debug("Yes deleteCity CityController.java");
-			cityDao.deleteCity(city);
+			cityService.deleteCity(city);
 		} else {
 			logger.debug("No deleteCity CityController.java");
 		}
@@ -38,7 +38,7 @@ public class CityController {
 	// 도시 수정 Action
 	@RequestMapping(value = "/city/updateCity", method = RequestMethod.POST)
 	public String updateCity(City city) {
-		cityDao.updateCity(city);
+		cityService.updateCity(city);
 		return "redirect:/city/cityList";
 	}
 	
@@ -50,7 +50,7 @@ public class CityController {
 		if(httpSession.getAttribute("loginMember") == null) {
 			view = "redirect:/city/cityList";
 		} else if(httpSession.getAttribute("loginMember") != null) {
-			City reCity = cityDao.updateCity(cityId);
+			City reCity = cityService.updateCity(cityId);
 			model.addAttribute("city", reCity);
 			view = "city/updateCity";
 		}
@@ -58,14 +58,14 @@ public class CityController {
 		return view;
 	}
 	
-	// 도시 입력 Action
+	// 도시 추가 Action
 	@RequestMapping(value = "/city/insertCity", method = RequestMethod.POST)
 	public String insertCity(City city) {
-		cityDao.insertCity(city);
+		cityService.insertCity(city);
 		return "redirect:/city/cityList";
 	}
 	
-	// 도시 입력 Form
+	// 도시 추가 Form
 	@RequestMapping(value = "/city/insertCity", method = RequestMethod.GET)
 	public String insertCity(HttpSession httpSession) {
 		String view = null;
@@ -82,7 +82,7 @@ public class CityController {
 	// 도시 전체 조회
 	@RequestMapping(value = "/city/cityList", method = RequestMethod.GET)
 	public String cityList(Model model) {
-		List<City> list = cityDao.selectCityList();
+		List<City> list = cityService.selectCityList();
 		model.addAttribute("list", list);
 		return "city/cityList";
 	}

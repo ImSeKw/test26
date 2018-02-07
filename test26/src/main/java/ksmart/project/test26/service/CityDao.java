@@ -13,27 +13,27 @@ public class CityDao {
 	// namespace (중복 처리)
 	private final String NAMESPACE = "ksmart.project.test26.service.CityMapper.";
 	
-	// 도시 삭제
+	// 도시 삭제 Action
 	public void deleteCity(City city) {
 		sqlSessionTemplate.delete(NAMESPACE + "deleteCity", city);
 	}
 	
-	// 도시 수정
+	// 도시 수정 Action
 	public void updateCity(City city) {
 		sqlSessionTemplate.update(NAMESPACE + "updateCity", city);
 	}
 	
-	// 도시 조회 (수정)
+	// 도시 수정 Form
 	public City updateCity(int cityId) {
 		return sqlSessionTemplate.selectOne(NAMESPACE + "selectCityId", cityId);
 	}
 	
-	// 도시 추가
+	// 도시 추가 Action
 	public void insertCity(City city) {
 		sqlSessionTemplate.insert(NAMESPACE + "insertCity", city);
 	}
 	
-	// 전체 도시 목록
+	// 도시 전체 조회
 	public List<City> selectCityList() {
 		return sqlSessionTemplate.selectList(NAMESPACE + "selectCityList");
 	}
