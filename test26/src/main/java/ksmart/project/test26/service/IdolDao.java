@@ -10,7 +10,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class IdolDao {
-	
 	@Autowired
 	private SqlSessionTemplate sqlSessionTemplate;
 	private static final Logger logger = LoggerFactory.getLogger(IdolDao.class);
