@@ -26,7 +26,7 @@
 			</div>
 		</div>
 	</div>
-	 
+
 	<c:set var="loginMember" value="${loginMember}"/>
 	<c:choose>
 		<c:when test="${not empty loginMember}">
