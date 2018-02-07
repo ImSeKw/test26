@@ -11,7 +11,8 @@ public class MemberDao {
 	@Autowired
 	private SqlSessionTemplate sqlSessionTemplate;
 	private static final Logger logger = LoggerFactory.getLogger(MemberDao.class);
-	private final String NAMESPACE = "ksmart.project.test26.service.MemberMapper.";
+	// 경로설정 중복처리
+	private final String NAMESPACE = "ksmart.project.test26.mapper.MemberMapper.";
 	
 	// 로그인
 	public Member loginMember(Member member) {

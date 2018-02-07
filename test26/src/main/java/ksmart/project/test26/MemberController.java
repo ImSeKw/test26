@@ -35,6 +35,7 @@ public class MemberController {
 		logger.debug("{} : member.getMemberPw() selectMember MemberController.java POST", member.getMemberPw());
 		Member reMember = memberDao.loginMember(member);
 		String view = null;
+		// 아이디, 비밀번호 일치 여부에 따라 페이지 변경
 		if(reMember == null) {
 			logger.debug("{} : null selectMember MemberController.java", reMember);
 			view = "redirect:/member/loginMember";

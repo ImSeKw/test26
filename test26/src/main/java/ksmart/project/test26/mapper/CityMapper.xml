@@ -3,7 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="ksmart.project.test26.service.CityMapper">
+<mapper namespace="ksmart.project.test26.mapper.CityMapper">
 	<!-- delete 도시 삭제 -->
 	<delete id="deleteCity" parameterType="ksmart.project.test26.service.City">
 		DELETE FROM city

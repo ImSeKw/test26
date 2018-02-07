@@ -3,6 +3,8 @@ package ksmart.project.test26.service;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -10,8 +12,9 @@ import org.springframework.stereotype.Repository;
 public class CityDao {
 	@Autowired
 	SqlSessionTemplate sqlSessionTemplate;
-	// namespace (중복 처리)
-	private final String NAMESPACE = "ksmart.project.test26.service.CityMapper.";
+	private static final Logger logger = LoggerFactory.getLogger(CityDao.class);
+	// 경로설정 중복처리
+	private final String NAMESPACE = "ksmart.project.test26.mapper.CityMapper.";
 	
 	// 도시 삭제 Action
 	public void deleteCity(City city) {
