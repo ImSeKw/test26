@@ -28,19 +28,21 @@ public class MemberController {
 		logger.debug("{} : member.getMemberId() selectMember MemberController.java POST", member.getMemberId());
 		logger.debug("{} : member.getMemberPw() selectMember MemberController.java POST", member.getMemberPw());
 		Member reMember = memberDao.loginMember(member);
-		logger.debug("{} : reMember selectMember MemberController.java", reMember);
+		String view = null;
 		if(reMember == null) {
+			logger.debug("{} : null selectMember MemberController.java", reMember);
 			return "redirect:/member/loginMember";
 		} else if(reMember.getMemberId().equals(member.getMemberId())) {
 			if(reMember.getMemberPw().equals(member.getMemberPw())) {
+				logger.debug("{} : pw selectMember MemberController.java", reMember);
 				httpSession.setAttribute("loginMember", reMember);
-				return "redirect:/";
+				view = "redirect:/";
 			} else {
-				return "redirect:/member/loginMember";
+				logger.debug("{} : id selectMember MemberController.java", reMember);
+				view = "redirect:/member/loginMember";
 			}
-		} else {
-			return "redirect:/member/loginMember";
 		}
+		return view;
 	}
 	
 	// 로그인 화면
@@ -48,12 +50,12 @@ public class MemberController {
 	public String loginMember() {
 		return "member/loginMember";
 	}
+	
 	//로그아웃
 	@RequestMapping(value="/member/logoutMember",method=RequestMethod.GET)
 	public String logoutMember(HttpSession httpSession) {
 		httpSession.invalidate();
 		return null;
-		
 	}
 	
 	//회원가입화면
@@ -67,7 +69,6 @@ public class MemberController {
 	public String insertMember(Member member) {
 		memberDao.insertMember(member);
 		return "redirect:/member/loginMember";
-		
 	}
 	
 	//개인회원정보검색처리
@@ -79,11 +80,11 @@ public class MemberController {
 		return "member/selectMemberInfo";
 	}
 	
-	//개인회원정보수정화면
+	//개인회원정보수정처리
 	@RequestMapping(value="/member/updateMember",method=RequestMethod.POST)
 	public String updateMember(HttpSession httpSession,Member member) {
 		memberDao.updateMember(member);
-		httpSession.setAttribute("member", member);
+		httpSession.setAttribute("loginMember", member);
 		return "redirect:/";
 	}	
 	
@@ -93,9 +94,5 @@ public class MemberController {
 		memberDao.deleteMember(member);
 		httpSession.invalidate();
 		return "redirect:/";
-		
 	}
-
-		
-	
 }
