@@ -2,6 +2,10 @@ package ksmart.project.test26;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,9 +20,9 @@ import ksmart.project.test26.service.CompanyDao;
 public class CompanyController {
 	@Autowired
 	private CompanyDao companyDao;
-	
+	private static final Logger logger = LoggerFactory.getLogger(CompanyController.class);
 
-	//È¸»ç ¸®½ºÆ® 
+	// íšŒì‚¬ì „ì²´ì¡°íšŒ
 	@RequestMapping(value="/company/companyList", method = RequestMethod.GET)
 	public String companyList(Model model) {
 		List<Company> list =companyDao.selectCompanyList();
@@ -26,38 +30,58 @@ public class CompanyController {
 		return "company/companyList";
 	}
 	
-	//È¸»çÃß°¡È­¸é ºÒ·¯¿À±â
+	// íšŒì‚¬ ì…ë ¥ Form
 	@RequestMapping(value="/company/insertcompany", method = RequestMethod.GET)
-	public String addcompany() {
-		return "company/insertCompany";
+	public String addcompany(HttpSession httpSession) {
+		String view = null;
+		// ë¡œê·¸ì¸ ì ‘ê·¼ ì²˜ë¦¬
+		if(httpSession.getAttribute("loginMember") == null) {
+			view = "redirect:/company/companyList";
+		} else if(httpSession.getAttribute("loginMember") != null) {
+			view = "company/insertCompany";
+		}
+		logger.debug("{} : view addcompany CompanyController.java", view);
+		return view;
 	}
-	//È¸»çÃß°¡
+	// íšŒì‚¬ ì…ë ¥ Action
 	@RequestMapping(value="/company/insertcompany",method = RequestMethod.POST)
 	public String addcompany(Company company) {
 		System.out.println("companyadd post");
 		companyDao.insertCompany(company);
-		return "redirect:/company/companyList";//ÇÑ¹øÄ¿¹ÔÀ» ²÷¾îÁà¾ßÇØ¼­ ¸®´ÙÀÌ·ºÆ®·Î ¹Ş´Â´Ù
+		return "redirect:/company/companyList";
 		
 	}
-	//È¸»ç¼öÁ¤À»À§ÇÑ ¾ÆÀÌµğ¹Ş±â
+	// íšŒì‚¬ ìˆ˜ì • Form
 	@RequestMapping(value="/company/updateCompany",method = RequestMethod.GET)
-	public String companyId(Model model,@RequestParam(value="companyId",required=true)int companyId) {
-		Company company=companyDao.selectCompanyId(companyId);
-		model.addAttribute("company", company);
-		return "company/updateCompany";
+	public String companyId(HttpSession httpSession, Model model, @RequestParam(value="companyId",required=true) int companyId) {
+		String view = null;
+		// ë¡œê·¸ì¸ ì ‘ê·¼ ì²˜ë¦¬
+		if(httpSession.getAttribute("loginMember") == null) {
+			view = "redirect:/company/companyList";
+		} else if(httpSession.getAttribute("loginMember") != null) {
+			Company company=companyDao.selectCompanyId(companyId);
+			model.addAttribute("company", company);
+			view = "company/updateCompany";
+		}
+		logger.debug("{} : view companyId CompanyController.java", view);
+		return view;
 	}
-	//È¸»ç¼öÁ¤
+	// íšŒì‚¬ ìˆ˜ì • Action
 	@RequestMapping(value="/company/updateCompany",method = RequestMethod.POST)
 	public String updateCompany(Company company) {
 		companyDao.updateCompany(company);
 		return "redirect:/company/companyList";
 	}
-	//È¸»ç»èÁ¦
+	// íšŒì‚¬ ì‚­ì œ
 	@RequestMapping(value="/company/deleteCompany",method = RequestMethod.GET)
-	public String companydelete(Company company) {
-		companyDao.deleteCompany(company);
+	public String companydelete(HttpSession httpSession, Company company) {
+		// ë¡œê·¸ì¸ ì ‘ê·¼ ì²˜ë¦¬
+		if(httpSession.getAttribute("loginMember") != null) {
+			logger.debug("Yes companydelete CompanyController.java");
+			companyDao.deleteCompany(company);
+		} else {
+			logger.debug("No companydelete CompanyController.java");
+		}
 		return "redirect:/company/companyList";
 	}
-	
-
-	}
+}

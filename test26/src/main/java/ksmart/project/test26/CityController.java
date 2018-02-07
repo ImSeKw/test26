@@ -2,6 +2,10 @@ package ksmart.project.test26;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,11 +20,18 @@ import ksmart.project.test26.service.CityDao;
 public class CityController {
 	@Autowired
 	CityDao cityDao;
+	private static final Logger logger = LoggerFactory.getLogger(CityController.class);
 	
 	// 도시 삭제
 	@RequestMapping(value = "/city/deleteCity", method = RequestMethod.GET)
-	public String deleteCity(City city) {
-		cityDao.deleteCity(city);
+	public String deleteCity(HttpSession httpSession, City city) {
+		// 로그인 처리
+		if(httpSession.getAttribute("loginMember") != null) {
+			logger.debug("Yes deleteCity CityController.java");
+			cityDao.deleteCity(city);
+		} else {
+			logger.debug("No deleteCity CityController.java");
+		}
 		return "redirect:/city/cityList";
 	}
 	
@@ -33,10 +44,18 @@ public class CityController {
 	
 	// 도시 수정 Form
 	@RequestMapping(value = "/city/updateCity", method = RequestMethod.GET)
-	public String updateCity(Model model, @RequestParam(value = "cityId") int cityId) {
-		City reCity = cityDao.updateCity(cityId);
-		model.addAttribute("city", reCity);
-		return "city/updateCity";
+	public String updateCity(HttpSession httpSession, Model model, @RequestParam(value = "cityId") int cityId) {
+		String view = null;
+		// 로그인 처리
+		if(httpSession.getAttribute("loginMember") == null) {
+			view = "redirect:/city/cityList";
+		} else if(httpSession.getAttribute("loginMember") != null) {
+			City reCity = cityDao.updateCity(cityId);
+			model.addAttribute("city", reCity);
+			view = "city/updateCity";
+		}
+		logger.debug("{} : view updateCity CityController.java", view);
+		return view;
 	}
 	
 	// 도시 입력 Action
@@ -48,8 +67,16 @@ public class CityController {
 	
 	// 도시 입력 Form
 	@RequestMapping(value = "/city/insertCity", method = RequestMethod.GET)
-	public String insertCity() {
-		return "city/insertCity";
+	public String insertCity(HttpSession httpSession) {
+		String view = null;
+		// 로그인 처리
+		if(httpSession.getAttribute("loginMember") == null) {
+			view = "redirect:/city/cityList";
+		} else if(httpSession.getAttribute("loginMember") != null) {
+			view = "city/insertCity";
+		}
+		logger.debug("{} : view insertCity CityController.java", view);
+		return view;
 	}
 	
 	// 도시 전체 조회
