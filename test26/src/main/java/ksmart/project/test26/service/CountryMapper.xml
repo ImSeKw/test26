@@ -14,7 +14,8 @@
 	<!--COUNTRY 수정 폼 SELECT   -->
 	<select id="selectCountryName" parameterType="int" resultType="ksmart.project.test26.service.Country">
 		SELECT 
-			country_name as countryName
+			country_id as countryId	
+			,country_name as countryName		
 		FROM country
 		WHERE country_id = #{countryId};
 	</select>	
