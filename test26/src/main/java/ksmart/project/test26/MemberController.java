@@ -22,8 +22,14 @@ public class MemberController {
 	private MemberDao memberDao;
 	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
 	
-	// 로그인 처리
-	@RequestMapping(value="/member/loginMember", method=RequestMethod.POST)
+	// 로그인 Form
+	@RequestMapping(value="/member/loginMember", method = RequestMethod.GET)
+	public String loginMember() {
+		return "member/loginMember";
+	}
+	
+	// 로그인 Action
+	@RequestMapping(value="/member/loginMember", method = RequestMethod.POST)
 	public String loginMember(HttpSession httpSession, Member member) {
 		logger.debug("{} : member.getMemberId() selectMember MemberController.java POST", member.getMemberId());
 		logger.debug("{} : member.getMemberPw() selectMember MemberController.java POST", member.getMemberPw());
@@ -31,7 +37,7 @@ public class MemberController {
 		String view = null;
 		if(reMember == null) {
 			logger.debug("{} : null selectMember MemberController.java", reMember);
-			return "redirect:/member/loginMember";
+			view = "redirect:/member/loginMember";
 		} else if(reMember.getMemberId().equals(member.getMemberId())) {
 			if(reMember.getMemberPw().equals(member.getMemberPw())) {
 				logger.debug("{} : pw selectMember MemberController.java", reMember);
@@ -45,34 +51,28 @@ public class MemberController {
 		return view;
 	}
 	
-	// 로그인 화면
-	@RequestMapping(value="/member/loginMember", method=RequestMethod.GET)
-	public String loginMember() {
-		return "member/loginMember";
-	}
-	
-	//로그아웃
-	@RequestMapping(value="/member/logoutMember",method=RequestMethod.GET)
+	// 로그아웃
+	@RequestMapping(value="/member/logoutMember", method = RequestMethod.GET)
 	public String logoutMember(HttpSession httpSession) {
 		httpSession.invalidate();
-		return null;
+		return "redirect:/";
 	}
 	
-	//회원가입화면
-	@RequestMapping(value="/member/insertMember",method=RequestMethod.GET)
+	// 회원 가입 Form
+	@RequestMapping(value="/member/insertMember", method = RequestMethod.GET)
 	public String insertMember() {
 		return "member/insertMember";
 	}
 	
-	//회원가입처리
-	@RequestMapping(value="/member/insertMember",method=RequestMethod.POST)
+	// 회원 가입 Action
+	@RequestMapping(value="/member/insertMember", method = RequestMethod.POST)
 	public String insertMember(Member member) {
 		memberDao.insertMember(member);
 		return "redirect:/member/loginMember";
 	}
 	
-	//개인회원정보검색처리
-	@RequestMapping(value="/member/selectMemberInfo",method=RequestMethod.GET)
+	// 회원 수정 Form
+	@RequestMapping(value="/member/selectMemberInfo", method = RequestMethod.GET)
 	public String selectMemberInfo(HttpSession httpSession, Model model) {
 		Member member = (Member)httpSession.getAttribute("loginMember");
 		Member reMember = memberDao.selectMemberInfo(member.getMemberNo());
@@ -80,18 +80,19 @@ public class MemberController {
 		return "member/selectMemberInfo";
 	}
 	
-	//개인회원정보수정처리
-	@RequestMapping(value="/member/updateMember",method=RequestMethod.POST)
-	public String updateMember(HttpSession httpSession,Member member) {
+	// 회원 수정 Action
+	@RequestMapping(value="/member/updateMember", method = RequestMethod.POST)
+	public String updateMember(HttpSession httpSession, Member member) {
 		memberDao.updateMember(member);
 		httpSession.setAttribute("loginMember", member);
 		return "redirect:/";
-	}	
+	}
 	
-	//개인회원 삭제
-	@RequestMapping(value="/member/deleteMember",method=RequestMethod.GET)
-	public String deleteMember(HttpSession httpSession,Member member) {
-		memberDao.deleteMember(member);
+	// 회원 삭제
+	@RequestMapping(value="/member/deleteMember", method = RequestMethod.GET)
+	public String deleteMember(HttpSession httpSession, Member member) {
+		int result = memberDao.deleteMember(member);
+		logger.debug("{} : result deleteMember MemberController.java", result);
 		httpSession.invalidate();
 		return "redirect:/";
 	}

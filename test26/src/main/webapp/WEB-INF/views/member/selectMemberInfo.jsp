@@ -26,7 +26,7 @@
 			</tbody>
 		</table>
 		<button type="submit">수정</button>
-		<a href="${pageContext.request.contextPath}/member/deleteMember">삭제</a>
+		<a href="${pageContext.request.contextPath}/member/deleteMember?memberNo=${member.memberNo}">삭제</a>
 	</form> 
 </body>
 </html>
