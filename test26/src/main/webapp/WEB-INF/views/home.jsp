@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ page session="false"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,31 +26,18 @@
 			</div>
 		</div>
 	</div>
-	<!-- 
-		http://fruitdev.tistory.com/131
-	 -->
-	<c:set var="loginMember" value='${httpSession.getAttribute("loginMember")}'/>
-	
-	<c:if test="${empty loginMember}">
-	    <a href="${pageContext.request.contextPath}/member/insertMember">회원가입</a>
-		<a href="${pageContext.request.contextPath}/member/loginMember">로그인</a>
-	</c:if>
-	<c:if test="${!empty loginMember}">
-		<a href="${pageContext.request.contextPath}/member/selectMemberInfo">나의정보</a>
-		<a href="${pageContext.request.contextPath}/member/logoutMember">로그아웃</a>
-	</c:if>
-	
-	<%-- <c:choose>
-		<c:when test="${!empty loginMember}">
+	 
+	<c:set var="loginMember" value="${loginMember}"/>
+	<c:choose>
+		<c:when test="${not empty loginMember}">
 			<a href="${pageContext.request.contextPath}/member/selectMemberInfo">나의정보</a>
 			<a href="${pageContext.request.contextPath}/member/logoutMember">로그아웃</a>
 		</c:when>
-		<c:otherwise>
+		<c:when test="${empty loginMember}">
 			<a href="${pageContext.request.contextPath}/member/insertMember">회원가입</a>
 			<a href="${pageContext.request.contextPath}/member/loginMember">로그인</a>
-		</c:otherwise>
-	</c:choose> --%>
-	
+		</c:when>
+	</c:choose>
 	
 	<div class="container">
 		<div class="row" style="padding-top: 50px">
