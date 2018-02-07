@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns:mvc="http://www.springframework.org/schema/mvc"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://www.springframework.org/schema/beans"
 	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
 	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
 
 	<!-- DispatcherServlet Context: defines this servlet's request-processing 
 		infrastructure -->
@@ -35,6 +38,14 @@
 		<property name="username" value="root" />
 		<property name="password" value="java0000" />
 	</bean>
+	
+	<!-- connection가진 tx기능을 spring에게 위임 -->
+	<!-- 서비스에 사용할 트랜젝션 -->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    <tx:annotation-driven /> <!-- 애노테이션 사용 가능 -->
+    <tx:annotation-driven proxy-target-class="true"/> <!-- 클래스에서도 애노테이션 사용 가능 -->
 	
 	<!-- mybatis 세션생성을 위한 팩토리 생성 -->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">

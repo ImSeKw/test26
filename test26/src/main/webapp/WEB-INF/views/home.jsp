@@ -23,6 +23,11 @@
 			</div>
 		</div>
 	</div>
+	<!-- 
+		http://fruitdev.tistory.com/131
+	 -->
+	<c:set var="loginMember" value='${httpSession.getAttribute("loginMember")}'/>
+	<a href="${pageContext.request.contextPath}/member/selectMemberInfo">나의정보</a>
 	<a href="${pageContext.request.contextPath}/member/selectMemberInfo">나의정보</a>
 	<div class="container">
 		<div class="row" style="padding-top: 50px">
@@ -31,7 +36,7 @@
 				<div class="list-group list-group-horizontal">
 					<a href="${pageContext.request.contextPath}/idol/idolList" class="list-group-item"><strong>IDOL</strong></a>
 					<a href="${pageContext.request.contextPath}/city/cityList" class="list-group-item"><strong>CITY</strong></a>
-					<a href="${pageContext.request.contextPath}/company/companyList" class="list-group-item"><strong>CONPANY</strong></a>
+					<a href="${pageContext.request.contextPath}/company/companyList" class="list-group-item"><strong>COMPANY</strong></a>
 					<a href="${pageContext.request.contextPath}/country/countryList" class="list-group-item"><strong>COUNTRY</strong></a>
 					<a href="${pageContext.request.contextPath}/movie/movieList" class="list-group-item"><strong>MOVIE</strong></a>
 				</div>
