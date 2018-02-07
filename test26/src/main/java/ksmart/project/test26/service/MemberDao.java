@@ -30,9 +30,15 @@ public class MemberDao {
 	}
 	
 	//회원수정
-	public int updateMember(int memberNo) {
-		return sqlSessionTemplate.update(NAMESPACE +"updateMember",memberNo);
+	public int updateMember(Member member) {
+		return sqlSessionTemplate.update(NAMESPACE +"updateMember",member);
 	}
+	//회원삭제
+	public int deleteMember(Member member) {
+		return  sqlSessionTemplate.delete(NAMESPACE +"deleteMember", member);
+	}
+	
+	
 	
 	
 }

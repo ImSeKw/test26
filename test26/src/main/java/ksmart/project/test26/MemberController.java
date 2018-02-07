@@ -48,6 +48,13 @@ public class MemberController {
 	public String loginMember() {
 		return "member/loginMember";
 	}
+	//로그아웃
+	@RequestMapping(value="/member/logoutMember",method=RequestMethod.GET)
+	public String logoutMember(HttpSession httpSession) {
+		httpSession.invalidate();
+		return null;
+		
+	}
 	
 	//회원가입화면
 	@RequestMapping(value="/member/insertMember",method=RequestMethod.GET)
@@ -73,10 +80,22 @@ public class MemberController {
 	}
 	
 	//개인회원정보수정화면
-	@RequestMapping(value="/member/updateMember",method=RequestMethod.GET)
-	public String updateMember(HttpSession httpSession,Model model) {
-		
-		return "/";
+	@RequestMapping(value="/member/updateMember",method=RequestMethod.POST)
+	public String updateMember(HttpSession httpSession,Member member) {
+		memberDao.updateMember(member);
+		httpSession.setAttribute("member", member);
+		return "redirect:/";
+	}	
+	
+	//개인회원 삭제
+	@RequestMapping(value="/member/deleteMember",method=RequestMethod.GET)
+	public String deleteMember(HttpSession httpSession,Member member) {
+		memberDao.deleteMember(member);
+		httpSession.invalidate();
+		return "redirect:/";
 		
 	}
+
+		
+	
 }
