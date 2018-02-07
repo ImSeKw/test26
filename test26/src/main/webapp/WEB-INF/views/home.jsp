@@ -1,44 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
-<link href="<c:url value="/resources/css-color/mdb.min.css" />"
-	rel="stylesheet">
-<link href="<c:url value="/resources/css-color/bootstrap.min.css" />"
-	rel="stylesheet">
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>home</title>
+	<%@ include file="/WEB-INF/views/module/head.jsp" %>
 </head>
 <body>
-	<div class="jumbotron jumbotron-sm">
-		<div class="container">
-			<div class="row">
-				<div class="col-sm-12 col-lg-12">
-					<h1 class="h1">
-						LIST <small>BOA</small>
-					</h1>
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<c:set var="loginMember" value="${loginMember}"/>
-	<c:choose>
-		<c:when test="${not empty loginMember}">
-			<a href="${pageContext.request.contextPath}/member/selectMemberInfo">나의정보</a>
-			<a href="${pageContext.request.contextPath}/member/logoutMember">로그아웃</a>
-		</c:when>
-		<c:when test="${empty loginMember}">
-			<a href="${pageContext.request.contextPath}/member/insertMember">회원가입</a>
-			<a href="${pageContext.request.contextPath}/member/loginMember">로그인</a>
-		</c:when>
-	</c:choose>
-	
+	<jsp:include page="/WEB-INF/views/module/top1.jsp"></jsp:include>
+		LIST <small>BOA</small>
+	<jsp:include page="/WEB-INF/views/module/top2.jsp"></jsp:include>
 	<div class="container">
 		<div class="row" style="padding-top: 50px">
 			<div class="col-md-4 col-lg-4"></div>
