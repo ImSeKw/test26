@@ -81,9 +81,16 @@ public class CityController {
 	
 	// 도시 전체 조회
 	@RequestMapping(value = "/city/cityList", method = RequestMethod.GET)
-	public String cityList(Model model) {
-		List<City> list = cityService.selectCityList();
-		model.addAttribute("list", list);
-		return "city/cityList";
+	public String cityList(HttpSession httpSession, Model model) {
+		String view = null;
+		// 로그인 접근 처리
+		if(httpSession.getAttribute("loginMember") == null) {
+			view = "redirect:/";
+		} else if(httpSession.getAttribute("loginMember") != null) {
+			List<City> list = cityService.selectCityList();
+			model.addAttribute("list", list);
+			view = "city/cityList";
+		}
+		return view;
 	}
 }

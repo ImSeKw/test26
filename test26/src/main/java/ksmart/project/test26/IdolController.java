@@ -19,15 +19,22 @@ import ksmart.project.test26.service.IdolService;
 @Controller
 public class IdolController {
 	@Autowired
-	IdolService idolService;
+	private IdolService idolService;
 	private static final Logger logger = LoggerFactory.getLogger(IdolController.class);
 	
 	// 전체목록조회
 	@RequestMapping(value="/idol/idolList", method = RequestMethod.GET)
-	public String idolList(Model model) {
-		List<Idol> list = idolService.selectIdolList();
-		model.addAttribute("list", list);
-		return "idol/idolList"; 
+	public String idolList(HttpSession httpSession, Model model) {
+		String view = null;
+		// 로그인 접근 처리
+		if(httpSession.getAttribute("loginMember") == null) {
+			view = "redirect:/";
+		} else if(httpSession.getAttribute("loginMember") != null) {
+			List<Idol> list = idolService.selectIdolList();
+			model.addAttribute("list", list);
+			view = "idol/idolList";
+		}
+		return view; 
 	}
 	
 	// 수정 Action

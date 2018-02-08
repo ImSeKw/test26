@@ -24,10 +24,17 @@ public class CompanyController {
 
 	// 회사 전체 조회
 	@RequestMapping(value="/company/companyList", method = RequestMethod.GET)
-	public String companyList(Model model) {
-		List<Company> list = companyService.selectCompanyList();
-		model.addAttribute("list",list);
-		return "company/companyList";
+	public String companyList(HttpSession httpSession, Model model) {
+		String view = null;
+		// 로그인 접근 처리
+		if(httpSession.getAttribute("loginMember") == null) {
+			view = "redirect:/";
+		} else if(httpSession.getAttribute("loginMember") != null) {
+			List<Company> list = companyService.selectCompanyList();
+			model.addAttribute("list",list);
+			view = "company/companyList";
+		}
+		return view;
 	}
 	
 	// 회사 입력 Form

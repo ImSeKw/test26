@@ -81,9 +81,16 @@ public class MovieController {
 	
 	// 영화 전체 목록
 	@RequestMapping(value="/movie/movieList")
-	public String movieList(Model model) {
-		List<Movie> list = movieService.selectMovieList();
-		model.addAttribute("list", list);
-		return "movie/movieList";
+	public String movieList(HttpSession httpSession, Model model) {
+		String view = null;
+		// 로그인 접근 처리
+		if(httpSession.getAttribute("loginMember") == null) {
+			view = "redirect:/";
+		} else if(httpSession.getAttribute("loginMember") != null) {
+			List<Movie> list = movieService.selectMovieList();
+			model.addAttribute("list", list);
+			view = "movie/movieList";
+		}
+		return view;
 	}
 }
