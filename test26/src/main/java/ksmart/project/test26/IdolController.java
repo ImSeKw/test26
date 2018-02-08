@@ -14,18 +14,18 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import ksmart.project.test26.service.Idol;
-import ksmart.project.test26.service.IdolDao;
+import ksmart.project.test26.service.IdolService;
 
 @Controller
 public class IdolController {
 	@Autowired
-	private IdolDao idolDao;
+	IdolService idolService;
 	private static final Logger logger = LoggerFactory.getLogger(IdolController.class);
 	
 	// 전체목록조회
 	@RequestMapping(value="/idol/idolList", method = RequestMethod.GET)
 	public String idolList(Model model) {
-		List<Idol> list = idolDao.selectIdolList();
+		List<Idol> list = idolService.selectIdolList();
 		model.addAttribute("list", list);
 		return "idol/idolList"; 
 	}
@@ -33,7 +33,7 @@ public class IdolController {
 	// 수정 Action
 	@RequestMapping(value = "/idol/updateIdol", method = RequestMethod.POST)
 	public String updateIdol(Idol idol) {
-		idolDao.updateIdol(idol);
+		idolService.updateIdol(idol);
 		return "redirect:/idol/idolList";
 	}
 	
@@ -45,7 +45,7 @@ public class IdolController {
 		if(httpSession.getAttribute("loginMember") == null) {
 			view = "redirect:/idol/idolList";
 		} else if(httpSession.getAttribute("loginMember") != null) {
-			Idol idol = idolDao.selectAndupdateIdol(idolID);
+			Idol idol = idolService.selectAndupdateIdol(idolID);
 			model.addAttribute("idol", idol);
 			view = "idol/updateIdol";
 		}
@@ -59,7 +59,7 @@ public class IdolController {
 		// 로그인 접근 처리
 		if(httpSession.getAttribute("loginMember") != null) {
 			logger.debug("Yes deleteIdol IdolController.java");
-			idolDao.deleteIdol(idol);
+			idolService.deleteIdol(idol);
 		} else {
 			logger.debug("No deleteIdol IdolController.java");
 		}
@@ -69,7 +69,7 @@ public class IdolController {
 	// 입력 Action
 	@RequestMapping(value = "/idol/insertIdol", method = RequestMethod.POST)
 	public String insertIdol(Idol idol) {
-		idolDao.insertIdol(idol);
+		idolService.insertIdol(idol);
 		return "redirect:/idol/idolList";
 	}
 

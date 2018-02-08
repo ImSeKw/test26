@@ -22,22 +22,22 @@ public class IdolDao {
 	}
 	
 	// idol추가입력
-	public void insertIdol(Idol idol) {
-		sqlSessionTemplate.insert(Route + "insertIdol", idol);
+	public int insertIdol(Idol idol) {
+		return sqlSessionTemplate.insert(Route + "insertIdol", idol);
 	}
 	
 	// idol수정처리
-	public void updateIdol(Idol idol) {
-		sqlSessionTemplate.update(Route + "updateIdol", idol);
+	public int updateIdol(Idol idol) {
+		return sqlSessionTemplate.update(Route + "updateIdol", idol);
 	}
 	
 	// idol 수정처리 id값조회
-	public Idol selectAndupdateIdol(int idolID) {
-		return sqlSessionTemplate.selectOne(Route + "selectAndupdateIdol", idolID);
+	public Idol rselectAndupdateIdol(int idolId) {
+		return sqlSessionTemplate.selectOne(Route + "selectAndupdateIdol", idolId);
 	}
 	
 	// idol삭제처리
-	public void deleteIdol(Idol idol) {
-		sqlSessionTemplate.delete(Route + "deleteIdol", idol);
+	public int deleteIdol(Idol idol) {
+		return sqlSessionTemplate.delete(Route + "deleteIdol", idol);
 	}
 }

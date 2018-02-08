@@ -17,7 +17,7 @@ public class CompanyService {
 		return companyDao.selectCompanyList();
 	}
 	
-	// 회사 추사 Action
+	// 회사 추가 Action
 	public int insertCompany(Company company) {
 		return companyDao.insertCompany(company);
 	}
