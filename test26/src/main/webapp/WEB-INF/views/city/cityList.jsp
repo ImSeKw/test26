@@ -11,6 +11,8 @@
 	<jsp:include page="/WEB-INF/views/module/top1.jsp"></jsp:include>
 		CITY <small>LIST</small>
 	<jsp:include page="/WEB-INF/views/module/top2.jsp"></jsp:include>
+	
+	<!-- cityList -->
 	<div class="row justify-content-md-center">
 		<div class="col-lg-4"></div>
 		<div class="col col-md-auto col-lg-4 text-center">
@@ -90,6 +92,7 @@
 		</ul>
 	</nav>
 	
+	<!-- 홈 및 추가 버튼 -->
 	<div class="row">
 		<div class="col-lg-4"></div>
 		<div class="col col-xs-12 col-sm-12 col-md-auto col-lg-4 text-center">

@@ -25,20 +25,28 @@ public class CityController {
 	
 	// 도시 조회(페이징)
 	@RequestMapping(value = "/city/cityList", method = RequestMethod.GET)
-	public String selectCityListAndCountByPage(Model model
+	public String selectCityListAndCountByPage(Model model, HttpSession httpSession
 										, @RequestParam(value = "currentPage", required = false, defaultValue = "1") int currentPage
 										, @RequestParam(value = "pagePerRow", required = false, defaultValue = "10") int pagePerRow) {
 		logger.debug("{} : <currentPage selectCityListAndCountByPage CityController", currentPage);
 		logger.debug("{} : <pagePerRow selectCityListAndCountByPage CityController", pagePerRow);
-		Map<String, Object> map = cityService.selectCityListAndCountByPage(currentPage, pagePerRow);
-		List<City> list = (List<City>)map.get("list");
-		int countPage = (Integer)map.get("countPage");
-		logger.debug("{} : >list ", list);
-		logger.debug("{} : >countPage ", countPage);
-		model.addAttribute("list", list);
-		model.addAttribute("countPage", countPage);
-		model.addAttribute("currentPage", currentPage);
-		return "city/cityList";
+		String view = null;
+		// 로그인 접근 처리
+		if(httpSession.getAttribute("loginMember") == null) {
+			view = "redirect:/";
+		} else if(httpSession.getAttribute("loginMember") != null) {
+			Map<String, Object> map = cityService.selectCityListAndCountByPage(currentPage, pagePerRow);
+			List<City> list = (List<City>)map.get("list");
+			int countPage = (Integer)map.get("countPage");
+			logger.debug("{} : >list selectCityListAndCountByPage CityController", list);
+			logger.debug("{} : >countPage selectCityListAndCountByPage CityController", countPage);
+			model.addAttribute("list", list);
+			model.addAttribute("countPage", countPage);
+			model.addAttribute("currentPage", currentPage);
+			view = "city/cityList";
+		}
+		logger.debug("{} : >view cityList CityController", view);
+		return view;
 	}
 	
 	// 도시 삭제
