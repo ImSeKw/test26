@@ -1,6 +1,7 @@
 package ksmart.project.test26;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -21,9 +22,23 @@ public class CompanyController {
 	@Autowired
 	private CompanyService companyService;
 	private static final Logger logger = LoggerFactory.getLogger(CompanyController.class);
-
+	
+	//회사 조회(페이징)
+	@RequestMapping(value="/company/companyList",method=RequestMethod.GET)
+	public String selectCompanyListAndCountByPage(Model model,@RequestParam(value="currentPage",required =false, defaultValue="1") int currentPage
+													,@RequestParam(value ="pagePerRow",required =false, defaultValue="10") int pagePerRow) {
+		logger.debug("{} : currentPage selectCompanyListAndCountByPage CompanyComtroller" , currentPage);
+		logger.debug("{} : pagePerRow selectCompanyListAndCountByPage CompanyController" , pagePerRow);
+		Map<String,Object> map =companyService.selectCompanyListAndCountByPage(currentPage,pagePerRow);
+		List<Company> list =(List<Company>)map.get("list");
+		int countPage =(Integer) map.get("countPage");
+		model.addAttribute("list",list);
+		model.addAttribute("countPage", countPage);
+		model.addAttribute("currentPage", currentPage);
+		return "company/companyList";
+	}
 	// 회사 전체 조회
-	@RequestMapping(value="/company/companyList", method = RequestMethod.GET)
+	@RequestMapping(value="/company/companyListAll", method = RequestMethod.GET)
 	public String companyList(HttpSession httpSession, Model model) {
 		String view = null;
 		// 로그인 접근 처리
@@ -54,7 +69,7 @@ public class CompanyController {
 	// 회사 입력 Action
 	@RequestMapping(value="/company/insertcompany",method = RequestMethod.POST)
 	public String addcompany(Company company) {
-		System.out.println("companyadd post");
+		logger.debug("{} : insertcompany CompanyController.java", company.getCompanyName());
 		companyService.insertCompany(company);
 		return "redirect:/company/companyList";
 	}
@@ -67,6 +82,7 @@ public class CompanyController {
 		if(httpSession.getAttribute("loginMember") == null) {
 			view = "redirect:/company/companyList";
 		} else if(httpSession.getAttribute("loginMember") != null) {
+			logger.debug("{} : selectcompanyId CompanyController.java", companyId);
 			Company company=companyService.selectCompanyId(companyId);
 			model.addAttribute("company", company);
 			view = "company/updateCompany";
@@ -78,6 +94,7 @@ public class CompanyController {
 	// 회사 수정 Action
 	@RequestMapping(value="/company/updateCompany",method = RequestMethod.POST)
 	public String updateCompany(Company company) {
+		logger.debug("{} : updateDompany CompanyController", company.getCompanyName());
 		companyService.updateCompany(company);
 		return "redirect:/company/companyList";
 	}

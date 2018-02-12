@@ -1,6 +1,7 @@
 package ksmart.project.test26.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.slf4j.Logger;
@@ -13,31 +14,48 @@ public class CompanyDao {
 	@Autowired
 	private SqlSessionTemplate sqlsessiontemplate;
 	private static final Logger logger = LoggerFactory.getLogger(CompanyDao.class);
+	
 	// 경로설정 중복처리
 	private final String NAMESPACE ="ksmart.project.test26.mapper.CompanyMapper.";
 	
+	//전체회사 수(페이징)
+	public int selectCompanyCountByPage() {
+		logger.debug("selectCompanyCountByPage CompanyDao.java");
+		return sqlsessiontemplate.selectOne(NAMESPACE + "selectCompanyCountByPage");
+		
+	}
+	//회사조회처리(페이징처리)
+	public List<Company> selectCompanyListByPage(Map map){
+		logger.debug("{} : <startPage selectCompanyListByPage ComapanyDao", map.get("startPage"));
+		logger.debug("{} : <startPage selectCompanyListByPage ComapanyDao", map.get("rowPerPage"));
+		return sqlsessiontemplate.selectList(NAMESPACE +"selectCompanyListByPage",map);
+	}
 	// 회사 전체 조회
 	public List<Company>selectCompanyList(){
 		return sqlsessiontemplate.selectList(NAMESPACE + "selectCompanyList");
 	}
 	
-	// 회사 추사 Action
+	// 회사 추가 Action
 	public int insertCompany(Company company) {
+		logger.debug("{} :insertCompany CompanyDao.java", company.getCompanyName());
 		return sqlsessiontemplate.insert(NAMESPACE + "insertCompany",company);
 	}
 	
 	// 회사 수정  Form
 	public Company selectCompanyId(int companyId) {
+		logger.debug("{} :selectCompany CompanyDao.java", companyId);
 		return sqlsessiontemplate.selectOne(NAMESPACE + "selectCompanyId",  companyId);
 	}
 	
-	// 회사 수정 Form
+	// 회사 수정 Action
 	public int updateCompany(Company company) {
+		logger.debug("{} :updateCompany CompanyDao.java", company.getCompanyName());
 		return sqlsessiontemplate.update(NAMESPACE + "updateCompany",company);
 	}
 	
 	// 회사 삭제 Action
 	public int deleteCompany(Company company) {
+		logger.debug("{} :updateCompany CompanyDao.java", company.getCompanyId());
 		return sqlsessiontemplate.delete(NAMESPACE + "deleteCompany", company);
 	}
 }
