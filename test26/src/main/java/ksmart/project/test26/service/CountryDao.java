@@ -18,13 +18,13 @@ public class CountryDao {
 	
 	// 나라 전체 조회
 	public List<Country> selectCountryList(){
-		System.out.println("01-02 CountryDao.java selectCountryList ");			
 		return sqlSessionTemplate.selectList(NAMESPACE + "selectCountryList");		
 	}
 	
 	// 나라 입력
-	public int insertCountry(Country country){
-		return sqlSessionTemplate.insert(NAMESPACE + "insertCountry",country);
+	public void insertCountry(Country country){
+		logger.debug("{} : CountryDao.java insertCountry country", country);
+		sqlSessionTemplate.insert(NAMESPACE + "insertCountry",country);
 	}
 	
 	// 나라 삭제
@@ -32,14 +32,14 @@ public class CountryDao {
         return sqlSessionTemplate.delete(NAMESPACE + "deleteCountry",countryId);
     }
     
-    // 나라 입력
-    public Country selectCountryName(int countryId) {    	    	
-    	System.out.println(countryId+" :CountryDao.java selectCountryName countryId");
+    // 나라 이름 조회
+    public Country selectCountryName(int countryId) {    	
+		logger.debug("{} : CountryDao.java selectCountryName countryId", countryId);
 		return sqlSessionTemplate.selectOne(NAMESPACE + "selectCountryName", countryId);
     }
     
     // 나라 수정
-    public int updateCountry(Country country) {
-		return sqlSessionTemplate.update(NAMESPACE + "updateCountry",country);
+    public void updateCountry(Country country) {
+		sqlSessionTemplate.update(NAMESPACE + "updateCountry",country);
 	}
 }
