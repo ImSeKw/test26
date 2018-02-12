@@ -46,7 +46,7 @@
 			<c:set var="countPage" value="${countPage}"/>
 			<c:choose>
 				<c:when test="${currentPage eq 1}">
-					<li class="page-item">
+					<li class="page-item disabled">
 						<a class="page-link" href="${pageContext.request.contextPath}/company/companyList?currentPage=${currentPage}" aria-label="Previous">
 						<span aria-hidden="true">&laquo;</span>
 						<span class="sr-only">Previous</span>
@@ -71,7 +71,7 @@
 			</c:forEach>
 			<c:choose>
 				<c:when test="${currentPage eq countPage}">
-					<li class="page-item">
+					<li class="page-item disabled">
 						<a class="page-link" href="${pageContext.request.contextPath}/company/companyList?currentPage=${currentPage}" aria-label="Next">
 							<span aria-hidden="true">&raquo;</span>
 							<span class="sr-only">Next</span>
