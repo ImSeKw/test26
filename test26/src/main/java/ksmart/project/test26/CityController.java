@@ -56,10 +56,7 @@ public class CityController {
 		logger.debug("{} : <city deleteCity CityController", city);
 		// 로그인 처리
 		if(httpSession.getAttribute("loginMember") != null) {
-			logger.debug("Yes deleteCity CityController");
 			cityService.deleteCity(city);
-		} else {
-			logger.debug("No deleteCity CityController");
 		}
 		return "redirect:/city/cityList";
 	}

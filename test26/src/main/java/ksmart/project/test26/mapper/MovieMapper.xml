@@ -4,6 +4,23 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="ksmart.project.test26.mapper.MovieMapper">
+	<!-- 총 영화 수(페이징) -->
+	<select id="selectMovieCountByPage" resultType="int">
+		SELECT 
+			COUNT(*) AS countMovie
+		FROM movie
+	</select>
+	
+	<!-- 영화 목록(페이징) -->
+	<select id="selectMovieListByPage" parameterType="java.util.Map" resultType="ksmart.project.test26.service.Movie">
+		SELECT 
+			movie_id AS movieId
+			, movie_name AS movieName
+		FROM movie
+		ORDER BY movieName ASC
+		LIMIT #{startPage}, #{pagePerRow}
+	</select>
+	
 	<!-- 영화 삭제 처리 -->
 	<delete id="deleteMovie" parameterType="int">
 		DELETE FROM movie
