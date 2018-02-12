@@ -48,16 +48,16 @@
 				<c:when test="${currentPage eq 1}">
 					<li class="page-item">
 						<a class="page-link" href="${pageContext.request.contextPath}/movie/movieList?currentPage=${currentPage}" aria-label="Previous">
-						<span aria-hidden="true">&laquo;</span>
-						<span class="sr-only">Previous</span>
+							<span aria-hidden="true">&laquo;</span>
+							<span class="sr-only">Previous</span>
 						</a>
 					</li>
 				</c:when>
 				<c:when test="${currentPage ne 1}">
 					<li class="page-item">
 						<a class="page-link" href="${pageContext.request.contextPath}/movie/movieList?currentPage=${currentPage-1}" aria-label="Previous">
-						<span aria-hidden="true">&laquo;</span>
-						<span class="sr-only">Previous</span>
+							<span aria-hidden="true">&laquo;</span>
+							<span class="sr-only">Previous</span>
 						</a>
 					</li>
 				</c:when>

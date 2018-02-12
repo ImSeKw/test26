@@ -42,6 +42,7 @@ public class MovieController {
 			logger.debug("{} : >countPage selectMovieListAndCountByPage MovieController", countPage);
 			model.addAttribute("list", list);
 			model.addAttribute("countPage", countPage);
+			model.addAttribute("currentPage", currentPage);
 			view = "movie/movieList";
 		}
 		return view;
