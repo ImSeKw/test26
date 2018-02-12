@@ -4,6 +4,24 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="ksmart.project.test26.mapper.CountryMapper">
+	<!--selectCityCountByPage 전체 수-->
+	<select id="selectCityCountByPage" resultType="int">
+	SELECT 
+		COUNT(country.country_id) 
+	FROM 
+		test.country
+	</select>
+	<!--selectCityListByPage limit된 select-->
+	<select id="selectCityListByPage"
+		parameterType="java.util.Map" resultType="ksmart.project.test26.service.Country">
+	SELECT
+		country_id as countryId
+		,country_name as countryName
+	FROM 
+		test.country
+	ORDER BY country_id ASC
+	LIMIT #{startPage}, #{pagePerRow}
+	</select>
 	<!--COUNTRY SELECT-->
 	<select id="selectCountryList" resultType="ksmart.project.test26.service.Country">
 		SELECT 
@@ -37,5 +55,4 @@
 		SET country_name = #{countryName} 
 		WHERE country_id = #{countryId}
 	</update>
-	<!--  -->
 </mapper>
