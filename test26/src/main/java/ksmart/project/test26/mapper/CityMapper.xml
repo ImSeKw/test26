@@ -4,6 +4,22 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="ksmart.project.test26.mapper.CityMapper">
+	<!-- select 전체 도시 수(페이징) -->
+	<select id="selectCityCountByPage" resultType="int">
+		SELECT COUNT(*) AS countCity
+		FROM city
+	</select>
+	
+	<!-- select 도시 조회(페이징) -->
+	<select id="selectCityListByPage" parameterType="java.util.Map" resultType="ksmart.project.test26.service.City">
+		SELECT 
+			city_id AS cityId
+			, city_name AS cityName
+		FROM city
+		ORDER BY cityName ASC
+		LIMIT #{startPage}, #{pagePerRow}
+	</select>
+	
 	<!-- delete 도시 삭제 -->
 	<delete id="deleteCity" parameterType="ksmart.project.test26.service.City">
 		DELETE FROM city
@@ -37,8 +53,8 @@
 	<!-- select 도시 전체 조회 -->
 	<select id="selectCityList" resultType="ksmart.project.test26.service.City">
 		SELECT 
-			city_id as cityId
-			, city_name as cityName
+			city_id AS cityId
+			, city_name AS cityName
 		 FROM city
 	</select>
 </mapper>
