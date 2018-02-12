@@ -34,6 +34,7 @@ public class CityService {
 		logger.debug("{} : >list selectCityListAndCountByPage CityService", list);
 		// 총 행의 수를 보여줄 행의 수로 나눈 뒤 나머지가 0일 경우는 넘어가고 아닐 경우 +1 한다.
 		int count = cityDao.selectCityCountByPage();
+		logger.debug("{} : >count selectCityListAndCountByPage CityService", count);
 		int countPage = count/pagePerRow;
 		if(count%pagePerRow != 0) {
 			countPage++;
