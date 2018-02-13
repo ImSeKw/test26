@@ -19,17 +19,21 @@ public class CompanyDao {
 	private final String NAMESPACE ="ksmart.project.test26.mapper.CompanyMapper.";
 	
 	//전체회사 수(페이징)
-	public int selectCompanyCountByPage() {
+	public int selectCompanyCountByPage(Map map) {
 		logger.debug("selectCompanyCountByPage CompanyDao.java");
-		return sqlsessiontemplate.selectOne(NAMESPACE + "selectCompanyCountByPage");
+		logger.debug("{} : word selectCompanyListByPage ComapanyDao", map.get("word"));
+		return sqlsessiontemplate.selectOne(NAMESPACE + "selectCompanyCountByPage", map);
 		
 	}
-	//회사조회처리(페이징처리)
+	
+	//회사조회처리(페이징처리)&조회
 	public List<Company> selectCompanyListByPage(Map map){
 		logger.debug("{} : <startPage selectCompanyListByPage ComapanyDao", map.get("startPage"));
-		logger.debug("{} : <startPage selectCompanyListByPage ComapanyDao", map.get("rowPerPage"));
-		return sqlsessiontemplate.selectList(NAMESPACE +"selectCompanyListByPage",map);
+		logger.debug("{} : <rowPerPage selectCompanyListByPage ComapanyDao", map.get("rowPerPage"));
+		logger.debug("{} : word selectCompanyListByPage ComapanyDao", map.get("word"));
+		return sqlsessiontemplate.selectList(NAMESPACE + "selectCompanyListByPage", map);
 	}
+	
 	// 회사 전체 조회
 	public List<Company>selectCompanyList(){
 		return sqlsessiontemplate.selectList(NAMESPACE + "selectCompanyList");
