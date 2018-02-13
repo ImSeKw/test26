@@ -5,9 +5,12 @@
 
 <mapper namespace="ksmart.project.test26.mapper.CityMapper">
 	<!-- select 전체 도시 수(페이징) -->
-	<select id="selectCityCountByPage" resultType="int">
+	<select id="selectCityCountByPage" parameterType="java.util.Map" resultType="int">
 		SELECT COUNT(*) AS countCity
 		FROM city
+		<if test="word != null">
+			WHERE city_name LIKE CONCAT("%", #{word}, "%")
+		</if>
 	</select>
 	
 	<!-- select 도시 조회(페이징) -->
@@ -16,6 +19,9 @@
 			city_id AS cityId
 			, city_name AS cityName
 		FROM city
+		<if test="word != null">
+			WHERE city_name LIKE CONCAT("%", #{word}, "%")
+		</if>
 		ORDER BY cityName ASC
 		LIMIT #{startPage}, #{pagePerRow}
 	</select>
