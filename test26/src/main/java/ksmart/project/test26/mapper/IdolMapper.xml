@@ -6,9 +6,12 @@
 <mapper namespace="ksmart.project.test26.mapper.IdolMapper">
 
 	<!-- select 전체 아이돌 수(페이징) -->
-	<select id="selectIdolCountByPage" resultType="int">
+	<select id="selectIdolCountByPage" parameterType="java.util.Map" resultType="int">
 		SELECT COUNT(*) AS countIdol
 		FROM idol
+		<if test="word != null">
+			WHERE idol_name LIKE CONCAT("%", #{word}, "%")
+		</if>
 	</select>
 	
 	<!-- select 아이돌 조회(페이징) -->
@@ -17,7 +20,10 @@
 			idol_id AS idolID
 			, idol_name AS idolName
 		FROM idol
-		ORDER BY idolID ASC
+		<if test="word != null">
+			WHERE idol_name LIKE CONCAT("%", #{word}, "%")
+		</if>
+		ORDER BY idolName ASC
 		LIMIT #{startPage}, #{pagePerRow}
 	</select>
 	
