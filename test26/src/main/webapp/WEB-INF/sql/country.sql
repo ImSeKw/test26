@@ -1,5 +1,10 @@
-﻿
-DELETE FROM `country`;
+DROP TABLE IF EXISTS `country`;
+CREATE TABLE IF NOT EXISTS `country` (
+  `country_id` int(10) NOT NULL AUTO_INCREMENT,
+  `country_name` varchar(50) CHARACTER SET utf8 NOT NULL DEFAULT '0',
+  PRIMARY KEY (`country_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+
 INSERT INTO `country` (`country_name`) VALUES
 	('이탈리아1'),
 	('스페인'),

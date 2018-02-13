@@ -1,4 +1,9 @@
-DELETE FROM `company`;
+DROP TABLE IF EXISTS `company`;
+CREATE TABLE IF NOT EXISTS `company` (
+  `company_id` int(10) NOT NULL AUTO_INCREMENT,
+  `company_name` varchar(50) CHARACTER SET utf8 NOT NULL DEFAULT '0',
+  PRIMARY KEY (`company_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
 INSERT INTO `company` (`company_name`) VALUES
 	('하이텍크'),

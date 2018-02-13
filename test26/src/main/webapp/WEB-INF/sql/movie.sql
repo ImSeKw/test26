@@ -1,4 +1,10 @@
-DELETE FROM `movie`;
+DROP TABLE IF EXISTS `movie`;
+CREATE TABLE IF NOT EXISTS `movie` (
+  `movie_id` int(10) NOT NULL AUTO_INCREMENT,
+  `movie_name` varchar(50) CHARACTER SET utf8 NOT NULL DEFAULT '0',
+  PRIMARY KEY (`movie_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+
 INSERT INTO `movie` (`movie_name`) VALUES
 	('코코코'),
 	('1987'),
@@ -39,4 +45,3 @@ INSERT INTO `movie` (`movie_name`) VALUES
 	('더록'),
 	('아이엠 샘'),
 	('록키');
-

@@ -1,4 +1,9 @@
-DELETE FROM `city`;
+DROP TABLE IF EXISTS `city`;
+CREATE TABLE IF NOT EXISTS `city` (
+  `city_id` int(10) NOT NULL AUTO_INCREMENT,
+  `city_name` varchar(50) CHARACTER SET utf8 NOT NULL DEFAULT '0',
+  PRIMARY KEY (`city_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
 INSERT INTO `city` (`city_name`) VALUES
 	('전주'),
@@ -32,4 +37,23 @@ INSERT INTO `city` (`city_name`) VALUES
 	('광저우'),
 	('모스크바'),
 	('파리'),
-	('런던');
+	('베를린'),
+    ('시드니'),
+    ('프라하'),
+    ('레이캬비크'),
+    ('하바나'),
+    ('두바이'),
+    ('칸쿤'),
+    ('빈'),
+    ('방콕'),
+    ('케이프타운'),
+    ('리우데자네이루'),
+    ('암스테르담'),
+    ('포틀랜드'),
+    ('베른'),
+    ('코펜하겐'),
+    ('몬트리올'),
+    ('교토'),
+    ('발리'),
+    ('더블린'),
+    ('퀸스타운');
