@@ -18,13 +18,13 @@ public class CountryDao {
 	private final String NAMESPACE = "ksmart.project.test26.mapper.CountryMapper.";
 	// country 전체  개수
 	public int selectCountryCountByPage() {
-		logger.debug("CountryDao.java selectCityListByPage");
 		return sqlSessionTemplate.selectOne(NAMESPACE + "selectCityCountByPage");
 	}
 	// country 페이징 작업 조회
 	public List<Country> selectCountryListByPage(Map<String,Object> map){
 		logger.debug("{} : CountryDao.java selectCityListByPage startPage", map.get("startPage"));
 		logger.debug("{} : CountryDao.java selectCityListByPage pagePerRow", map.get("pagePerRow"));
+		logger.debug("{} : CountryDao.java selectCityListByPage word", map.get("word"));
 		return sqlSessionTemplate.selectList(NAMESPACE + "selectCityListByPage", map);
 	}
 	// 나라 전체 조회
