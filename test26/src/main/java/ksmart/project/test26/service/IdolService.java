@@ -18,22 +18,24 @@ public class IdolService {
 	private static final Logger logger = LoggerFactory.getLogger(IdolService.class);
 	
 	// 도시 조회(페이징)
-	public Map<String, Object> selectIdolListAndCountByPage(int currentPage, int pagePerRow) {
+	public Map<String, Object> selectIdolListAndCountByPage(int currentPage, int pagePerRow, String word) {
 		logger.debug("{} : <currentPage selectIdolListAndCountByPage IdolService", currentPage);
 		logger.debug("{} : <pagePerRow selectIdolListAndCountByPage IdolService", pagePerRow);
+		logger.debug("{} : <word selectIdolListAndCountByPage IdolService", word);
 		// 쿼리문의 시작 페이지
 		int startPage = 0;
 		if(currentPage > 1) {
 			startPage = (currentPage-1)*pagePerRow;
 		}
 		// DAO에 시작 페이지와 행의 수 보내기
-		Map<String, Integer> map = new HashMap();
+		Map<String, Object> map = new HashMap();
 		map.put("startPage", startPage);
 		map.put("pagePerRow", pagePerRow);
+		map.put("word", word);
 		List<Idol> list = idolDao.selectIdolListByPage(map);
 		logger.debug("{} : >list selectIdolListAndCountByPage IdolService", list);
 		// 총 행의 수를 보여줄 행의 수로 나눈 뒤 나머지가 0일 경우는 넘어가고 아닐 경우 +1 한다.
-		int count = idolDao.selectIdolCountByPage();
+		int count = idolDao.selectIdolCountByPage(map);
 		logger.debug("{} : >count selectIdolListAndCountByPage IdolService", count);
 		int countPage = count/pagePerRow;
 		if(count%pagePerRow != 0) {
@@ -44,6 +46,7 @@ public class IdolService {
 		Map<String, Object> returnMap = new HashMap();
 		returnMap.put("list", list);
 		returnMap.put("countPage", countPage);
+		returnMap.put("word", word);
 		return returnMap;
 	}
 	
