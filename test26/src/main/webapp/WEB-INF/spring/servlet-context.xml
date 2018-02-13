@@ -54,6 +54,7 @@
 		<!-- mybatis 세션생성후 쿼리를 실행시킬때 사용할 쿼리위치(메퍼)설정 -->
 		<property name="mapperLocations">
 			<list>
+				<value>classpath:ksmart/project/test26/mapper/CategoryMapper.xml</value>
 				<value>classpath:ksmart/project/test26/mapper/IdolMapper.xml</value>
 				<value>classpath:ksmart/project/test26/mapper/CityMapper.xml</value>
 				<value>classpath:ksmart/project/test26/mapper/CompanyMapper.xml</value>

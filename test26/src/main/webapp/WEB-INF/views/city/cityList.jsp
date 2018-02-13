@@ -1,17 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html>
-<html>
-<head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>CITY LIST</title>
-	<%@ include file="/WEB-INF/views/module/head.jsp" %>
-</head>
-<body>
-	<jsp:include page="/WEB-INF/views/module/top1.jsp"></jsp:include>
-		CITY <small>LIST</small>
-	<jsp:include page="/WEB-INF/views/module/top2.jsp"></jsp:include>
-	
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<jsp:include page="/WEB-INF/views/module/headerOne.jsp"></jsp:include>
+<jsp:include page="/WEB-INF/views/module/headerTwo.jsp"></jsp:include>
+
+	<!-- 검색 -->
 	<div class="row justify-content-md-center">
 		<div class="col col-md-auto col-lg-4 text-center">
 			<div class="input-group">
@@ -37,6 +29,36 @@
 		</div>
 	</div>
 	
+	
+<section class="bg-white">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-8 mx-auto text-center">
+				<h2 class="section-heading">CITY LIST</h2>
+				<hr class="my-5">
+				<table class="table bg-white">
+					<tbody>
+						<c:forEach var="list" items="${list}">
+							<tr>
+								<td><strong>${list.cityName}</strong></td>
+								<td>
+									<a href="${pageContext.request.contextPath}/city/updateCity?cityId=${cityList.cityId}" class="btn btn-none n-gray"role="button">
+										<i class="fa fa-cog fa-2x" aria-hidden="true"></i>
+									</a>
+									<a href="${pageContext.request.contextPath}/city/deleteCity?cityId=${cityList.cityId}" class="btn rgba-red-strong"role="button">
+										<i class="fa fa-times fa-2x" aria-hidden="true"></i>
+									</a>
+								</td>
+							</tr>
+						</c:forEach>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</section>
+	
+	
 	<!-- cityList -->
 	<div class="row justify-content-md-center">
 		<div class="col-lg-4"></div>
@@ -56,8 +78,8 @@
 						<tr>
 							<td><strong>${cityList.cityId}</strong></td>
 							<td><strong>${cityList.cityName}</strong></td>
-							<td><a href="${pageContext.request.contextPath}/city/updateCity?cityId=${cityList.cityId}" class="btn rgba-teal-strong"role="button"><i class="fa fa-wrench fa-3x" aria-hidden="true"></i></a></td>
-							<td><a href="${pageContext.request.contextPath}/city/deleteCity?cityId=${cityList.cityId}" class="btn rgba-red-strong"role="button"><i class="fa fa-times-circle fa-1g" aria-hidden="true"></i></a></td>
+							<td><a href="${pageContext.request.contextPath}/City/updateCity?cityId=${cityList.cityId}" class="btn rgba-teal-strong"role="button"><i class="fa fa-wrench fa-3x" aria-hidden="true"></i></a></td>
+							<td><a href="${pageContext.request.contextPath}/City/deleteCity?cityId=${cityList.cityId}" class="btn rgba-red-strong"role="button"><i class="fa fa-times-circle fa-1g" aria-hidden="true"></i></a></td>
 						</tr>
 					</c:forEach>
 				</tbody>
@@ -188,3 +210,6 @@
 	</div>
 </body>
 </html>
+
+
+<jsp:include page="/WEB-INF/views/module/bottom.jsp"></jsp:include>
