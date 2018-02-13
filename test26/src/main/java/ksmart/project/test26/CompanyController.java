@@ -57,7 +57,7 @@ public class CompanyController {
 	}
 	
 	// 회사 입력 Form
-	@RequestMapping(value="/Company/Insertcompany", method = RequestMethod.GET)
+	@RequestMapping(value="/Company/insertCompany", method = RequestMethod.GET)
 	public String addcompany(HttpSession httpSession) {
 		String view = null;
 		// 로그인 접근 처리
@@ -71,7 +71,7 @@ public class CompanyController {
 	}
 	
 	// 회사 입력 Action
-	@RequestMapping(value="/Company/Insertcompany",method = RequestMethod.POST)
+	@RequestMapping(value="/Company/insertCompany",method = RequestMethod.POST)
 	public String addcompany(Company company) {
 		logger.debug("{} : insertcompany CompanyController.java", company.getCompanyName());
 		companyService.insertCompany(company);
@@ -79,7 +79,7 @@ public class CompanyController {
 	}
 	
 	// 회사 수정 Form
-	@RequestMapping(value="/Company/UpdateCompany",method = RequestMethod.GET)
+	@RequestMapping(value="/Company/updateCompany",method = RequestMethod.GET)
 	public String companyId(HttpSession httpSession, Model model, @RequestParam(value="companyId",required=true) int companyId) {
 		String view = null;
 		// 로그인 접근 처리
@@ -96,7 +96,7 @@ public class CompanyController {
 	}
 	
 	// 회사 수정 Action
-	@RequestMapping(value="/Company/UpdateCompany",method = RequestMethod.POST)
+	@RequestMapping(value="/Company/updateCompany",method = RequestMethod.POST)
 	public String updateCompany(Company company) {
 		logger.debug("{} : updateDompany CompanyController", company.getCompanyName());
 		companyService.updateCompany(company);
@@ -104,7 +104,7 @@ public class CompanyController {
 	}
 	
 	// 회사 삭제 Action
-	@RequestMapping(value="/Company/DeleteCompany",method = RequestMethod.GET)
+	@RequestMapping(value="/Company/deleteCompany",method = RequestMethod.GET)
 	public String companydelete(HttpSession httpSession, Company company) {
 		// 로그인 접근 처리
 		if(httpSession.getAttribute("loginMember") != null) {
