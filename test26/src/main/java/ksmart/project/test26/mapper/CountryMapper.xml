@@ -9,7 +9,7 @@
 	SELECT 
 		COUNT(country.country_id) 
 	FROM 
-		test.country
+		country
 	</select>
 	<!--selectCityListByPage limit된 select-->
 	<select id="selectCityListByPage"
@@ -19,6 +19,11 @@
 		,country_name as countryName
 	FROM 
 		test.country
+        <where>
+            <if test="word != null">
+                country_name like CONCAT('%',#{word},'%')
+            </if>
+        </where>
 	ORDER BY country_id ASC
 	LIMIT #{startPage}, #{pagePerRow}
 	</select>
