@@ -29,23 +29,31 @@
 		</div>
 	</div>
 	
-	
 <section class="bg-white">
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-8 mx-auto text-center">
 				<h2 class="section-heading">CITY LIST</h2>
 				<hr class="my-5">
+				<form action="${pageContext.request.contextPath}/City/CityList?word=${word}" method="get">
+						<input type="text" name="word" class="mb-3 n-black" placeholder="검색어를 입력해주세요.">
+						<button type="submit" class="btn btn-none n-black">
+							<i class="fas fa-search"></i>
+						</button>
+				</form>
+				<a href="${pageContext.request.contextPath}/City/insertCity" class="btn n-blue" role="button">
+					<i class="fa fa-plus fa-2x" aria-hidden="true"></i>
+				</a>
 				<table class="table bg-white">
 					<tbody>
 						<c:forEach var="list" items="${list}">
 							<tr>
 								<td><strong>${list.cityName}</strong></td>
 								<td>
-									<a href="${pageContext.request.contextPath}/city/updateCity?cityId=${cityList.cityId}" class="btn btn-none n-gray"role="button">
+									<a href="${pageContext.request.contextPath}/City/updateCity?cityId=${cityList.cityId}" class="btn btn-none n-gray"role="button">
 										<i class="fa fa-cog fa-2x" aria-hidden="true"></i>
 									</a>
-									<a href="${pageContext.request.contextPath}/city/deleteCity?cityId=${cityList.cityId}" class="btn rgba-red-strong"role="button">
+									<a href="${pageContext.request.contextPath}/City/deleteCity?cityId=${cityList.cityId}" class="btn rgba-red-strong"role="button">
 										<i class="fa fa-times fa-2x" aria-hidden="true"></i>
 									</a>
 								</td>
@@ -53,12 +61,14 @@
 						</c:forEach>
 					</tbody>
 				</table>
+				<a href="${pageContext.request.contextPath}/city/insertCity" class="btn n-blue" role="button">
+					<i class="fa fa-plus fa-2x" aria-hidden="true"></i>
+				</a>
 			</div>
 		</div>
 	</div>
 </section>
-	
-	
+
 	<!-- cityList -->
 	<div class="row justify-content-md-center">
 		<div class="col-lg-4"></div>

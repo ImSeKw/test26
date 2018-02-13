@@ -24,7 +24,7 @@ public class CityController {
 	private static final Logger logger = LoggerFactory.getLogger(CityController.class);
 	
 	// 도시 조회(페이징)
-	@RequestMapping(value = "/City/CityList", method = RequestMethod.GET)
+	@RequestMapping(value = "/city/cityList", method = RequestMethod.GET)
 	public String selectCityListAndCountByPage(Model model, HttpSession httpSession
 										, @RequestParam(value = "currentPage", required = false, defaultValue = "1") int currentPage
 										, @RequestParam(value = "pagePerRow", required = false, defaultValue = "5") int pagePerRow
@@ -63,7 +63,7 @@ public class CityController {
 		if(httpSession.getAttribute("loginMember") != null) {
 			cityService.deleteCity(city);
 		}
-		return "redirect:/city/cityList";
+		return "redirect:/City/CityList";
 	}
 	
 	// 도시 수정 Action
@@ -71,7 +71,7 @@ public class CityController {
 	public String updateCity(City city) {
 		logger.debug("{} : <city updateCity CityController", city);
 		cityService.updateCity(city);
-		return "redirect:/city/cityList";
+		return "redirect:/City/CityList";
 	}
 	
 	// 도시 수정 Form
@@ -83,12 +83,12 @@ public class CityController {
 		String view = null;
 		// 로그인 처리
 		if(httpSession.getAttribute("loginMember") == null) {
-			view = "redirect:/city/cityList";
+			view = "redirect:/City/CityList";
 		} else if(httpSession.getAttribute("loginMember") != null) {
 			City reCity = cityService.updateCity(cityId);
 			logger.debug("{} : >reCity updateCity CityController", reCity);
 			model.addAttribute("city", reCity);
-			view = "city/updateCity";
+			view = "City/updateCity";
 		}
 		logger.debug("{} : >view updateCity CityController", view);
 		return view;
@@ -99,7 +99,7 @@ public class CityController {
 	public String insertCity(City city) {
 		logger.debug("{} : <city insertCity CityController", city);
 		cityService.insertCity(city);
-		return "redirect:/city/cityList";
+		return "redirect:/City/CityList";
 	}
 	
 	// 도시 추가 Form
@@ -109,16 +109,16 @@ public class CityController {
 		String view = null;
 		// 로그인 처리
 		if(httpSession.getAttribute("loginMember") == null) {
-			view = "redirect:/city/cityList";
+			view = "redirect:/City/CityList";
 		} else if(httpSession.getAttribute("loginMember") != null) {
-			view = "city/insertCity";
+			view = "City/insertCity";
 		}
 		logger.debug("{} : >view insertCity CityController", view);
 		return view;
 	}
 	
 	// 도시 전체 조회
-	@RequestMapping(value = "/City/cityListAll", method = RequestMethod.GET)
+	@RequestMapping(value = "/City/CityListAll", method = RequestMethod.GET)
 	public String cityList(HttpSession httpSession, Model model) {
 		logger.debug("{} : <httpSession cityList CityController", httpSession);
 		logger.debug("{} : <model cityList CityController", model);
@@ -130,7 +130,7 @@ public class CityController {
 			List<City> list = cityService.selectCityList();
 			logger.debug("{} : >list cityList CityController", list);
 			model.addAttribute("list", list);
-			view = "city/cityList";
+			view = "City/CityList";
 		}
 		logger.debug("{} : >view cityList CityController", view);
 		return view;

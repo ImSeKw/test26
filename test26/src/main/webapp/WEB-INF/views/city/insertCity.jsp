@@ -1,11 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<!DOCTYPE html>
-<html>
-<head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>CITY INSERT</title>
-	<%@ include file="/WEB-INF/views/module/head.jsp" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<jsp:include page="/WEB-INF/views/module/headerOne.jsp"></jsp:include>
 	<script>
 		$(document).ready(function() {
 			$('#insertButton').click(function() {
@@ -17,46 +12,42 @@
 				}
 			})
 			$('#cancelButton').click(function(){
-				document.location.href='<%= request.getContextPath() %>/city/cityList'
+				document.location.href='<%= request.getContextPath() %>/City/CityList'
 			});
 		});
 	</script>
-</head>
-<body>
-	<jsp:include page="/WEB-INF/views/module/top1.jsp"></jsp:include>
-		CITY <small>INSERT</small>
-	<jsp:include page="/WEB-INF/views/module/top2.jsp"></jsp:include>
-	<div class="row justify-content-md-center">
-		<div class="col-lg-4"></div>
-		<div class="col col-md-auto col-lg-4 text-center">
-			<h2 class="text-center"></h2>
-			<form action="${pageContext.request.contextPath}/city/insertCity" method="post" id="cityAdd">
-				<table class="table table-hover">
-					<thead class="mdb-color darken-3">
-						<tr class="text-white">
-							<td><strong>CITY</strong></td>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td><input type="text" name="cityName" id="cityName" placeholder="이곳에 도시 이름을 입력하세요"></td>
-						</tr>
-						<tr>
-							<td>
-								<button type="button" id="insertButton" class="btn rgba-blue-strong">
-									<i class="fa fa-check-circle" aria-hidden="true"></i>
-								</button>
-								<!-- 취소버튼 -->
-								<button type="button" id="cancelButton" class="btn danger-color-dark">
-									<i class="fa fa-times-circle" aria-hidden="true"></i>
-								</button>
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</form>
+<jsp:include page="/WEB-INF/views/module/headerTwo.jsp"></jsp:include>
+
+<section id="services">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-12 text-center">
+				<h2 class="section-heading">CITY</h2>
+				<hr class="my-4">
+			</div>
 		</div>
-		<div class="col-lg-4"></div>
 	</div>
-</body>
-</html>
+</section>
+
+<section class="bg-black">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-8 mx-auto text-center">
+				<form action="${pageContext.request.contextPath}/City/insertCity" method="post" id="cityAdd">
+					<h3 class="mb-3 n-white"></h3>
+					<input type="text" name="cityName" id="cityName" class="mb-3 bg-black" placeholder="이곳에 도시 이름을 입력하세요">
+					<br>
+					<button type="button" id="insertButton" class="btn btn-none n-white">
+						<i class="fa fa-check-circle fa-2x"></i>
+					</button>
+					<!-- 취소버튼 -->
+					<button type="button" id="cancelButton" class="btn btn-none n-white">
+						<i class="fa fa-times-circle fa-2x"></i>
+					</button>
+				</form>
+			</div>
+		</div>
+	</div>
+</section>
+
+<jsp:include page="/WEB-INF/views/module/bottom.jsp"></jsp:include>

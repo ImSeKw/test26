@@ -11,18 +11,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import ksmart.project.test26.service.Category;
-import ksmart.project.test26.service.CategoryDao;
+import ksmart.project.test26.service.CategoryService;
 
 @Controller
 public class HomeController {
 	@Autowired
-	CategoryDao categoryDao;
+	CategoryService categoryService;
 	// System.out.println 대체
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Model model) {
-		List<Category> list = categoryDao.selectCategoryList();
+		List<Category> list = categoryService.selectCategoryList();
 		for(Category c : list) {
 			logger.debug("{} : CategoryName indexCall IndexController.java", c.getCategoryName());
 		}
