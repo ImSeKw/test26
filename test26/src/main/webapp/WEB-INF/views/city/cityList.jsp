@@ -208,8 +208,5 @@
 		</div>
 		<div class="col-lg-4"></div>
 	</div>
-</body>
-</html>
-
 
 <jsp:include page="/WEB-INF/views/module/bottom.jsp"></jsp:include>
