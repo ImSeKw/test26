@@ -7,7 +7,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-12 text-center">
-				<h2 class="section-heading">At Your Service</h2>
+				<h2 class="section-heading">BOA TEAM</h2>
 				<hr class="my-4">
 			</div>
 		</div>
@@ -56,8 +56,8 @@
 							<img class="img-fluid" src="resources/img/portfolio/thumbnails/${list.categoryNo}_thumbnails.jpg" alt="">
 							<div class="portfolio-box-caption">
 								<div class="portfolio-box-caption-content">
-									<div class="project-category text-faded">CATEGORY</div>
 									<div class="project-name">${list.categoryName}</div>
+									<hr class=" light my-3">
 								</div>
 							</div>
 						</div>
