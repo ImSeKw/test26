@@ -18,15 +18,16 @@ public class CityDao {
 	private final String NAMESPACE = "ksmart.project.test26.mapper.CityMapper.";
 	
 	// 전체 도시 수(페이징)
-	public int selectCityCountByPage() {
-		logger.debug("<selectCityCountByPage CityDao");
-		return sqlSessionTemplate.selectOne(NAMESPACE + "selectCityCountByPage");
+	public int selectCityCountByPage(Map map) {
+		logger.debug("{} : <word selectCityCountByPage CityDao", map.get("word"));
+		return sqlSessionTemplate.selectOne(NAMESPACE + "selectCityCountByPage", map);
 	}
 	
 	// 도시 조회(페이징)
 	public List<City> selectCityListByPage(Map map) {
 		logger.debug("{} : <startPage selectCityListByPage CityDao", map.get("startPage"));
 		logger.debug("{} : <pagePerRow selectCityListByPage CityDao", map.get("pagePerRow"));
+		logger.debug("{} : <word selectCityListByPage CityDao", map.get("word"));
 		return sqlSessionTemplate.selectList(NAMESPACE + "selectCityListByPage", map);
 	}
 	
