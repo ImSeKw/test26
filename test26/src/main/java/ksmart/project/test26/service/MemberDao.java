@@ -16,29 +16,31 @@ public class MemberDao {
 	
 	// 로그인
 	public Member loginMember(Member member) {
-		logger.debug("{} : member selectMember MemberDao.java", member);
-		Member reMember = sqlSessionTemplate.selectOne(NAMESPACE + "selectMember", member);
-		logger.debug("{} : reMember selectMember MemberDao.java", reMember);
-		return reMember;
+		logger.debug("{} : <member selectMember MemberDao.java", member);
+		return sqlSessionTemplate.selectOne(NAMESPACE + "selectMember", member);
 	}
 	
 	// 회원 가입
 	public int insertMember(Member member) {
+		logger.debug("{} : <member selectMember MemberDao.java", member);
 		return sqlSessionTemplate.insert(NAMESPACE + "insertMember", member);
 	}
 	
 	// 회원 수정 Form
 	public Member selectMemberInfo(int memberNo) {
+		logger.debug("{} : <memberNo selectMember MemberDao.java", memberNo);
 		return sqlSessionTemplate.selectOne(NAMESPACE + "selectMemberInfo", memberNo);
 	}
 	
 	// 회원 수정 Action
 	public int updateMember(Member member) {
+		logger.debug("{} : <member selectMember MemberDao.java", member);
 		return sqlSessionTemplate.update(NAMESPACE + "updateMember",member);
 	}
 	
 	// 회원 삭제
 	public int deleteMember(Member member) {
+		logger.debug("{} : <member selectMember MemberDao.java", member);
 		return  sqlSessionTemplate.delete(NAMESPACE + "deleteMember", member);
 	}
 }

@@ -12,7 +12,7 @@
 				}
 			})
 			$('#cancelButton').click(function(){
-				document.location.href='<%= request.getContextPath() %>/City/CityList'
+				document.location.href='<%= request.getContextPath() %>/city/cityList'
 			});
 		});
 	</script>
@@ -33,7 +33,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-8 mx-auto text-center">
-				<form action="${pageContext.request.contextPath}/City/insertCity" method="post" id="cityAdd">
+				<form action="${pageContext.request.contextPath}/city/insertCity" method="post" id="cityAdd">
 					<h3 class="mb-3 n-white"></h3>
 					<input type="text" name="cityName" id="cityName" class="mb-3 bg-black" placeholder="이곳에 도시 이름을 입력하세요">
 					<br>
