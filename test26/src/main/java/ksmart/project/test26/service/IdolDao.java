@@ -12,21 +12,22 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class IdolDao {
 	@Autowired
-	private SqlSessionTemplate sqlSessionTemplate;
+	SqlSessionTemplate sqlSessionTemplate;
 	private static final Logger logger = LoggerFactory.getLogger(IdolDao.class);
 	// 경로설정 중복처리
 	private final String Route = "ksmart.project.test26.mapper.IdolMapper.";
 	
 	// 전체 아이돌 수(페이징)
-	public int selectIdolCountByPage() {
-		logger.debug("<selectIdolCountByPage IdolDao");
-		return sqlSessionTemplate.selectOne(Route + "selectIdolCountByPage");
+	public int selectIdolCountByPage(Map map) {
+		logger.debug("{} : <--selectIdolCountByPage IdolDao", map.get("word"));
+		return sqlSessionTemplate.selectOne(Route + "selectIdolCountByPage", map);
 	}
 	
 	// 아이돌 조회(페이징)
 	public List<Idol> selectIdolListByPage(Map map) {
-		logger.debug("{} : <startPage selectIdolListByPage IdolDao", map.get("startPage"));
-		logger.debug("{} : <pagePerRow selectIdolListByPage IdolDao", map.get("pagePerRow"));
+		logger.debug("{} : <--startPage selectIdolListByPage IdolDao", map.get("startPage"));
+		logger.debug("{} : <--pagePerRow selectIdolListByPage IdolDao", map.get("pagePerRow"));
+		logger.debug("{} : <--word selectIdolListByPage IdolDao", map.get("word"));
 		return sqlSessionTemplate.selectList(Route + "selectIdolListByPage", map);
 	}
 	
