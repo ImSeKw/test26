@@ -1,6 +1,7 @@
 package ksmart.project.test26;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -22,7 +23,33 @@ public class IdolController {
 	private IdolService idolService;
 	private static final Logger logger = LoggerFactory.getLogger(IdolController.class);
 	
-	// 전체목록조회
+	// 아이돌page 조회
+	@RequestMapping(value = "/idol/idolList", method = RequestMethod.GET)
+	public String selectIdolListAndCountByPage(Model model, HttpSession httpSession
+										, @RequestParam(value = "currentPage", required = false, defaultValue = "1") int currentPage
+										, @RequestParam(value = "pagePerRow", required = false, defaultValue = "10") int pagePerRow) {
+		logger.debug("{} : <currentPage selectIdolListAndCountByPage IdolController", currentPage);
+		logger.debug("{} : <pagePerRow selectIdolListAndCountByPage IdolController", pagePerRow);
+		String view = null;
+		// 로그인 접근 처리
+		if(httpSession.getAttribute("loginMember") == null) {
+			view = "redirect:/";
+		} else if(httpSession.getAttribute("loginMember") != null) {
+			Map<String, Object> map = idolService.selectIdolListAndCountByPage(currentPage, pagePerRow);
+			List<Idol> list = (List<Idol>)map.get("list");
+			int countPage = (Integer)map.get("countPage");
+			logger.debug("{} : >list selectIdolListAndCountByPage IdolController", list);
+			logger.debug("{} : >countPage selectIdolListAndCountByPage IdolController", countPage);
+			model.addAttribute("list", list);
+			model.addAttribute("countPage", countPage);
+			model.addAttribute("currentPage", currentPage);
+			view = "idol/idolList";
+		}
+		logger.debug("{} : >view idolList IdolController", view);
+		return view;
+	}
+	
+/*	// 전체목록조회
 	@RequestMapping(value="/idol/idolList", method = RequestMethod.GET)
 	public String idolList(HttpSession httpSession, Model model) {
 		String view = null;
@@ -35,7 +62,7 @@ public class IdolController {
 			view = "idol/idolList";
 		}
 		return view; 
-	}
+	}*/
 	
 	// 수정 Action
 	@RequestMapping(value = "/idol/updateIdol", method = RequestMethod.POST)

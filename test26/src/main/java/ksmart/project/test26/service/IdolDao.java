@@ -1,6 +1,7 @@
 package ksmart.project.test26.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.slf4j.Logger;
@@ -15,6 +16,19 @@ public class IdolDao {
 	private static final Logger logger = LoggerFactory.getLogger(IdolDao.class);
 	// 경로설정 중복처리
 	private final String Route = "ksmart.project.test26.mapper.IdolMapper.";
+	
+	// 전체 아이돌 수(페이징)
+	public int selectIdolCountByPage() {
+		logger.debug("<selectIdolCountByPage IdolDao");
+		return sqlSessionTemplate.selectOne(Route + "selectIdolCountByPage");
+	}
+	
+	// 아이돌 조회(페이징)
+	public List<Idol> selectIdolListByPage(Map map) {
+		logger.debug("{} : <startPage selectIdolListByPage IdolDao", map.get("startPage"));
+		logger.debug("{} : <pagePerRow selectIdolListByPage IdolDao", map.get("pagePerRow"));
+		return sqlSessionTemplate.selectList(Route + "selectIdolListByPage", map);
+	}
 	
 	// idolList 조회
 	public List<Idol> selectIdolList() {
