@@ -18,21 +18,23 @@ public class MovieService {
 	private static final Logger logger = LoggerFactory.getLogger(MovieService.class);
 	
 	// 영화 목록(페이징)
-	public Map<String, Object> selectMovieListAndCountByPage(int currentPage, int pagePerRow) {
+	public Map<String, Object> selectMovieListAndCountByPage(int currentPage, int pagePerRow, String word) {
 		logger.debug("{} : <currentPage selectMovieListAndCountByPage MovieService", currentPage);
 		logger.debug("{} : <pagePerRow selectMovieListAndCountByPage MovieService", pagePerRow);
+		logger.debug("{} : <word selectMovieListAndCountByPage MovieService", word);
 		// 쿼리문 페이징 작업
 		int startPage = 0;
 		if(currentPage != 1) {
 			startPage = (currentPage-1)*pagePerRow;
 		}
-		Map<String, Integer> map = new HashMap();
+		Map<String, Object> map = new HashMap();
 		map.put("startPage", startPage);
 		map.put("pagePerRow", pagePerRow);
+		map.put("word", word);
 		List<Movie> list = movieDao.selectMovieListByPage(map);
 		logger.debug("{} : >list selectMovieListAndCountByPage MovieService", list);
 		// 총 영화 수
-		int count = movieDao.selectMovieCountByPage();
+		int count = movieDao.selectMovieCountByPage(map);
 		logger.debug("{} : >count selectMovieListAndCountByPage MovieService", count);
 		int countPage = count/pagePerRow;
 		if(count%pagePerRow != 0) {
@@ -43,6 +45,7 @@ public class MovieService {
 		Map<String, Object> returnMap = new HashMap();
 		returnMap.put("list", list);
 		returnMap.put("countPage", countPage);
+		returnMap.put("word", word);
 		return returnMap;
 	}
 	

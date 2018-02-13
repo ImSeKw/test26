@@ -27,22 +27,26 @@ public class MovieController {
 	@RequestMapping(value = "/movie/movieList", method = RequestMethod.GET)
 	public String selectMovieListAndCountByPage(Model model, HttpSession httpSession
 												, @RequestParam(value = "currentPage", required = false, defaultValue = "1") int currentPage
-												, @RequestParam(value = "pagePerRow", required = false, defaultValue = "10") int pagePerRow) {
+												, @RequestParam(value = "pagePerRow", required = false, defaultValue = "5") int pagePerRow
+												, @RequestParam(value = "word", required = false) String word) {
 		logger.debug("{} : <currentPage selectMovieListAndCountByPage MovieController", currentPage);
 		logger.debug("{} : <pagePerRow selectMovieListAndCountByPage MovieController", pagePerRow);
+		logger.debug("{} : <word selectMovieListAndCountByPage MovieController", word);
 		String view = null;
 		// 로그인 접근 처리
 		if(httpSession.getAttribute("loginMember") == null) {
 			view = "redirect:/";
 		} else if(httpSession.getAttribute("loginMember") != null) {
-			Map<String, Object> map = movieService.selectMovieListAndCountByPage(currentPage, pagePerRow);
+			Map<String, Object> map = movieService.selectMovieListAndCountByPage(currentPage, pagePerRow, word);
 			List<Movie> list = (List<Movie>)map.get("list");
 			int countPage = (Integer)map.get("countPage");
+			word = (String)map.get("word");
 			logger.debug("{} : >list selectMovieListAndCountByPage MovieController", list);
 			logger.debug("{} : >countPage selectMovieListAndCountByPage MovieController", countPage);
 			model.addAttribute("list", list);
 			model.addAttribute("countPage", countPage);
 			model.addAttribute("currentPage", currentPage);
+			model.addAttribute("word", word);
 			view = "movie/movieList";
 		}
 		return view;

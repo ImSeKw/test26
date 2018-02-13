@@ -5,10 +5,13 @@
 
 <mapper namespace="ksmart.project.test26.mapper.MovieMapper">
 	<!-- 총 영화 수(페이징) -->
-	<select id="selectMovieCountByPage" resultType="int">
+	<select id="selectMovieCountByPage" parameterType="java.util.Map" resultType="int">
 		SELECT 
 			COUNT(*) AS countMovie
 		FROM movie
+		<if test="word != null">
+			WHERE movie_name LIKE CONCAT("%", #{word}, "%")
+		</if>
 	</select>
 	
 	<!-- 영화 목록(페이징) -->
@@ -17,6 +20,9 @@
 			movie_id AS movieId
 			, movie_name AS movieName
 		FROM movie
+		<if test="word != null">
+			WHERE movie_name LIKE CONCAT("%", #{word}, "%")
+		</if>
 		ORDER BY movieName ASC
 		LIMIT #{startPage}, #{pagePerRow}
 	</select>

@@ -18,15 +18,16 @@ public class MovieDao {
 	private final String NAMESPACE = "ksmart.project.test26.mapper.MovieMapper."; 
 	
 	// 총 영화 수(페이징)
-	public int selectMovieCountByPage() {
-		logger.debug("<selectMovieCountByPage MovieDao");
-		return sqlSessionTemplate.selectOne(NAMESPACE + "selectMovieCountByPage");
+	public int selectMovieCountByPage(Map map) {
+		logger.debug("{} : <word selectMovieCountByPage MovieDao", map.get("word"));
+		return sqlSessionTemplate.selectOne(NAMESPACE + "selectMovieCountByPage", map);
 	}
 	
 	// 영화 목록(페이징)
 	public List<Movie> selectMovieListByPage(Map map) {
 		logger.debug("{} : <startPage selectMovieListByPage MovieDao", map.get("startPage"));
 		logger.debug("{} : <PagePerRow selectMovieListByPage MovieDao", map.get("pagePerRow"));
+		logger.debug("{} : <word selectMovieListByPage MovieDao", map.get("word"));
 		return sqlSessionTemplate.selectList(NAMESPACE + "selectMovieListByPage", map);
 	}
 	
