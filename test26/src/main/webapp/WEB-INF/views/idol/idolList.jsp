@@ -3,44 +3,54 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>Insert title here</title>
-	<%@ include file="/WEB-INF/views/module/head.jsp" %>
+<jsp:include page="/WEB-INF/views/module/headerOne.jsp"></jsp:include>
+<jsp:include page="/WEB-INF/views/module/headerTwo.jsp"></jsp:include>
 </head>
 <body>
-	<jsp:include page="/WEB-INF/views/module/top1.jsp"></jsp:include>
-		IDOL<small> LIST</small>
-	<jsp:include page="/WEB-INF/views/module/top2.jsp"></jsp:include>
-	
-	<!-- List 보여주기 -->
-	<div class="row justify-content-md-center">
-		<div class="col-lg-4"></div>
-		<div class="col col-md-auto col-lg-4 text-center">
-			<h2 class="text-center"></h2>
-			<table class="table table-hover">
-				<thead class="mdb-color darken-3">
-					<tr class="text-white">
-						<td><strong>No.</strong></td>
-						<td><strong>IDOL</strong></td>
-						<td><strong>UPDATE</strong></td>
-						<td><strong>DELETE</strong></td>
-					</tr>
-				</thead>
-				<tbody>
-					<c:forEach var="idolList" items="${list}">
-						<tr>
-							<td><strong>${idolList.idolID}</strong></td>
-							<td><strong>${idolList.idolName}</strong></td>
-							<td><a href="${pageContext.request.contextPath}/idol/updateIdol?idolID=${idolList.idolID}&idolName=${idolList.idolName}" class="btn rgba-teal-strong" role="button"><i class="fa fa-wrench fa-3x" aria-hidden="true"></i></a></td>
-							<td><a href="${pageContext.request.contextPath}/idol/deleteIdol?idolID=${idolList.idolID}" class="btn rgba-red-strong" role="button"><i class="fa fa-times-circle fa-1g" aria-hidden="true"></i></a></td>
-						</tr>
-					</c:forEach>
-				</tbody>
-			</table>
+
+<!-- 검색 -->
+<div class="row justify-content-md-center">
+	<div class="col col-md-auto col-lg-4 text-center">
+		<div class="input-group">
+			<form action="${pageContext.request.contextPath}/idol/idolList?word=${word}" method="get">
+				<div class="input-group-prepend">
+					<button type="submit" class="btn btn-outline-secondary">검색</button>
+				</div>
+				<input type="text" name="word" class="form-control" aria-label="Text input with segmented dropdown button">
+			</form>
 		</div>
-		<div class="col-lg-4"></div>
 	</div>
+</div>
 	
+<!-- start -->
+<section class="bg-white">
+	<!-- IDOL LIST -->
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-8 mx-auto text-center">
+				<h2 class="section-heading">IDOL LIST</h2>
+				<hr class="my-5">
+				<table class="table bg-white">
+					<tbody>
+						<c:forEach var="list" items="${list}">
+							<tr>
+								<td><strong>${list.idolName}</strong></td>
+								<td>
+									<a href="${pageContext.request.contextPath}/idol/updateidol?idolID=${idolList.idolID}" class="btn btn-none n-gray"role="button">
+										<i class="fa fa-cog fa-2x" aria-hidden="true"></i>
+									</a>
+									<a href="${pageContext.request.contextPath}/idol/deleteidol?idolID=${idolList.idolID}" class="btn rgba-red-strong"role="button">
+										<i class="fa fa-times fa-2x" aria-hidden="true"></i>
+									</a>
+								</td>
+							</tr>
+						</c:forEach>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+
 	<!-- 페이징 -->
 	<nav aria-label="Page navigation example">
 		<ul class="pagination justify-content-center">
@@ -48,8 +58,8 @@
 			<c:set var="countPage" value="${countPage}"/>
 			<c:choose>
 				<c:when test="${currentPage eq 1}">
-					<li class="page-item disabled hm-red-strong">
-						<a class="page-link" href="${pageContext.request.contextPath}/idol/idolList?currentPage=${currentPage}" aria-label="Previous">
+					<li class="page-item disabled">
+						<a class="page-link" href="${pageContext.request.contextPath}/idol/idolList?currentPage=${currentPage}&word=${word}" aria-label="Previous">
 						<span aria-hidden="true">&laquo;</span>
 						<span class="sr-only">Previous</span>
 						</a>
@@ -57,7 +67,7 @@
 				</c:when>
 				<c:when test="${currentPage ne 1}">
 					<li class="page-item">
-						<a class="page-link" href="${pageContext.request.contextPath}/idol/idolList?currentPage=${currentPage-1}" aria-label="Previous">
+						<a class="page-link" href="${pageContext.request.contextPath}/idol/idolList?currentPage=${currentPage-1}&word=${word}" aria-label="Previous">
 						<span aria-hidden="true">&laquo;</span>
 						<span class="sr-only">Previous</span>
 						</a>
@@ -66,7 +76,7 @@
 			</c:choose>
 			<c:forEach var="i" begin="1" end="${countPage}" step="1">
 				<li class="page-item">
-					<a class="page-link" href="${pageContext.request.contextPath}/idol/idolList?currentPage=${i}">
+					<a class="page-link" href="${pageContext.request.contextPath}/idol/idolList?currentPage=${i}&word=${word}">
 						${i}
 					</a>
 				</li>
@@ -74,7 +84,7 @@
 			<c:choose>
 				<c:when test="${currentPage eq countPage}">
 					<li class="page-item disabled">
-						<a class="page-link" href="${pageContext.request.contextPath}/idol/idolList?currentPage=${currentPage}" aria-label="Next">
+						<a class="page-link" href="${pageContext.request.contextPath}/idol/idolList?currentPage=${currentPage}&word=${word}" aria-label="Next">
 							<span aria-hidden="true">&raquo;</span>
 							<span class="sr-only">Next</span>
 						</a>
@@ -82,7 +92,7 @@
 				</c:when>
 				<c:when test="${currentPage ne countPage}">
 					<li class="page-item">
-						<a class="page-link" href="${pageContext.request.contextPath}/idol/idolList?currentPage=${currentPage+1}" aria-label="Next">
+						<a class="page-link" href="${pageContext.request.contextPath}/idol/idolList?currentPage=${currentPage+1}&word=${word}" aria-label="Next">
 							<span aria-hidden="true">&raquo;</span>
 							<span class="sr-only">Next</span>
 						</a>
@@ -91,7 +101,7 @@
 			</c:choose>
 		</ul>
 	</nav>
-	
+
 	<!-- 홈, 추가버튼 -->
 	<div class="row">
 		<div class="col-lg-4"></div>
@@ -103,5 +113,9 @@
 		</div>
 		<div class="col-lg-4"></div>
 	</div>
+	<!-- 하단 회사정보 추가 -->
+	<jsp:include page="/WEB-INF/views/module/bottom.jsp"></jsp:include>
+<!-- end  -->
+</section>
 </body>
 </html>
