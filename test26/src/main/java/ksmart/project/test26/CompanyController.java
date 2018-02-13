@@ -26,15 +26,19 @@ public class CompanyController {
 	//회사 조회(페이징)
 	@RequestMapping(value="/company/companyList",method=RequestMethod.GET)
 	public String selectCompanyListAndCountByPage(Model model,@RequestParam(value="currentPage",required =false, defaultValue="1") int currentPage
-													,@RequestParam(value ="pagePerRow",required =false, defaultValue="10") int pagePerRow) {
+													,@RequestParam(value ="pagePerRow",required =false, defaultValue="10") int pagePerRow
+													,@RequestParam(value="word",required =false) String word) {
 		logger.debug("{} : currentPage selectCompanyListAndCountByPage CompanyComtroller" , currentPage);
 		logger.debug("{} : pagePerRow selectCompanyListAndCountByPage CompanyController" , pagePerRow);
-		Map<String,Object> map =companyService.selectCompanyListAndCountByPage(currentPage,pagePerRow);
+		logger.debug("{} : word selectCompanyListAndCountByPage CompanyController" , word);
+		Map<String,Object> map =companyService.selectCompanyListAndCountByPage(currentPage, pagePerRow, word);
 		List<Company> list =(List<Company>)map.get("list");
 		int countPage =(Integer) map.get("countPage");
+		String word1 =(String) map.get("word");
 		model.addAttribute("list",list);
 		model.addAttribute("countPage", countPage);
 		model.addAttribute("currentPage", currentPage);
+		model.addAttribute("word", word1);
 		return "company/companyList";
 	}
 	// 회사 전체 조회
