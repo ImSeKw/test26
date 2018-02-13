@@ -34,7 +34,7 @@
 		<div class="col col-md-auto col-lg-4 text-center">
 			<h2 class="text-center"></h2>
 			<form action="${pageContext.request.contextPath}/idol/updateIdol" id="idolAdd" method = "post">
-				<input type="hidden" name="idolID" id=" idolID"value="${idol.idolID}">
+				<input type="hidden" name="idolID" id=" idolID" value="${idol.idolID}">
 				<table class="table table-hover">
 					<thead class="mdb-color darken-3">
 						<tr class="text-white">
