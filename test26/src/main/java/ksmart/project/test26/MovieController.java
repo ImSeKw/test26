@@ -24,7 +24,7 @@ public class MovieController {
 	private static final Logger logger = LoggerFactory.getLogger(MovieController.class);
 	
 	// 영화 목록(페이징)
-	@RequestMapping(value = "/movie/movieList", method = RequestMethod.GET)
+	@RequestMapping(value = "/Movie/MovieList", method = RequestMethod.GET)
 	public String selectMovieListAndCountByPage(Model model, HttpSession httpSession
 												, @RequestParam(value = "currentPage", required = false, defaultValue = "1") int currentPage
 												, @RequestParam(value = "pagePerRow", required = false, defaultValue = "5") int pagePerRow
@@ -53,7 +53,7 @@ public class MovieController {
 	}
 	
 	// 영화 삭제 처리
-	@RequestMapping(value = "/movie/deleteMovie", method = RequestMethod.GET)
+	@RequestMapping(value = "/Movie/deleteMovie", method = RequestMethod.GET)
 	public String deleteMovie(HttpSession httpSession, @RequestParam(value = "movieId") int movieId) {
 		logger.debug("{} : <httpSession deleteMovie MovieController", httpSession);
 		logger.debug("{} : <movieId deleteMovie MovieController", movieId);
@@ -65,7 +65,7 @@ public class MovieController {
 	}
 	
 	// 영화 수정 처리
-	@RequestMapping(value = "/movie/updateMovie", method = RequestMethod.POST)
+	@RequestMapping(value = "/Movie/updateMovie", method = RequestMethod.POST)
 	public String updateMovie(Movie movie) {
 		logger.debug("{} : <movie updateMovie MovieController", movie);
 		movieService.updateMovie(movie);
@@ -73,7 +73,7 @@ public class MovieController {
 	}
 	
 	// 영화 수정 화면
-	@RequestMapping(value = "/movie/updateMovie", method = RequestMethod.GET)
+	@RequestMapping(value = "/Movie/updateMovie", method = RequestMethod.GET)
 	public String updateMovie(HttpSession httpSession, Model model, @RequestParam(value = "movieId") int movieId) {
 		logger.debug("{} : <httpSession updateMovie MovieController", httpSession);
 		logger.debug("{} : <model updateMovie MovieController", model);
@@ -81,7 +81,7 @@ public class MovieController {
 		String view = null;
 		// 로그인 접근 처리
 		if(httpSession.getAttribute("loginMember") == null) {
-			view = "redirect:/movie/movieList";
+			view = "redirect:/Movie/movieList";
 		} else if(httpSession.getAttribute("loginMember") != null) {
 			Movie movie = movieService.updateMovie(movieId);
 			logger.debug("{} : >movie updateMovie MovieController", movie);
@@ -93,7 +93,7 @@ public class MovieController {
 	}
 	
 	// 영화 입력 처리
-	@RequestMapping(value = "/movie/insertMovie", method = RequestMethod.POST)
+	@RequestMapping(value = "/Movie/insertMovie", method = RequestMethod.POST)
 	public String insertMovie(@RequestParam(value="movieName") String movieName) {
 		logger.debug("{} : <movieName insertMovie MovieController", movieName);
 		movieService.insertMovie(movieName);
@@ -101,7 +101,7 @@ public class MovieController {
 	}
 	
 	// 영화 입력 화면
-	@RequestMapping(value = "/movie/insertMovie", method = RequestMethod.GET)
+	@RequestMapping(value = "/Movie/insertMovie", method = RequestMethod.GET)
 	public String insertMovie(HttpSession httpSession) {
 		logger.debug("{} : <httpSession insertMovie MovieController", httpSession);
 		String view = null;
@@ -116,7 +116,7 @@ public class MovieController {
 	}
 	
 	// 영화 전체 목록
-	@RequestMapping(value = "/movie/movieListAll", method = RequestMethod.GET)
+	@RequestMapping(value = "/Movie/MovieListAll", method = RequestMethod.GET)
 	public String movieList(HttpSession httpSession, Model model) {
 		logger.debug("{} : <httpSession movieList MovieController", httpSession);
 		logger.debug("{} : <model movieList MovieController", model);
