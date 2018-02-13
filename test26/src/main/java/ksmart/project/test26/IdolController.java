@@ -27,42 +27,32 @@ public class IdolController {
 	@RequestMapping(value = "/idol/idolList", method = RequestMethod.GET)
 	public String selectIdolListAndCountByPage(Model model, HttpSession httpSession
 										, @RequestParam(value = "currentPage", required = false, defaultValue = "1") int currentPage
-										, @RequestParam(value = "pagePerRow", required = false, defaultValue = "10") int pagePerRow) {
+										, @RequestParam(value = "pagePerRow", required = false, defaultValue = "10") int pagePerRow 
+										, @RequestParam(value = "word", required = false) String word) {
 		logger.debug("{} : <currentPage selectIdolListAndCountByPage IdolController", currentPage);
 		logger.debug("{} : <pagePerRow selectIdolListAndCountByPage IdolController", pagePerRow);
+		logger.debug("{} : <word selectIdolListAndCountByPage IdolController", word);
 		String view = null;
 		// 로그인 접근 처리
 		if(httpSession.getAttribute("loginMember") == null) {
 			view = "redirect:/";
 		} else if(httpSession.getAttribute("loginMember") != null) {
-			Map<String, Object> map = idolService.selectIdolListAndCountByPage(currentPage, pagePerRow);
+			Map<String, Object> map = idolService.selectIdolListAndCountByPage(currentPage, pagePerRow, word);
 			List<Idol> list = (List<Idol>)map.get("list");
 			int countPage = (Integer)map.get("countPage");
+			word = (String)map.get("word");
 			logger.debug("{} : >list selectIdolListAndCountByPage IdolController", list);
 			logger.debug("{} : >countPage selectIdolListAndCountByPage IdolController", countPage);
+			logger.debug("{} : >word selectIdolListAndCountByPage IdolController", word);
 			model.addAttribute("list", list);
 			model.addAttribute("countPage", countPage);
 			model.addAttribute("currentPage", currentPage);
+			model.addAttribute("word", word);
 			view = "idol/idolList";
 		}
 		logger.debug("{} : >view idolList IdolController", view);
 		return view;
 	}
-	
-/*	// 전체목록조회
-	@RequestMapping(value="/idol/idolList", method = RequestMethod.GET)
-	public String idolList(HttpSession httpSession, Model model) {
-		String view = null;
-		// 로그인 접근 처리
-		if(httpSession.getAttribute("loginMember") == null) {
-			view = "redirect:/";
-		} else if(httpSession.getAttribute("loginMember") != null) {
-			List<Idol> list = idolService.selectIdolList();
-			model.addAttribute("list", list);
-			view = "idol/idolList";
-		}
-		return view; 
-	}*/
 	
 	// 수정 Action
 	@RequestMapping(value = "/idol/updateIdol", method = RequestMethod.POST)
