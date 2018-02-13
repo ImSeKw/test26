@@ -55,7 +55,7 @@ public class CityController {
 	}
 	
 	// 도시 삭제
-	@RequestMapping(value = "/City/deleteCity", method = RequestMethod.GET)
+	@RequestMapping(value = "/city/deleteCity", method = RequestMethod.GET)
 	public String deleteCity(HttpSession httpSession, City city) {
 		logger.debug("{} : <httpSession deleteCity CityController", httpSession);
 		logger.debug("{} : <city deleteCity CityController", city);
@@ -63,19 +63,19 @@ public class CityController {
 		if(httpSession.getAttribute("loginMember") != null) {
 			cityService.deleteCity(city);
 		}
-		return "redirect:/City/CityList";
+		return "redirect:/city/cityList";
 	}
 	
 	// 도시 수정 Action
-	@RequestMapping(value = "/City/updateCity", method = RequestMethod.POST)
+	@RequestMapping(value = "/city/updateCity", method = RequestMethod.POST)
 	public String updateCity(City city) {
 		logger.debug("{} : <city updateCity CityController", city);
 		cityService.updateCity(city);
-		return "redirect:/City/CityList";
+		return "redirect:/city/cityList";
 	}
 	
 	// 도시 수정 Form
-	@RequestMapping(value = "/City/updateCity", method = RequestMethod.GET)
+	@RequestMapping(value = "/city/updateCity", method = RequestMethod.GET)
 	public String updateCity(HttpSession httpSession, Model model, @RequestParam(value = "cityId") int cityId) {
 		logger.debug("{} : <httpSession updateCity CityController", httpSession);
 		logger.debug("{} : <model updateCity CityController", model);
@@ -83,42 +83,42 @@ public class CityController {
 		String view = null;
 		// 로그인 처리
 		if(httpSession.getAttribute("loginMember") == null) {
-			view = "redirect:/City/CityList";
+			view = "redirect:/city/cityList";
 		} else if(httpSession.getAttribute("loginMember") != null) {
 			City reCity = cityService.updateCity(cityId);
 			logger.debug("{} : >reCity updateCity CityController", reCity);
 			model.addAttribute("city", reCity);
-			view = "City/updateCity";
+			view = "city/updateCity";
 		}
 		logger.debug("{} : >view updateCity CityController", view);
 		return view;
 	}
 	
 	// 도시 추가 Action
-	@RequestMapping(value = "/City/insertCity", method = RequestMethod.POST)
+	@RequestMapping(value = "/city/insertCity", method = RequestMethod.POST)
 	public String insertCity(City city) {
 		logger.debug("{} : <city insertCity CityController", city);
 		cityService.insertCity(city);
-		return "redirect:/City/CityList";
+		return "redirect:/city/cityList";
 	}
 	
 	// 도시 추가 Form
-	@RequestMapping(value = "/City/insertCity", method = RequestMethod.GET)
+	@RequestMapping(value = "/city/insertCity", method = RequestMethod.GET)
 	public String insertCity(HttpSession httpSession) {
 		logger.debug("{} : <httpSession insertCity CityController", httpSession);
 		String view = null;
 		// 로그인 처리
 		if(httpSession.getAttribute("loginMember") == null) {
-			view = "redirect:/City/CityList";
+			view = "redirect:/city/cityList";
 		} else if(httpSession.getAttribute("loginMember") != null) {
-			view = "City/insertCity";
+			view = "city/insertCity";
 		}
 		logger.debug("{} : >view insertCity CityController", view);
 		return view;
 	}
 	
 	// 도시 전체 조회
-	@RequestMapping(value = "/City/CityListAll", method = RequestMethod.GET)
+	@RequestMapping(value = "/city/cityListAll", method = RequestMethod.GET)
 	public String cityList(HttpSession httpSession, Model model) {
 		logger.debug("{} : <httpSession cityList CityController", httpSession);
 		logger.debug("{} : <model cityList CityController", model);
@@ -130,7 +130,7 @@ public class CityController {
 			List<City> list = cityService.selectCityList();
 			logger.debug("{} : >list cityList CityController", list);
 			model.addAttribute("list", list);
-			view = "City/CityList";
+			view = "city/cityList";
 		}
 		logger.debug("{} : >view cityList CityController", view);
 		return view;

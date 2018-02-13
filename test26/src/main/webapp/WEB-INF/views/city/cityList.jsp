@@ -50,10 +50,10 @@
 							<tr>
 								<td><strong>${list.cityName}</strong></td>
 								<td>
-									<a href="${pageContext.request.contextPath}/city/updateCity?cityId=${cityList.cityId}" class="btn btn-none n-gray"role="button">
+									<a href="${pageContext.request.contextPath}/city/updateCity?cityId=${list.cityId}" class="btn btn-none n-gray"role="button">
 										<i class="fa fa-cog fa-2x" aria-hidden="true"></i>
 									</a>
-									<a href="${pageContext.request.contextPath}/city/deleteCity?cityId=${cityList.cityId}" class="btn rgba-red-strong"role="button">
+									<a href="${pageContext.request.contextPath}/city/deleteCity?cityId=${list.cityId}" class="btn rgba-red-strong"role="button">
 										<i class="fa fa-times fa-2x" aria-hidden="true"></i>
 									</a>
 								</td>
