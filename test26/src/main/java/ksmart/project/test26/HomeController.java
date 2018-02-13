@@ -24,7 +24,7 @@ public class HomeController {
 	public String home(Model model) {
 		List<Category> list = categoryService.selectCategoryList();
 		for(Category c : list) {
-			logger.debug("{} : CategoryName indexCall IndexController.java", c.getCategoryName());
+			logger.debug("{} : >CategoryName indexCall IndexController.java", c.getCategoryName());
 		}
 		model.addAttribute("list", list);
 		return "home";
