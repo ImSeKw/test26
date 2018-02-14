@@ -25,7 +25,7 @@
 			<div class="col-lg-3 col-md-6 text-center">
 				<div class="service-box mt-5 mx-auto">
 					<i class="fab fa-napster fa-4x mb-3 sr-icons n-yellow"></i>
-					<h3 class="mb-3">YoungSin</h3>
+					<h3 class="mb-3">YoungShin</h3>
 					<p class="text-muted mb-0">You can use this theme as is, or you can make changes!</p>
 				</div>
 			</div>
