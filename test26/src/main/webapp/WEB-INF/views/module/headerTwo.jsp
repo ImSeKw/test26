@@ -19,13 +19,38 @@
 							<li class="nav-item"><a class="nav-link js-scroll-trigger" href="${pageContext.request.contextPath}/member/logoutMember">Sign Out</a></li>
 						</c:when>
 						<c:when test="${empty loginMember}">
-							<div class="center"><button data-toggle="modal" data-target="#squarespaceModal" class="btn btn-primary center-block">Click Me</button></div>
-							 <li class="nav-item"><a class="nav-link js-scroll-trigger" href="${pageContext.request.contextPath}/member/loginMember">Sign In</a></li>
+							
 							<li class="nav-item"><a class="nav-link js-scroll-trigger" href="${pageContext.request.contextPath}/member/insertMember">Join us</a></li>
+							<li class="nav-item" data-toggle="modal" data-target="#loginModal"><a class="nav-link js-scroll-trigger">Sign In</a></li>
 						</c:when>
 					</c:choose>
 				</ul>
 			</div>
 		</div>
 	</nav>
+	<div class="modal hide" id="loginModal">
+	    <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal">✕</button>
+	    </div>
+	    <div class="modal-body" style="text-align:center;">
+	        <div class="row-fluid">
+	            <div class="span10 offset1">
+	                <div id="modalTab">
+	                    <div class="tab-content">
+	                        <div class="tab-pane active" id="login">
+	                        	<form action="${pageContext.request.contextPath}/member/loginMember" method="post">
+									<input type="text" name="memberId" class="mb-3 bg-black input-white" placeholder="id">
+									<br>
+									<input type="text" name="memberPw" class="mb-3 bg-black input-white" placeholder="password">
+									<br>
+									<button type="submit" class="btn btn-primary">Sign in</button>
+								</form>
+	                         </div>
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+	
 	

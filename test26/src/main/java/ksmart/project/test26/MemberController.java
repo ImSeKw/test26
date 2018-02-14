@@ -72,7 +72,7 @@ public class MemberController {
 	public String insertMember(Member member) {
 		logger.debug("{} : <member insertMember MemberController",member);
 		memberService.insertMember(member);
-		return "redirect:/member/loginMember";
+		return "redirect:/";
 	}
 	
 	// 회원 수정 Form
