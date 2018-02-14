@@ -1,9 +1,5 @@
 package ksmart.project.test26;
 
-
-import ksmart.project.test26.service.Country;
-import ksmart.project.test26.service.CountryService;
-
 import java.util.List;
 import java.util.Map;
 
@@ -18,88 +14,132 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import ksmart.project.test26.service.Country;
+import ksmart.project.test26.service.CountryService;
+
 @Controller
 public class CountryController {
 	@Autowired
-	private CountryService countryService;
+	CountryService countryService;
 	private static final Logger logger = LoggerFactory.getLogger(CountryController.class);
-
-	//나라 전체 조회
-	@RequestMapping(value="/Country/countryList")		
-	public String CountryList(HttpSession httpSession
-			, Model model 
-			,@RequestParam(value="currentPage",defaultValue="1",required=false) int currentPage
-			,@RequestParam(value="pagePerRow",defaultValue="5",required=false) int pagePerRow
-			,@RequestParam(value="word",required=false)String word
-			) {	
+	
+	// 도시 조회(페이징)
+	@RequestMapping(value = "/country/countryList", method = RequestMethod.GET)
+	public String selectCountryListAndCountByPage(Model model, HttpSession httpSession
+										, @RequestParam(value = "currentPage", required = false, defaultValue = "1") int currentPage
+										, @RequestParam(value = "pagePerRow", required = false, defaultValue = "5") int pagePerRow
+										, @RequestParam(value = "word", required = false) String word) {
+		logger.debug("{} : CountryController selectCountryListAndCountByPage currentPage", currentPage);
+		logger.debug("{} : CountryController selectCountryListAndCountByPage pagePerRow", pagePerRow);
+		logger.debug("{} : CountryController selectCountryListAndCountByPage word", word);
 		String view = null;
-		logger.debug("{} : CountryController.java CountryList word", word);
-
 		// 로그인 접근 처리
-		if(httpSession.getAttribute("loginMember")==null) { //세션에 로그인정보가 없다면
+		if(httpSession.getAttribute("loginMember") == null) {
 			view = "redirect:/";
-		}else if(httpSession.getAttribute("loginMember")!=null) { //세션에 로그인정보가 있다면
-			//List<Country> countrylist = countryService.selectCountryList(currentPage,word); 	
-			logger.debug("01_01 CountryController.java CountryList model");
-			Map<String, Object> map = countryService.selectCountryListAndCountByPage(currentPage, pagePerRow,word);
+		} else if(httpSession.getAttribute("loginMember") != null) {
+			Map<String, Object> map = countryService.selectCountryListAndCountByPage(currentPage, pagePerRow, word);
 			List<Country> list = (List<Country>)map.get("list");
 			int countPage = (Integer)map.get("countPage");
-			int endPage = (Integer)map.get("endPage");
-			int startPage = (Integer)map.get("startPage");
-			int count = (Integer)map.get("count");
-			boolean prev = (Boolean)map.get("prev");
-			boolean next = (Boolean)map.get("next");
+			word = (String)map.get("word");
+			String category = (String)map.get("category");
+			logger.debug("{} : CountryController selectCountryListAndCountByPage list", list);
+			logger.debug("{} : CountryController selectCountryListAndCountByPage countPage", countPage);
+			logger.debug("{} : CountryController selectCountryListAndCountByPage word", word);
+			logger.debug("{} : CountryController selectCountryListAndCountByPage category", category);
 			model.addAttribute("list", list);
 			model.addAttribute("countPage", countPage);
 			model.addAttribute("currentPage", currentPage);
-			model.addAttribute("endPage", endPage);
-			model.addAttribute("startPage", startPage);
-			model.addAttribute("count", count);
-			model.addAttribute("prev", prev);
-			model.addAttribute("next", next);
-			logger.debug("{} : CountryController.java CountryList model", model);
-			logger.debug("{} : CountryController.java CountryList currentPage", currentPage);
-			logger.debug("{} : CountryController.java CountryList countPage", countPage);
+			model.addAttribute("word", word);
+			model.addAttribute("category", category);
 			view = "country/countryList";
 		}
-		return view;	
+		logger.debug("{} : CountryController view", view);
+		return view;
 	}
-	//나라입력화면 불러오기
-	@RequestMapping(value="/Country/insertCountry",method = RequestMethod.GET)
-	public String CountryInsert() {
-		logger.debug("CountryController.java CountryInsert ");
-		return "Country/insertCountry";	
-	}
-	//나라추가
-	@RequestMapping(value="/Country/insertCountry",method = RequestMethod.POST)
-	public String CountryInsert(Country country) {
-		//System.out.println(country+" :CountryController.java CountryInsertAction country");		
-		logger.debug("{} : CountryController.java CountryInsert country", country);
-		countryService.insertCountry(country);		
-		return "redirect:/country/countryList";		
-	}
-	//나라삭제
-	@RequestMapping(value="/Country/deleteCountry",method=RequestMethod.GET)
-	public String CountryDelete(@RequestParam(value="countryId",required=true)int countryId){
-		countryService.deleteCountry(countryId);
-		logger.debug("{} : CountryController.java CountryDelete countryId", countryId);
-		return "redirect:/country/countryList";		
-	}
-	//나라수정을위한 아이디 받기
-	@RequestMapping(value="/Country/updateCountry",method=RequestMethod.GET)
-	public String CountryUpdate(Model model,@RequestParam(value="countryId",required=true)int countryId) {
-		Country country = countryService.selectCountryName(countryId);
-		model.addAttribute("country", country);	
-		logger.debug("{} : country.getMemberId() CountryUpdate CountryController.java GET", country.getCountryId());
-		logger.debug("{} : country.getCountryName() CountryUpdate CountryController.java GET", country.getCountryName());
-		return "country/updateCountry";		
-	}
-	//나라수정
-	@RequestMapping(value="/Country/updateCountry",method = RequestMethod.POST)
-	public String CountryUpdate(Country country) {
-		logger.debug("{} : country.getMemberId() CountryUpdate CountryController.java POST", country.getCountryId());
-		logger.debug("{} : country.getCountryName() CountryUpdate CountryController.java POST", country.getCountryName());
-		countryService.updateCountry(country);
+	
+	// 도시 삭제
+	@RequestMapping(value = "/country/deleteCountry", method = RequestMethod.GET)
+	public String deleteCountry(HttpSession httpSession, Country country) {
+		logger.debug("{} : CountryController deleteCountry httpSession", httpSession);
+		logger.debug("{} : CountryController deleteCountry country", country);
+		// 로그인 처리
+		if(httpSession.getAttribute("loginMember") != null) {
+			countryService.deleteCountry(country);
+		}
 		return "redirect:/country/countryList";
+	}
+	
+	// 도시 수정 Action
+	@RequestMapping(value = "/country/updateCountry", method = RequestMethod.POST)
+	public String updateCountry(Country country) {
+		logger.debug("{} : CountryController updateCountry country", country);
+		countryService.updateCountry(country);
+		return "redirect:/country/updateCountry";
+	}
+	
+	
+	
+	
+	
+	// 도시 수정 Form
+	@RequestMapping(value = "/country/updateCountry", method = RequestMethod.GET)
+	public String updateCountry(HttpSession httpSession, Model model, @RequestParam(value = "countryId") int countryId) {
+		logger.debug("{} : CountryController updateCountry httpSession", httpSession);
+		logger.debug("{} : CountryController updateCountry model", model);
+		logger.debug("{} : CountryController updateCountry countryId", countryId);
+		String view = null;
+		// 로그인 처리
+		if(httpSession.getAttribute("loginMember") == null) {
+			view = "redirect:/country/countryList";
+		} else if(httpSession.getAttribute("loginMember") != null) {
+			Country reCountry = countryService.updateCountry(countryId);
+			logger.debug("{} : CountryController updateCountry reCountry", reCountry);
+			model.addAttribute("country", reCountry);
+			view = "country/updateCountry";
+		}
+		logger.debug("{} : CountryController updateCountry view", view);
+		return view;
+	}
+	
+	// 도시 추가 Action
+	@RequestMapping(value = "/country/insertCountry", method = RequestMethod.POST)
+	public String insertCountry(Country country) {
+		logger.debug("{} : CountryController insertCountry CountryController", country);
+		countryService.insertCountry(country);
+		return "redirect:/country/countryList";
+	}
+	
+	// 도시 추가 Form
+	@RequestMapping(value = "/country/insertCountry", method = RequestMethod.GET)
+	public String insertCountry(HttpSession httpSession) {
+		logger.debug("{} : CountryController insertCountry httpSession", httpSession);
+		String view = null;
+		// 로그인 처리
+		if(httpSession.getAttribute("loginMember") == null) {
+			view = "redirect:/country/countryList";
+		} else if(httpSession.getAttribute("loginMember") != null) {
+			view = "country/insertCountry";
+		}
+		logger.debug("{} : CountryController insertCountry view", view);
+		return view;
+	}
+	
+	// 도시 전체 조회
+	@RequestMapping(value = "/country/countryListAll", method = RequestMethod.GET)
+	public String countryList(HttpSession httpSession, Model model) {
+		logger.debug("{} : CountryController countryList httpSession", httpSession);
+		logger.debug("{} : CountryController countryList model", model);
+		String view = null;
+		// 로그인 접근 처리
+		if(httpSession.getAttribute("loginMember") == null) {
+			view = "redirect:/";
+		} else if(httpSession.getAttribute("loginMember") != null) {
+			List<Country> list = countryService.selectCountryList();
+			logger.debug("{} : CountryController countryList list", list);
+			model.addAttribute("list", list);
+			view = "country/countryList";
+		}
+		logger.debug("{} : CountryController countryList view", view);
+		return view;
 	}
 }
