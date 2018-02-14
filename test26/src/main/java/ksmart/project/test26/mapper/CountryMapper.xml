@@ -4,60 +4,63 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="ksmart.project.test26.mapper.CountryMapper">
-	<!--selectCityCountByPage 전체 수-->
-	<select id="selectCityCountByPage" resultType="int">
-	SELECT 
-		COUNT(country.country_id) 
-	FROM 
-		country
+	<!-- select 전체 도시 수(페이징) -->
+	<select id="selectCountryCountByPage" parameterType="java.util.Map" resultType="int">
+		SELECT COUNT(*) AS countCountry
+		FROM Country
+		<if test="word != null">
+			WHERE Country_name LIKE CONCAT("%", #{word}, "%")
+		</if>
 	</select>
-	<!--selectCityListByPage limit된 select-->
-	<select id="selectCityListByPage"
-		parameterType="java.util.Map" resultType="ksmart.project.test26.service.Country">
-	SELECT
-		country_id as countryId
-		,country_name as countryName
-	FROM 
-		test.country
-        <where>
-            <if test="word != null">
-                country_name like CONCAT('%',#{word},'%')
-            </if>
-        </where>
-	ORDER BY country_id ASC
-	LIMIT #{startPage}, #{pagePerRow}
-	</select>
-	<!--COUNTRY SELECT-->
-	<select id="selectCountryList" resultType="ksmart.project.test26.service.Country">
+	
+	<!-- select 도시 조회(페이징) -->
+	<select id="selectCountryListByPage" parameterType="java.util.Map" resultType="ksmart.project.test26.service.Country">
 		SELECT 
-			country_id as countryId
-			,country_name as countryName
-		FROM country;
-	</select>
-	<!--COUNTRY 수정 폼 SELECT   -->
-	<select id="selectCountryName" parameterType="int" resultType="ksmart.project.test26.service.Country">
-		SELECT 
-			country_id as countryId	
-			,country_name as countryName		
+			country_id AS countryId
+			, country_name AS countryName
 		FROM country
-		WHERE country_id = #{countryId};
-	</select>	
-	<!--COUNTRY INSERT-->
-	<insert id="insertCountry" parameterType="ksmart.project.test26.service.Country">		
-	INSERT INTO 
-		test.country (country_name) 
-	VALUES (#{countryName});
-	</insert>
-	<!--COUNTRY DELETE-->
+		<if test="word != null">
+			WHERE country_name LIKE CONCAT("%", #{word}, "%")
+		</if>
+		ORDER BY countryName ASC
+		LIMIT #{startPage}, #{pagePerRow}
+	</select>
+	
+	<!-- delete 도시 삭제 -->
 	<delete id="deleteCountry" parameterType="ksmart.project.test26.service.Country">
-		DELETE FROM 
-			test.country 
-		WHERE country_id = #{countryId};
+		DELETE FROM Country
+		WHERE Country_id = #{CountryId}
 	</delete>
-	<!--COUNTRY UPDATE  -->
-	<update id="updateCountry" parameterType ="ksmart.project.test26.service.Country">
-		UPDATE country 
-		SET country_name = #{countryName} 
+	
+	<!-- update 도시 수정 -->
+	<update id="updateCountry" parameterType="ksmart.project.test26.service.Country">
+		UPDATE country
+		SET country_name = #{countryName}
 		WHERE country_id = #{countryId}
 	</update>
+	
+	<!-- update view 도시 조회 (수정) -->
+	<select id="selectCountryId" parameterType="int" resultType="ksmart.project.test26.service.Country">
+		SELECT
+			country_id as countryId
+			, country_name as countryName
+		FROM country
+		WHERE country_id = #{countryId}
+	</select>
+	
+	<!-- insert 도시 추가 -->
+	<insert id="insertCountry" parameterType="ksmart.project.test26.service.Country">
+		INSERT INTO country
+			(country_name)
+		VALUES
+			(#{countryName})
+	</insert>
+	
+	<!-- select 도시 전체 조회 -->
+	<select id="selectCountryList" resultType="ksmart.project.test26.service.Country">
+		SELECT 
+			country_id AS countryId
+			, country_name AS countryName
+		 FROM country
+	</select>
 </mapper>
