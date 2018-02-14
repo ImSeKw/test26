@@ -42,11 +42,13 @@ public class IdolService {
 			countPage++;
 		}
 		logger.debug("{} : >countPage selectIdolListAndCountByPage IdolService", countPage);
+		String category = "idol";
 		// list와 페이지 수를 리턴하기
 		Map<String, Object> returnMap = new HashMap();
 		returnMap.put("list", list);
 		returnMap.put("countPage", countPage);
 		returnMap.put("word", word);
+		returnMap.put("category", category);
 		return returnMap;
 	}
 	

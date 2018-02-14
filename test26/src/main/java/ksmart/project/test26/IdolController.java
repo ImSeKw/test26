@@ -41,6 +41,8 @@ public class IdolController {
 			List<Idol> list = (List<Idol>)map.get("list");
 			int countPage = (Integer)map.get("countPage");
 			word = (String)map.get("word");
+			// 페이징카테고리 설정
+			String category = (String)map.get("category");
 			logger.debug("{} : >list selectIdolListAndCountByPage IdolController", list);
 			logger.debug("{} : >countPage selectIdolListAndCountByPage IdolController", countPage);
 			logger.debug("{} : >word selectIdolListAndCountByPage IdolController", word);
@@ -48,6 +50,7 @@ public class IdolController {
 			model.addAttribute("countPage", countPage);
 			model.addAttribute("currentPage", currentPage);
 			model.addAttribute("word", word);
+			model.addAttribute("category", category);
 			view = "idol/idolList";
 		}
 		logger.debug("{} : >view idolList IdolController", view);
