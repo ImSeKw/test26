@@ -28,24 +28,24 @@
 		</div>
 	</nav>
 	
-<!-- Modal -->
-<div class="modal fade" id="loginModal" role="dialog">
-	<div class="modal-dialog">
-		<!-- Modal content-->
-		<div class="modal-content">
-			<form action="${pageContext.request.contextPath}/member/loginMember" method="post">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal"><i class="far fa-times-circle"></i></button>
-				</div>
-				<div class="modal-body text-center">
-					<input type="text" name="memberId" placeholder="id">
-					<br>
-					<input type="text" name="memberPw" placeholder="password">
-				</div>
-				<div class="modal-footer text-center">
-					<button type="submit" class="btn btn-default">Sign In</button>
-				</div>
-			</form>
+	<!-- Modal -->
+	<div class="modal fade" id="loginModal" role="dialog">
+		<div class="modal-dialog">
+			<!-- Modal content-->
+			<div class="modal-content">
+				<form action="${pageContext.request.contextPath}/member/loginMember" method="post">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"><i class="far fa-times-circle"></i></button>
+					</div>
+					<div class="modal-body text-center">
+						<input type="text" name="memberId" placeholder="id">
+						<br>
+						<input type="password" name="memberPw" placeholder="password">
+					</div>
+					<div class="modal-footer text-center">
+						<button type="submit" class="btn btn-default">Sign In</button>
+					</div>
+				</form>
+			</div>
 		</div>
 	</div>
-</div>
