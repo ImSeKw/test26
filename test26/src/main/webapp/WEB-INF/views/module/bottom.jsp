@@ -1,3 +1,4 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 	<section id="contact">
@@ -12,12 +13,12 @@
 			<div class="row">
 				<div class="col-lg-4 ml-auto text-center">
 					<i class="fa fa-phone fa-3x mb-3 sr-contact"></i>
-					<p>123-456-6789</p>
+					<p>063-717-1008</p>
 				</div>
 				<div class="col-lg-4 mr-auto text-center">
-					<i class="fa fa-envelope-o fa-3x mb-3 sr-contact"></i>
+					<i class="fas fa-building fa-3x mb-3 sr-contact"></i>
 					<p>
-						<a href="mailto:your-email@your-domain.com">feedback@startbootstrap.com</a>
+						<a href="http://www.ksmart.or.kr/">한국 스마트 정보교육원</a>
 					</p>
 				</div>
 			</div>

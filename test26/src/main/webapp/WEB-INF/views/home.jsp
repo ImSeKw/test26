@@ -19,28 +19,28 @@
 					<!-- <i class="fa fa-4x fa-diamond text-primary mb-3 sr-icons"></i> -->
 					<i class="fab fa-reddit-alien fa-4x mb-3 sr-icons n-pink"></i>
 					<h3 class="mb-3">SinDock</h3>
-					<p class="text-muted mb-0">Our templates are updated regularly so they don't break.</p>
+					
 				</div>
 			</div>
 			<div class="col-lg-3 col-md-6 text-center">
 				<div class="service-box mt-5 mx-auto">
 					<i class="fab fa-napster fa-4x mb-3 sr-icons n-yellow"></i>
 					<h3 class="mb-3">YoungShin</h3>
-					<p class="text-muted mb-0">You can use this theme as is, or you can make changes!</p>
+					
 				</div>
 			</div>
 			<div class="col-lg-3 col-md-6 text-center">
 				<div class="service-box mt-5 mx-auto">
 					<i class="fas fa-user-secret fa-4x mb-3 sr-icons n-skyblue"></i>
 					<h3 class="mb-3">SeungKwon</h3>
-					<p class="text-muted mb-0">We update dependencies to keep things fresh.</p>
+					
 				</div>
 			</div>
 			<div class="col-lg-3 col-md-6 text-center">
 				<div class="service-box mt-5 mx-auto">
 					<i class="fab fa-qq fa-4x mb-3 sr-icons n-puple"></i>
 					<h3 class="mb-3">WonJin</h3>
-					<p class="text-muted mb-0">You have to make your websites with love these days!</p>
+					
 				</div>
 			</div>
 		</div>
