@@ -1,4 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+
+
+<%-- <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -7,12 +9,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<div class="col-sm-10 col-md-10 col-lg-10 col-xs-10 input-group">
-		<span class="input-group-addon"><span
-			class="glyphicon glyphicon-user" style="color: black;"></span></span> <input
-			type="text" class="form-control" id="username"
-			placeholder="Enter your Username">
-	</div>
 	<form action="${pageContext.request.contextPath}/member/loginMember"
 		method="post">
 		<table>
@@ -24,4 +20,4 @@
 		<button type="submit">로그인</button>
 	</form>
 </body>
-</html>
+</html> --%>
