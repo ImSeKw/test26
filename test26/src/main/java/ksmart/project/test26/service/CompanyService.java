@@ -41,11 +41,14 @@ public class CompanyService {
 			countPage++;
 		}
 		logger.debug("{} : countPage selectCompanyListAndCountByPage CompanySevice", countPage);
+		//자신의 카테고리 셋팅
+		String category = "company";
 		//리스트와 페이지 수를 리턴
 		Map<String,Object> returnMap=new HashMap();
 		returnMap.put("word",word);
 		returnMap.put("list",list);
 		returnMap.put("countPage",countPage);
+		returnMap.put("category", category);
 		return returnMap;
 		
 	}

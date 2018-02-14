@@ -35,10 +35,12 @@ public class CompanyController {
 		List<Company> list =(List<Company>)map.get("list");
 		int countPage =(Integer) map.get("countPage");
 		String word1 =(String) map.get("word");
+		String category = (String)map.get("category");
 		model.addAttribute("list",list);
 		model.addAttribute("countPage", countPage);
 		model.addAttribute("currentPage", currentPage);
 		model.addAttribute("word", word1);
+		model.addAttribute("category", category);
 		return "company/companyList";
 	}
 	// 회사 전체 조회
