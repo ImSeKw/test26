@@ -12,41 +12,52 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class CountryDao {
 	@Autowired
-	private SqlSessionTemplate sqlSessionTemplate;
+	SqlSessionTemplate sqlSessionTemplate;
 	private static final Logger logger = LoggerFactory.getLogger(CountryDao.class);
 	// 경로설정 중복처리
 	private final String NAMESPACE = "ksmart.project.test26.mapper.CountryMapper.";
-	// country 전체  개수
-	public int selectCountryCountByPage() {
-		return sqlSessionTemplate.selectOne(NAMESPACE + "selectCityCountByPage");
+	
+	// 전체 도시 수(페이징)
+	public int selectCountryCountByPage(Map map) {
+		logger.debug("{} : CountryDao selectCountryDaoCountByPage word", map.get("word"));
+		return sqlSessionTemplate.selectOne(NAMESPACE + "selectCountryCountByPage", map);
 	}
-	// country 페이징 작업 조회
-	public List<Country> selectCountryListByPage(Map<String,Object> map){
-		logger.debug("{} : CountryDao.java selectCityListByPage startPage", map.get("startPage"));
-		logger.debug("{} : CountryDao.java selectCityListByPage pagePerRow", map.get("pagePerRow"));
-		logger.debug("{} : CountryDao.java selectCityListByPage word", map.get("word"));
-		return sqlSessionTemplate.selectList(NAMESPACE + "selectCityListByPage", map);
+	
+	// 도시 조회(페이징)
+	public List<Country> selectCountryListByPage(Map map) {
+		logger.debug("{} : CountryDao selectCountryDaoListByPage startPage", map.get("startPage"));
+		logger.debug("{} : CountryDao selectCountryDaoListByPage pagePerRow", map.get("pagePerRow"));
+		logger.debug("{} : CountryDao selectCountryDaoListByPage word", map.get("word"));
+		return sqlSessionTemplate.selectList(NAMESPACE + "selectCountryListByPage", map);
 	}
-	// 나라 전체 조회
-	public List<Country> selectCountryList(){ 
-		return sqlSessionTemplate.selectList(NAMESPACE + "selectCountryList");		
+	
+	// 도시 삭제 Action
+	public void deleteCountry(Country country) {
+		logger.debug("{} : CountryDao deleteCountry country", country);
+		sqlSessionTemplate.delete(NAMESPACE + "deleteCountry", country);
 	}
-	// 나라 입력
-	public void insertCountry(Country country){
-		logger.debug("{} : CountryDao.java insertCountry country", country);
-		sqlSessionTemplate.insert(NAMESPACE + "insertCountry",country);
+	
+	// 도시 수정 Action
+	public void updateCountry(Country country) {
+		logger.debug("{} : CountryDao deleteCountry country", country);
+		sqlSessionTemplate.update(NAMESPACE + "updateCountry", country);
 	}
-	// 나라 삭제
-    public int deleteCountry(int countryId) {    	
-        return sqlSessionTemplate.delete(NAMESPACE + "deleteCountry",countryId);
-    }
-    // 나라 이름 조회
-    public Country selectCountryName(int countryId) {    	
-		logger.debug("{} : CountryDao.java selectCountryName countryId", countryId);
-		return sqlSessionTemplate.selectOne(NAMESPACE + "selectCountryName", countryId);
-    }
-    // 나라 수정
-    public void updateCountry(Country country) {
-		sqlSessionTemplate.update(NAMESPACE + "updateCountry",country);
+	
+	// 도시 수정 Form
+	public Country updateCountry(int countryId) {
+		logger.debug("{} : CountryDao updateCountry countryId", countryId);
+		return sqlSessionTemplate.selectOne(NAMESPACE + "selectCountryId", countryId);
+	}
+	
+	// 도시 추가 Action
+	public void insertCountry(Country country) {
+		logger.debug("{} : CountryDao insertCountry country", country);
+		sqlSessionTemplate.insert(NAMESPACE + "insertCountry", country);
+	}
+	
+	// 도시 전체 조회
+	public List<Country> selectCountryList() {
+		logger.debug("CountryDao selectCountryList");
+		return sqlSessionTemplate.selectList(NAMESPACE + "selectCountryList");
 	}
 }
