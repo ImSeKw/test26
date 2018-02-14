@@ -4,10 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>Insert title here</title>
-	<jsp:include page="/WEB-INF/views/module/headerOne.jsp"></jsp:include>
-	<jsp:include page="/WEB-INF/views/module/headerTwo.jsp"></jsp:include>
+<jsp:include page="/WEB-INF/views/module/headerOne.jsp"></jsp:include>
 	<!-- JQUERY 공백시 경고창  -->
 	<script>
 		$(document).ready(function() {
@@ -26,42 +23,41 @@
 			});
 		});
 	</script>
+<jsp:include page="/WEB-INF/views/module/headerTwo.jsp"></jsp:include>
 </head>
 <body>
-
-	<div class="row justify-content-md-center">
-		<div class="col-lg-4"></div>
-		<div class="col col-md-auto col-lg-4 text-center">
-			<h2 class="text-center"></h2>
-			<form action="${pageContext.request.contextPath}/idol/updateIdol" id="idolAdd" method = "post">
-				<input type="hidden" name="idolID" id=" idolID" value="${idol.idolID}">
-				<table class="table table-hover">
-					<thead class="mdb-color darken-3">
-						<tr class="text-white">
-							<td><strong>IDOL</strong></td>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>	
-							<td><input type="text" name="idolName" id="idolName" value="${idol.idolName}"></td>
-						</tr>
-						<tr>
-							<td>
-								<!-- 확인버튼 -->
-								<button type="button" id="updateButton" class="btn rgba-blue-strong">
-									<i class="fa fa-check-circle" aria-hidden="true"></i>
-								</button>
-								<!-- 취소버튼 -->
-								<button type="button" id="cancelButton" class="btn danger-color-dark">
-									<i class="fa fa-times-circle" aria-hidden="true"></i>
-								</button>
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</form>
+<section id="services">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-12 text-center">
+				<h2 class="section-heading">IDOL</h2>
+				<hr class="my-4">
+			</div>
 		</div>
-		<div class="col-lg-4"></div>
 	</div>
+</section>
+
+<section class="bg-black">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-8 mx-auto text-center">
+				<form action="${pageContext.request.contextPath}/idol/updateIdol" method="post" id="idolUpdate">
+					<input type="hidden" name="idolID" value="${idol.idolID}">
+					<h3 class="mb-3 n-white"></h3>
+					<input type="text" name="idolName" id="idolName" class="mb-3 bg-black input-white" value="${idol.idolName}" placeholder="이곳에 아이돌 이름을 입력하세요">
+					<br>
+					<button type="button" id="updateButton" class="btn btn-none n-white">
+						<i class="fa fa-check-circle fa-2x"></i>
+					</button>
+					<!-- 취소버튼 -->
+					<button type="button" id="cancelButton" class="btn btn-none n-white">
+						<i class="fa fa-times-circle fa-2x"></i>
+					</button>
+				</form>
+			</div>
+		</div>
+	</div>
+</section>
+<jsp:include page="/WEB-INF/views/module/bottom.jsp"></jsp:include>
 </body>
 </html>
