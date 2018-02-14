@@ -14,7 +14,7 @@
 			})
 			/* 취소버튼 경로 설정 */
 			$('#cancelButton').click(function(){
-				document.location.href="<%= request.getContextPath() %>/Movie/MovieList"
+				document.location.href="<%= request.getContextPath() %>/movie/movieList"
 			});
 		});
 	</script>
@@ -22,7 +22,7 @@
 		<div class="col-lg-4"></div>
 		<div class="col col-md-auto col-lg-4 text-center">
 			<h2 class="text-center"></h2>
-			<form action="${pageContext.request.contextPath}/Movie/insertMovie" method="post" id="movieAdd">
+			<form action="${pageContext.request.contextPath}/movie/insertMovie" method="post" id="movieAdd">
 				<table class="table table-hover">
 					<thead class="mdb-color darken-3">
 						<tr class="text-white">
