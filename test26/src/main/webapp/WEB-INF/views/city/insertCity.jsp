@@ -29,25 +29,25 @@
 	</div>
 </section>
 
-<section class="bg-black">
+
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-8 mx-auto text-center">
 				<form action="${pageContext.request.contextPath}/city/insertCity" method="post" id="cityAdd">
 					<h3 class="mb-3 n-white"></h3>
-					<input type="text" name="cityName" id="cityName" class="mb-3 bg-black input-white" placeholder="이곳에 도시 이름을 입력하세요">
+					<input type="text" name="cityName" id="cityName" class="mb-3 bg-white input-black" placeholder="이곳에 도시 이름을 입력하세요">
 					<br>
-					<button type="button" id="insertButton" class="btn btn-none n-white">
+					<button type="button" id="insertButton" class="btn btn-none n-black">
 						<i class="fa fa-check-circle fa-2x"></i>
 					</button>
 					<!-- 취소버튼 -->
-					<button type="button" id="cancelButton" class="btn btn-none n-white">
+					<button type="button" id="cancelButton" class="btn btn-none n-black">
 						<i class="fa fa-times-circle fa-2x"></i>
 					</button>
 				</form>
 			</div>
 		</div>
 	</div>
-</section>
+
 
 <jsp:include page="/WEB-INF/views/module/bottom.jsp"></jsp:include>
