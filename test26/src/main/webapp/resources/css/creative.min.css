@@ -64,6 +64,19 @@ color: #AB75AB;
 }
 /* 페이지 */
 
+/* 필드셋  */
+fieldset {
+	border: 1px solid #ffffff!important;
+	margin: 0;
+	xmin-width: 0;
+	padding: 10px;       
+	position: relative;
+	border-radius:4px;
+	background-color:#ffffff;
+	padding-left:10px!important;
+}
+/* 필드셋 */
+
 body, html {
 	width: 100%;
 	height: 100%

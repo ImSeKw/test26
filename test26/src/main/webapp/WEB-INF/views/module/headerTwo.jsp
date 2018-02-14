@@ -19,9 +19,8 @@
 							<li class="nav-item"><a class="nav-link js-scroll-trigger" href="${pageContext.request.contextPath}/member/logoutMember">Sign Out</a></li>
 						</c:when>
 						<c:when test="${empty loginMember}">
-							
 							<li class="nav-item"><a class="nav-link js-scroll-trigger" href="${pageContext.request.contextPath}/member/insertMember">Join us</a></li>
-							<li class="nav-item" data-toggle="modal" data-target="#loginModal"><a class="nav-link js-scroll-trigger">Sign In</a></li>
+							<li class="nav-item" data-toggle="modal" data-target="#loginModal"><a class="nav-link js-scroll-trigger" href="#">Sign In</a></li>
 						</c:when>
 					</c:choose>
 				</ul>
@@ -39,9 +38,9 @@
 	                    <div class="tab-content">
 	                        <div class="tab-pane active" id="login">
 	                        	<form action="${pageContext.request.contextPath}/member/loginMember" method="post">
-									<input type="text" name="memberId" class="mb-3 bg-black input-white" placeholder="id">
+									<input type="text" name="memberId"  placeholder="id">
 									<br>
-									<input type="text" name="memberPw" class="mb-3 bg-black input-white" placeholder="password">
+									<input type="text" name="memberPw"  placeholder="password">
 									<br>
 									<button type="submit" class="btn btn-primary">Sign in</button>
 								</form>

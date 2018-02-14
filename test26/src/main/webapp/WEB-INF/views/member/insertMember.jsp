@@ -5,32 +5,29 @@
 
 <section id="services">
 	<div class="container">
-		<div class="row">
-			<div class="col-lg-12 text-center">
+		<div class="col-lg-8 mx-auto text-center">
 				<h2 class="section-heading">MEMBERSHIP</h2>
 				<hr class="my-4">
-			</div>
 		</div>
-	</div>
-</section>
-
-<section class="bg-black">
-	<div class="container">
-		<div class="row">
-			<div class="col-lg-8 mx-auto text-center">
+		<div class="col-lg-8 mx-auto text-center">
+		</div>	
+		<div class="col-lg-8 mx-auto text-center">
+			
 				<form action="${pageContext.request.contextPath}/member/insertMember" method="post" id="companyAdd">
-					<h3 class="mb-3 n-white"></h3>
-					<input type="text" name="memberId" id="memberId" class="mb-3 bg-black input-white" placeholder="id를 입력하세요">
+				<!-- 	<h3 class="mb-3 n-white"></h3> -->
+					<input type="text" name="memberId" id="memberId" class="mb-3" placeholder="id를 입력하세요">
 					<br>
-					<input type="text" name="memberPw" id="memberPw" class="mb-3 bg-black input-white" placeholder="password를 입력하세요">
+					<input type="text" name="memberPw" id="memberPw" class="mb-3" placeholder="password를 입력하세요">
 					<br>
-					<button type="submit" id="insertButton" class="btn btn-none n-white">
+					<button type="submit" id="insertButton" class="btn btn-none n-black">
 						<i class="fa fa-check-circle fa-2x"></i>
 					</button>
 				</form>
-			</div>
+			
 		</div>
-	</div>
-</section>
+	</div>	
+		
+</section>	
+
 
 <jsp:include page="/WEB-INF/views/module/bottom.jsp"></jsp:include>
