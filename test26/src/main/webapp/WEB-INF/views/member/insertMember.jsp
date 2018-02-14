@@ -3,44 +3,34 @@
 <jsp:include page="/WEB-INF/views/module/headerOne.jsp"></jsp:include>
 <jsp:include page="/WEB-INF/views/module/headerTwo.jsp"></jsp:include>
 
-<section class="bg-white">
+<section id="services">
 	<div class="container">
 		<div class="row">
-			<div class="col-lg-8 mx-auto text-center">
+			<div class="col-lg-12 text-center">
 				<h2 class="section-heading">MEMBERSHIP</h2>
-				<hr class="my-5">
-				<form class="form-horizontal" action="${pageContext.request.contextPath}/member/insertMember" method="post">
-				  <div class="form-group col-lg-8 mx-auto text-center">
-				   	<div class="col-sm-12 text-center">
-				      <input type="id" class="form-control" name="memberId" placeholder="id">
-				    </div>
-				  </div>
-				  <div class="form-group col-lg-8 mx-auto text-center">
-				    <div class="col-sm-12 text-center"> 
-				      <input type="password" class="form-control" name="memberPw" placeholder="password">
-				    </div>
-				  </div>
-				  <div class="form-group col-lg-8 mx-auto text-center"> 
-				    <div class="col-sm-offset-2 col-sm-12">
-				      <button type="submit" class="btn btn-default">Submit</button>
-				    </div>
-				  </div>
-				</form>
-				<%-- <form action="${pageContext.request.contextPath}/member/insertMember" method="post">
-		<table border=1>
-			<tr>
-				<td>회원아이디<td>
-				<td><input type="text" name="memberId"><td>
-			</tr>
-			<tr>
-				<td>회원비밀번호</td>
-				<td><input type="text" name="memberPw"></td>
-			</tr>	
-		</table>
-		<button type="submit">확인</button>
-	</form> --%>
+				<hr class="my-4">
 			</div>
 		</div>
 	</div>
 </section>
+
+<section class="bg-black">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-8 mx-auto text-center">
+				<form action="${pageContext.request.contextPath}/member/insertMember" method="post" id="companyAdd">
+					<h3 class="mb-3 n-white"></h3>
+					<input type="text" name="memberId" id="memberId" class="mb-3 bg-black input-white" placeholder="id를 입력하세요">
+					<br>
+					<input type="text" name="memberPw" id="memberPw" class="mb-3 bg-black input-white" placeholder="password를 입력하세요">
+					<br>
+					<button type="submit" id="insertButton" class="btn btn-none n-white">
+						<i class="fa fa-check-circle fa-2x"></i>
+					</button>
+				</form>
+			</div>
+		</div>
+	</div>
+</section>
+
 <jsp:include page="/WEB-INF/views/module/bottom.jsp"></jsp:include>
