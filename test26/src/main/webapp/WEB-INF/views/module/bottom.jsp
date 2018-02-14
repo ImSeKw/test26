@@ -18,7 +18,7 @@
 				<div class="col-lg-4 mr-auto text-center">
 					<i class="fas fa-building fa-3x mb-3 sr-contact"></i>
 					<p>
-						<a href="http://www.ksmart.or.kr/">한국 스마트 정보교육원</a>
+						<a class="n-black" href="http://www.ksmart.or.kr/">한국 스마트 정보교육원</a>
 					</p>
 				</div>
 			</div>
