@@ -27,29 +27,25 @@
 			</div>
 		</div>
 	</nav>
-	<div class="modal hide" id="loginModal">
-	    <div class="modal-header">
-	        <button type="button" class="close" data-dismiss="modal">✕</button>
-	    </div>
-	    <div class="modal-body" style="text-align:center;">
-	        <div class="row-fluid">
-	            <div class="span10 offset1">
-	                <div id="modalTab">
-	                    <div class="tab-content">
-	                        <div class="tab-pane active" id="login">
-	                        	<form action="${pageContext.request.contextPath}/member/loginMember" method="post">
-									<input type="text" name="memberId"  placeholder="id">
-									<br>
-									<input type="text" name="memberPw"  placeholder="password">
-									<br>
-									<button type="submit" class="btn btn-primary">Sign in</button>
-								</form>
-	                         </div>
-	                    </div>
-	                </div>
-	            </div>
-	        </div>
-	    </div>
+	
+<!-- Modal -->
+<div class="modal fade" id="loginModal" role="dialog">
+	<div class="modal-dialog">
+		<!-- Modal content-->
+		<div class="modal-content">
+			<form action="${pageContext.request.contextPath}/member/loginMember" method="post">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"><i class="far fa-times-circle"></i></button>
+				</div>
+				<div class="modal-body text-center">
+					<input type="text" name="memberId" placeholder="id">
+					<br>
+					<input type="text" name="memberPw" placeholder="password">
+				</div>
+				<div class="modal-footer text-center">
+					<button type="submit" class="btn btn-default">Sign In</button>
+				</div>
+			</form>
+		</div>
 	</div>
-	
-	
+</div>

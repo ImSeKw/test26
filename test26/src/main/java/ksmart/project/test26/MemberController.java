@@ -38,7 +38,7 @@ public class MemberController {
 		// 아이디, 비밀번호 일치 여부에 따라 페이지 변경
 		if(reMember == null) {
 			logger.debug("{} : null selectMember MemberController.java", reMember);
-			view = "redirect:/member/loginMember";
+			view = "redirect:/";
 		} else if(reMember.getMemberId().equals(member.getMemberId())) {
 			if(reMember.getMemberPw().equals(member.getMemberPw())) {
 				logger.debug("{} : pw selectMember MemberController.java", reMember);
@@ -46,7 +46,7 @@ public class MemberController {
 				view = "redirect:/";
 			} else {
 				logger.debug("{} : id selectMember MemberController.java", reMember);
-				view = "redirect:/member/loginMember";
+				view = "redirect:/";
 			}
 		}
 		return view;

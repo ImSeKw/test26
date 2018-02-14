@@ -1,4 +1,4 @@
-input[type=text] {
+input[type=text], [type=password] {
     width: 35%;
     padding: 5px 2px;
     margin: 8px 0;
@@ -76,6 +76,19 @@ fieldset {
 	padding-left:10px!important;
 }
 /* 필드셋 */
+
+/* 모달 */
+.modal-contant {
+	max-width: 450px;
+	width: 100% !important;
+	background-color: #FFFFFF;
+	margin: 0 auto;
+	border-radius: 2px;
+	box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+	overflow: hidden;
+	font-family: roboto;
+}
+/* 모달 */
 
 body, html {
 	width: 100%;
