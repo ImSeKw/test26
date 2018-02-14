@@ -7,7 +7,7 @@
 		<div class="row justify-content-md-center">
 			<div class="col col-md-auto col-lg-4 text-center">
 				<div class="input-group">
-					<form action="${pageContext.request.contextPath}/Company/CompanyList?word=${word}" method="get">
+					<form action="${pageContext.request.contextPath}/company/companyList?word=${word}" method="get">
 						<div class="input-group-prepend">
 							<input type="text" name="word" class="form-control" aria-label="Text input with segmented dropdown button">
 						</div>
@@ -30,9 +30,9 @@
 								<tr>
 									<td><strong>${company.companyName}</strong></td>
 									<td>
-										<a href="${pageContext.request.contextPath}/Company/updateCompany?companyId=${company.companyId}"
+										<a href="${pageContext.request.contextPath}/company/updateCompany?companyId=${company.companyId}"
 											class="btn btn-none n-gray" role="button"><i class="fa fa-cog fa-2x" aria-hidden="true"></i></a>
-										<a 	href="${pageContext.request.contextPath}/Company/deleteCompany?companyId=${company.companyId}"
+										<a 	href="${pageContext.request.contextPath}/company/deleteCompany?companyId=${company.companyId}"
 											class="btn rgba-red-strong" role="button"><i class="fa fa-times fa-2x" aria-hidden="true"></i></a>
 									</td>
 								</tr>
@@ -54,14 +54,14 @@
 							<c:choose>
 								<c:when test="${currentPage eq 1}">
 									<li class="page-item disabled"><a class="page-link"
-										href="${pageContext.request.contextPath}/Company/CompanyList?currentPage=${currentPage}"
+										href="${pageContext.request.contextPath}/company/companyList?currentPage=${currentPage}"
 										aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
 											<span class="sr-only">Previous</span>
 									</a></li>
 								</c:when>
 								<c:when test="${currentPage ne 1}">
 									<li class="page-item"><a class="page-link"
-										href="${pageContext.request.contextPath}/Company/CompanyList?currentPage=${currentPage-1}"
+										href="${pageContext.request.contextPath}/company/companyList?currentPage=${currentPage-1}"
 										aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
 											<span class="sr-only">Previous</span>
 									</a></li>
@@ -69,20 +69,20 @@
 							</c:choose>
 							<c:forEach var="i" begin="1" end="${countPage}" step="1">
 								<li class="page-item"><a class="page-link"
-									href="${pageContext.request.contextPath}/Company/CompanyList?currentPage=${i}">
+									href="${pageContext.request.contextPath}/company/companyList?currentPage=${i}">
 										${i} </a></li>
 							</c:forEach>
 							<c:choose>
 								<c:when test="${currentPage eq countPage}">
 									<li class="page-item disabled"><a class="page-link"
-										href="${pageContext.request.contextPath}/Company/CompanyList?currentPage=${currentPage}"
+										href="${pageContext.request.contextPath}/company/companyList?currentPage=${currentPage}"
 										aria-label="Next"> <span aria-hidden="true">&raquo;</span> <span
 											class="sr-only">Next</span>
 									</a></li>
 								</c:when>
 								<c:when test="${currentPage ne countPage}">
 									<li class="page-item"><a class="page-link"
-										href="${pageContext.request.contextPath}/Company/CompanyList?currentPage=${currentPage+1}"
+										href="${pageContext.request.contextPath}/company/companyList?currentPage=${currentPage+1}"
 										aria-label="Next"> <span aria-hidden="true">&raquo;</span> <span
 											class="sr-only">Next</span>
 									</a></li>
@@ -98,7 +98,7 @@
 			<a href="${pageContext.request.contextPath}/"
 				class="btn rgba-pink-strong" role="button"> <i
 				class="fa fa-home" aria-hidden="true"></i>
-			</a> <a href="${pageContext.request.contextPath}/Company/insertCompany"
+			</a> <a href="${pageContext.request.contextPath}/company/insertCompany"
 				class="btn rgba-blue-strong" role="button"> <i
 				class="fa fa-plus-circle" aria-hidden="true"></i>
 			</a>

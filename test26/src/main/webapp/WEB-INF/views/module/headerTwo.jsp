@@ -19,8 +19,9 @@
 							<li class="nav-item"><a class="nav-link js-scroll-trigger" href="${pageContext.request.contextPath}/member/logoutMember">Sign Out</a></li>
 						</c:when>
 						<c:when test="${empty loginMember}">
+							<div class="center"><button data-toggle="modal" data-target="#squarespaceModal" class="btn btn-primary center-block">Click Me</button></div>
+							 <li class="nav-item"><a class="nav-link js-scroll-trigger" href="${pageContext.request.contextPath}/member/loginMember">Sign In</a></li>
 							<li class="nav-item"><a class="nav-link js-scroll-trigger" href="${pageContext.request.contextPath}/member/insertMember">Join us</a></li>
-							<li class="nav-item"><a class="nav-link js-scroll-trigger" href="${pageContext.request.contextPath}/member/loginMember">Sign In</a></li>
 						</c:when>
 					</c:choose>
 				</ul>

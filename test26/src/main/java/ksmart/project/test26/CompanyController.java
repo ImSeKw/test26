@@ -24,7 +24,7 @@ public class CompanyController {
 	private static final Logger logger = LoggerFactory.getLogger(CompanyController.class);
 	
 	//회사 조회(페이징)
-	@RequestMapping(value="/Company/CompanyList",method=RequestMethod.GET)
+	@RequestMapping(value="/company/companyList",method=RequestMethod.GET)
 	public String selectCompanyListAndCountByPage(Model model,@RequestParam(value="currentPage",required =false, defaultValue="1") int currentPage
 													,@RequestParam(value ="pagePerRow",required =false, defaultValue="10") int pagePerRow
 													,@RequestParam(value="word",required =false) String word) {
@@ -42,7 +42,7 @@ public class CompanyController {
 		return "company/companyList";
 	}
 	// 회사 전체 조회
-	@RequestMapping(value="/Company/CompanyListAll", method = RequestMethod.GET)
+	@RequestMapping(value="/company/companyListAll", method = RequestMethod.GET)
 	public String companyList(HttpSession httpSession, Model model) {
 		String view = null;
 		// 로그인 접근 처리
@@ -57,7 +57,7 @@ public class CompanyController {
 	}
 	
 	// 회사 입력 Form
-	@RequestMapping(value="/Company/insertCompany", method = RequestMethod.GET)
+	@RequestMapping(value="/company/insertCompany", method = RequestMethod.GET)
 	public String addcompany(HttpSession httpSession) {
 		String view = null;
 		// 로그인 접근 처리
@@ -71,7 +71,7 @@ public class CompanyController {
 	}
 	
 	// 회사 입력 Action
-	@RequestMapping(value="/Company/insertCompany",method = RequestMethod.POST)
+	@RequestMapping(value="/company/insertCompany",method = RequestMethod.POST)
 	public String addcompany(Company company) {
 		logger.debug("{} : insertcompany CompanyController.java", company.getCompanyName());
 		companyService.insertCompany(company);
@@ -79,7 +79,7 @@ public class CompanyController {
 	}
 	
 	// 회사 수정 Form
-	@RequestMapping(value="/Company/updateCompany",method = RequestMethod.GET)
+	@RequestMapping(value="/company/updateCompany",method = RequestMethod.GET)
 	public String companyId(HttpSession httpSession, Model model, @RequestParam(value="companyId",required=true) int companyId) {
 		String view = null;
 		// 로그인 접근 처리
@@ -96,7 +96,7 @@ public class CompanyController {
 	}
 	
 	// 회사 수정 Action
-	@RequestMapping(value="/Company/updateCompany",method = RequestMethod.POST)
+	@RequestMapping(value="/company/updateCompany",method = RequestMethod.POST)
 	public String updateCompany(Company company) {
 		logger.debug("{} : updateDompany CompanyController", company.getCompanyName());
 		companyService.updateCompany(company);
@@ -104,7 +104,7 @@ public class CompanyController {
 	}
 	
 	// 회사 삭제 Action
-	@RequestMapping(value="/Company/deleteCompany",method = RequestMethod.GET)
+	@RequestMapping(value="/company/deleteCompany",method = RequestMethod.GET)
 	public String companydelete(HttpSession httpSession, Company company) {
 		// 로그인 접근 처리
 		if(httpSession.getAttribute("loginMember") != null) {
