@@ -40,12 +40,14 @@ public class MovieService {
 		if(count%pagePerRow != 0) {
 			countPage++;
 		}
+		String category = "movie";
 		logger.debug("{} : >countPage selectMovieListAndCountByPage MovieService", countPage);
 		// 리턴 작업
 		Map<String, Object> returnMap = new HashMap();
 		returnMap.put("list", list);
 		returnMap.put("countPage", countPage);
 		returnMap.put("word", word);
+		returnMap.put("category", category);
 		return returnMap;
 	}
 	

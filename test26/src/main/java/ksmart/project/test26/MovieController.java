@@ -41,12 +41,14 @@ public class MovieController {
 			List<Movie> list = (List<Movie>)map.get("list");
 			int countPage = (Integer)map.get("countPage");
 			word = (String)map.get("word");
+			String category = (String)map.get("category");
 			logger.debug("{} : >list selectMovieListAndCountByPage MovieController", list);
 			logger.debug("{} : >countPage selectMovieListAndCountByPage MovieController", countPage);
 			model.addAttribute("list", list);
 			model.addAttribute("countPage", countPage);
 			model.addAttribute("currentPage", currentPage);
 			model.addAttribute("word", word);
+			model.addAttribute("category", category);
 			view = "movie/movieList";
 		}
 		return view;
