@@ -26,7 +26,7 @@ public class CompanyController {
 	//회사 조회(페이징)
 	@RequestMapping(value="/company/companyList",method=RequestMethod.GET)
 	public String selectCompanyListAndCountByPage(Model model,@RequestParam(value="currentPage",required =false, defaultValue="1") int currentPage
-													,@RequestParam(value ="pagePerRow",required =false, defaultValue="10") int pagePerRow
+													,@RequestParam(value ="pagePerRow",required =false, defaultValue="5") int pagePerRow
 													,@RequestParam(value="word",required =false) String word) {
 		logger.debug("{} : currentPage selectCompanyListAndCountByPage CompanyComtroller" , currentPage);
 		logger.debug("{} : pagePerRow selectCompanyListAndCountByPage CompanyController" , pagePerRow);
