@@ -41,13 +41,16 @@ public class CityController {
 			List<City> list = (List<City>)map.get("list");
 			int countPage = (Integer)map.get("countPage");
 			word = (String)map.get("word");
+			String category = (String)map.get("category");
 			logger.debug("{} : >list selectCityListAndCountByPage CityController", list);
 			logger.debug("{} : >countPage selectCityListAndCountByPage CityController", countPage);
 			logger.debug("{} : >word selectCityListAndCountByPage CityController", word);
+			logger.debug("{} : >category selectCityListAndCountByPage CityController", category);
 			model.addAttribute("list", list);
 			model.addAttribute("countPage", countPage);
 			model.addAttribute("currentPage", currentPage);
 			model.addAttribute("word", word);
+			model.addAttribute("category", category);
 			view = "city/cityList";
 		}
 		logger.debug("{} : >view cityList CityController", view);
