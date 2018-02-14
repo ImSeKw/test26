@@ -35,7 +35,7 @@
 			<div class="col-lg-8 mx-auto text-center">
 				<form action="${pageContext.request.contextPath}/city/insertCity" method="post" id="cityAdd">
 					<h3 class="mb-3 n-white"></h3>
-					<input type="text" name="cityName" id="cityName" class="mb-3 bg-black" placeholder="이곳에 도시 이름을 입력하세요">
+					<input type="text" name="cityName" id="cityName" class="mb-3 bg-black input-white" placeholder="이곳에 도시 이름을 입력하세요">
 					<br>
 					<button type="button" id="insertButton" class="btn btn-none n-white">
 						<i class="fa fa-check-circle fa-2x"></i>
