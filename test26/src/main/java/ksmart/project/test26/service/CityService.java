@@ -1,14 +1,18 @@
 package ksmart.project.test26.service;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 @Service
 @Transactional
@@ -72,13 +76,43 @@ public class CityService {
 	// 도시 수정 Form
 	public City updateCity(int cityId) {
 		logger.debug("{} : <cityId updateCity CityService", cityId);
-		return cityDao.updateCity(cityId);
+		cityDao.updateCity(cityId);
+		return null;
 	}
 	
-	// 도시 추가 Action
-	public void insertCity(City city) {
-		logger.debug("{} : <city insertCity CityService", city);
-		cityDao.insertCity(city);
+	// 도시 추가 및 도시 파일 추가 Action
+	public void insertCity(CityCommand cityCommand) {
+		logger.debug("{} : <city.getCityName() insertCity CityService", cityCommand.getCityName());
+		logger.debug("{} : <cityCommand.getFile().size() insertCity CityService", cityCommand.getFile().size());
+		// 도시명 셋팅 후 Id값 받기
+		City city = new City();
+		city.setCityName(cityCommand.getCityName());
+		int cityId = cityDao.insertCity(city);
+		logger.debug("{} : ^cityId insertCity CityService", cityId);
+		// 1 : N개의 파일 insert
+		for(MultipartFile file : cityCommand.getFile()) {
+			// 파일 하나당 한번의 DTO
+			CityFile cityFile = new CityFile();
+			// 중복되지 않는 파일 이름 만들기
+			UUID uuid = UUID.randomUUID();
+			String fileName = uuid.toString();
+			logger.debug("{} : ^fileName insertCity CityService", fileName);
+			// 원래 이릅에서 확장자만 추출
+			String originalName = file.getOriginalFilename();
+			int fileExtNumber = originalName.indexOf(".");
+			String fileExt = originalName.substring(fileExtNumber + 1);
+			logger.debug("{} : ^fileExt insertCity CityService", fileExt);
+			logger.debug("{} : ^file.getSize() insertCity CityService", file.getSize());
+			// 셋팅
+			cityFile.setCityId(cityId);
+			cityFile.setFileName(fileName);
+			cityFile.setFileExt(fileExt);
+			cityFile.setFileSize(file.getSize());			
+			// 저장
+			cityDao.insertCityFile(cityFile);
+			File temp = new File("c:\\upload\\" + fileName);
+			try { file.transferTo(temp); } catch (IllegalStateException e) { e.printStackTrace(); } catch (IOException e) { e.printStackTrace(); }
+		}
 	}
 	
 	// 도시 전체 조회
