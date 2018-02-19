@@ -3,6 +3,8 @@ package ksmart.project.test26.service;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Options;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,6 +18,18 @@ public class CityDao {
 	private static final Logger logger = LoggerFactory.getLogger(CityDao.class);
 	// 경로설정 중복처리
 	private final String NAMESPACE = "ksmart.project.test26.mapper.CityMapper.";
+	
+	// 도시 파일 수정
+	public List<CityFile> selectCityIdByFile(int cityId) {
+		logger.debug("{} : <cityId selectCityIdByFile CityDao", cityId);
+		return sqlSessionTemplate.selectList(NAMESPACE + "selectCityIdByFile", cityId);
+	}
+	
+	// 도시 파일 추가 Action
+	public void insertCityFile(CityFile cityFile) {
+		logger.debug("{} : <cityFile insertCityFile CityDao", cityFile);
+		sqlSessionTemplate.insert(NAMESPACE + "insertCityFile", cityFile);
+	}
 	
 	// 전체 도시 수(페이징)
 	public int selectCityCountByPage(Map map) {
@@ -50,9 +64,13 @@ public class CityDao {
 	}
 	
 	// 도시 추가 Action
-	public void insertCity(City city) {
+	@Insert("INSERT INTO city (city_name) VALUES (#{cityName})")
+	@Options(useGeneratedKeys = true, keyProperty = "cityId")
+	public int insertCity(City city) {
 		logger.debug("{} : <city insertCity CityDao", city);
 		sqlSessionTemplate.insert(NAMESPACE + "insertCity", city);
+		int cityId = city.getCityId();
+		return cityId;
 	}
 	
 	// 도시 전체 조회
