@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import ksmart.project.test26.service.City;
+import ksmart.project.test26.service.CityCommand;
 import ksmart.project.test26.service.CityService;
 
 @Controller
@@ -97,11 +98,11 @@ public class CityController {
 		return view;
 	}
 	
-	// 도시 추가 Action
+	// 도시 추가 및 도시 파일 추가 Action
 	@RequestMapping(value = "/city/insertCity", method = RequestMethod.POST)
-	public String insertCity(City city) {
-		logger.debug("{} : <city insertCity CityController", city);
-		cityService.insertCity(city);
+	public String insertCity(CityCommand cityCommand) {
+		logger.debug("{} : <cityCommand insertCity CityController", cityCommand);
+		cityService.insertCity(cityCommand);
 		return "redirect:/city/cityList";
 	}
 	
