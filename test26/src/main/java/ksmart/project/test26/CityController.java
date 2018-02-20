@@ -128,6 +128,7 @@ public class CityController {
 	@RequestMapping(value = "/city/insertCity", method = RequestMethod.POST)
 	public String insertCity(CityCommand cityCommand, HttpSession httpSession) {
 		String rootPath = httpSession.getServletContext().getRealPath("/");
+//		String rootPath = CityController.class.getResource("").getPath();
 		String attachPath = "resources/upload/city/";
 		String path = rootPath + attachPath;
 		logger.debug("{} : /resources 경로", path);
