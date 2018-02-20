@@ -3,6 +3,8 @@ package ksmart.project.test26.service;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Options;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,9 +38,18 @@ public class IdolDao {
 		return sqlSessionTemplate.selectList(Route + "selectIdolList"); 
 	}
 	
+	// idolFile추가입력
+	public void insertIdolFile(IdolFile idolFile) {
+		sqlSessionTemplate.insert(Route + "insertIdolFile", idolFile);
+	}
+	
 	// idol추가입력
+	@Insert("INSERT INTO idol (idol_name) VALUES (#{idolName})")
+	@Options(useGeneratedKeys = true, keyProperty = "idolID")
 	public int insertIdol(Idol idol) {
-		return sqlSessionTemplate.insert(Route + "insertIdol", idol);
+		sqlSessionTemplate.insert(Route + "insertIdol", idol);
+		int idolID = idol.getIdolID();
+		return idolID;
 	}
 	
 	// idol수정처리
