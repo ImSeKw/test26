@@ -1,14 +1,18 @@
 package ksmart.project.test26.service;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 @Service
 @Transactional
@@ -58,12 +62,42 @@ public class CompanyService {
 		return companyDao.selectCompanyList();
 	}
 	
-	// 회사 추가 Action
-	public int insertCompany(Company company) {
-		logger.debug("{} :insertCompany CompanyService.java", company.getCompanyName());
-		return companyDao.insertCompany(company);
-	}
-	
+	// 회사 추가 파일 추가  Action
+		public void insertCompany(CompanyCommand companyCommand,String path) {
+			logger.debug("{} :insertCompany CompanyService.java", companyCommand.getCompanyName());
+			logger.debug("{} :insertCompany CompanyService.java", companyCommand.getFile().size());
+			//회사명 셋팅후 아이디값 받기
+			Company company= new Company();
+			company.setCompanyName(companyCommand.getCompanyName());
+			int comapnyId=companyDao.insertCompany(company);
+			logger.debug("{} : companyId insertCompany CompanyService.java", comapnyId);
+			//N개의 파일 추가
+			for(MultipartFile file :companyCommand.getFile()) {
+				//파일 하나당 한번의 dto
+				CompanyFile companyFile= new CompanyFile();
+				//중복되지 않는 파일 이름 만들기
+				UUID uuid=UUID.randomUUID();
+				String fileName= uuid.toString();
+				logger.debug("{} : fileName insertCompany CompanyService.java", fileName);
+				//원래 이름에서 확장자만 추출
+				String originalName= file.getOriginalFilename();
+				int fileExNumber =originalName.indexOf(".");
+				String fileExt =originalName.substring(fileExNumber+1);
+				logger.debug("{} : fileExNumber insertCompany CompanyService.java", fileExNumber);
+				logger.debug("{} : file.getSize() insertCompany CompanyService.java", file.getSize());
+				//셋팅
+				companyFile.setCompanyId(comapnyId);
+				companyFile.setFileName(fileName);
+				companyFile.setFileExt(fileExt);
+				companyFile.setFileSize(file.getSize());
+				//저장
+				companyDao.insertComapnyFile(companyFile);
+				File temp =new File(path+"\\"+fileName+"."+fileExt);
+				logger.debug("{} : temp insertCompany CompanyService.java", temp);
+				try {file.transferTo(temp);}catch (IllegalStateException e) {e.printStackTrace();} catch (IOException e) {e.printStackTrace();}
+			}
+			
+		}
 	// 회사 수정  Form
 	public Company selectCompanyId(int companyId) {
 		logger.debug("{} :selectCompany CompanyService.java", companyId);

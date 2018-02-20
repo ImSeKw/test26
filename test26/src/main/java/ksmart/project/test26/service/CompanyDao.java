@@ -3,6 +3,8 @@ package ksmart.project.test26.service;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Options;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,6 +16,13 @@ public class CompanyDao {
 	@Autowired
 	private SqlSessionTemplate sqlsessiontemplate;
 	private static final Logger logger = LoggerFactory.getLogger(CompanyDao.class);
+	
+	//회사파일 추가 Action
+		public void insertComapnyFile(CompanyFile companyFile) {
+			logger.debug("{} : CompanyFile insertCompanyFile CompanyDao", companyFile);
+			sqlsessiontemplate.insert(NAMESPACE+"insertComapnyFile", companyFile);
+		}
+		
 	
 	// 경로설정 중복처리
 	private final String NAMESPACE ="ksmart.project.test26.mapper.CompanyMapper.";
@@ -40,10 +49,14 @@ public class CompanyDao {
 	}
 	
 	// 회사 추가 Action
-	public int insertCompany(Company company) {
-		logger.debug("{} :insertCompany CompanyDao.java", company.getCompanyName());
-		return sqlsessiontemplate.insert(NAMESPACE + "insertCompany",company);
-	}
+		@Insert("INSERT INTO company (company_name) VALUES (#{companyName})")
+		@Options(useGeneratedKeys=true,keyProperty="companyId")
+		public int insertCompany(Company company) {
+			logger.debug("{} :insertCompany CompanyDao.java", company);
+			sqlsessiontemplate.insert(NAMESPACE + "insertCompany",company);
+			int companyId = company.getCompanyId();
+			return  companyId;
+		}
 	
 	// 회사 수정  Form
 	public Company selectCompanyId(int companyId) {

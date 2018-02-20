@@ -4,6 +4,20 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="ksmart.project.test26.mapper.CompanyMapper">
+	<!--insert 회사 파일 추가  -->
+		<insert id="insertComapnyFile" parameterType="ksmart.project.test26.service.CompanyFile">
+			INSERT INTO company_file(
+				company_id
+				,file_name
+				,file_ext
+				,file_size
+			) VALUES (
+				#{companyId}
+				,#{fileName}
+				,#{fileExt}
+				,#fileSize}
+			)
+		</insert>
 	
 	<!--select 전체 회사  수 페이징 -->
 	<select id="selectCompanyCountByPage" parameterType="java.util.Map" resultType="int">
@@ -35,7 +49,7 @@
 	</select>
 	
 	<!--회사 추가 -->
-	<insert id="insertCompany" parameterType="ksmart.project.test26.service.Company">
+	<insert id="insertCompany" useGeneratedKeys="true" keyProperty="companyId">
 		INSERT INTO company (company_name) VALUES (#{companyName})
 	</insert>
 	

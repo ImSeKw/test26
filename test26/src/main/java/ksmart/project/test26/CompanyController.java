@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import ksmart.project.test26.service.Company;
+import ksmart.project.test26.service.CompanyCommand;
 import ksmart.project.test26.service.CompanyService;
 
 @Controller
@@ -72,11 +73,13 @@ public class CompanyController {
 		return view;
 	}
 	
-	// 회사 입력 Action
+	// 회사 추가 및 회사파일 추가  Action
 	@RequestMapping(value="/company/insertCompany",method = RequestMethod.POST)
-	public String addcompany(Company company) {
-		logger.debug("{} : insertcompany CompanyController.java", company.getCompanyName());
-		companyService.insertCompany(company);
+	public String addcompany(CompanyCommand companyCommand,HttpSession httpSession) {
+		String path = httpSession.getServletContext().getRealPath("/resources/upload/company");
+		logger.debug("{} : insertcompany CompanyController.java", companyCommand.getCompanyName());
+		logger.debug("{} : insertcompany CompanyController.java",  path);
+		companyService.insertCompany(companyCommand,path);
 		return "redirect:/company/companyList";
 	}
 	
