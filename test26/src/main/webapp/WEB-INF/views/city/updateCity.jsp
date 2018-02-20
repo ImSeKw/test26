@@ -35,9 +35,9 @@
 		<div class="row">
 			<div class="col-lg-8 mx-auto text-center">
 				<form action="${pageContext.request.contextPath}/city/updateCity" method="post" id="cityUpdate">
-					<input type="hidden" name="cityId" value="${city.cityId}">
+					<input type="hidden" name="cityId" value="${cityAndCityFile.cityId}">
 					<h3 class="mb-3 n-white"></h3>
-					<input type="text" name="cityName" id="cityName" class="mb-3 bg-black input-white" value="${city.cityName}" placeholder="이곳에 도시 이름을 입력하세요">
+					<input type="text" name="cityName" id="cityName" class="mb-3 bg-black input-white" value="${cityAndCityFile.cityName}" placeholder="이곳에 도시 이름을 입력하세요">
 					<br>
 					<button type="button" id="updateButton" class="btn btn-none n-white">
 						<i class="fa fa-check-circle fa-2x"></i>
@@ -51,5 +51,9 @@
 		</div>
 	</div>
 </section>
+<c:forEach var="cityFile" items="${cityAndCityFile.list}">
+	<img src="${path}\\${cityFile.fileName}.${cityFile.fileExt}">
+</c:forEach>
+
 
 <jsp:include page="/WEB-INF/views/module/bottom.jsp"></jsp:include>
