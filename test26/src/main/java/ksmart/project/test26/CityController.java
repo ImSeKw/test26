@@ -41,7 +41,9 @@ public class CityController {
 			logger.debug("{} : >cityAndCityFile selectCityJoinFile CityController", cityAndCityFile);
 			model.addAttribute("cityAndCityFile", cityAndCityFile);
 			// 절대경로 셋팅
-			String path = httpSession.getServletContext().getRealPath("/resources/upload/city");
+			String rootPath = httpSession.getServletContext().getRealPath("/");
+			String attachPath = "resources/upload/city/";
+			String path = rootPath + attachPath;
 			logger.debug("{} : ^path selectCityJoinFile CityController", path);
 			model.addAttribute("path", path);
 			view = "city/updateCity";
@@ -125,7 +127,9 @@ public class CityController {
 	// 도시 추가 및 도시 파일 추가 Action
 	@RequestMapping(value = "/city/insertCity", method = RequestMethod.POST)
 	public String insertCity(CityCommand cityCommand, HttpSession httpSession) {
-		String path = httpSession.getServletContext().getRealPath("/resources/upload/city");
+		String rootPath = httpSession.getServletContext().getRealPath("/");
+		String attachPath = "resources/upload/city/";
+		String path = rootPath + attachPath;
 		logger.debug("{} : /resources 경로", path);
 		logger.debug("{} : <cityCommand insertCity CityController", cityCommand);
 		cityService.insertCity(cityCommand, path);
@@ -135,8 +139,8 @@ public class CityController {
 	// 도시 추가 Form
 	@RequestMapping(value = "/city/insertCity", method = RequestMethod.GET)
 	public String insertCity(HttpSession httpSession) {
-		String path = httpSession.getServletContext().getRealPath("/resources/upload/city");
-		logger.debug("{} : /resources 경로", path);
+		String path = httpSession.getServletContext().getRealPath("/");
+		logger.debug("{} : 경로", path);
 		String view = null;
 		// 로그인 처리
 		if(httpSession.getAttribute("loginMember") == null) {

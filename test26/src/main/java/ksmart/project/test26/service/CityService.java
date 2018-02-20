@@ -115,7 +115,7 @@ public class CityService {
 			cityFile.setFileSize(file.getSize());
 			// 저장
 			cityDao.insertCityFile(cityFile);
-			File temp = new File(path + "\\" + fileName + "." + fileExt); // resource로 변경하기
+			File temp = new File(path + fileName + "." + fileExt); // resource로 변경하기
 			logger.debug("{} : ^temp insertCity CityService", temp);
 			try { file.transferTo(temp); } catch (IllegalStateException e) { e.printStackTrace(); } catch (IOException e) { e.printStackTrace(); }
 		}

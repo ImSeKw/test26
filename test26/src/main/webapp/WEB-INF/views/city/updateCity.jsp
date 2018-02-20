@@ -52,7 +52,7 @@
 	</div>
 </section>
 <c:forEach var="cityFile" items="${cityAndCityFile.list}">
-	<img src="${path}\\${cityFile.fileName}.${cityFile.fileExt}">
+	<img src="${pageContext.request.contextPath}/resources/upload/city/${cityFile.fileName}.${cityFile.fileExt}">
 </c:forEach>
 
 
