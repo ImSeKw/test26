@@ -135,7 +135,8 @@ public class CityController {
 	// 도시 추가 Form
 	@RequestMapping(value = "/city/insertCity", method = RequestMethod.GET)
 	public String insertCity(HttpSession httpSession) {
-		logger.debug("{} : <httpSession insertCity CityController", httpSession);
+		String path = httpSession.getServletContext().getRealPath("/resources/upload/city");
+		logger.debug("{} : /resources 경로", path);
 		String view = null;
 		// 로그인 처리
 		if(httpSession.getAttribute("loginMember") == null) {
