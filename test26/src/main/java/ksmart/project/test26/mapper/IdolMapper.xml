@@ -34,8 +34,23 @@
 			, idol_name AS idolName
 		FROM idol;
 	</select>
+	
+	<!-- idolFile추가 쿼리문 -->
+	<insert id="insertIdolFile" parameterType="ksmart.project.test26.service.IdolFile">
+		INSERT INTO idol_file
+			(idol_id
+			,file_name
+			,file_ext
+			,file_size)
+		VALUES
+			(#{idolID}
+			,#{fileName}
+			,#{fileExt}
+			,#{fileSize})
+	</insert>
+	
 	<!-- idol추가 쿼리문 -->
-	<insert id="insertIdol" parameterType="ksmart.project.test26.service.Idol">
+	<insert id="insertIdol" useGeneratedKeys="true" keyProperty="idolID">
 		INSERT INTO idol
 			(idol_name) 
 		VALUES
