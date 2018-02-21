@@ -1,0 +1,20 @@
+<!--select 전체 회사  수 페이징 -->
+	<select id="selectCompanyCountByPage" parameterType="java.util.Map" resultType="int">
+		SELECT COUNT(*) AS countCompany 
+		FROM company 
+			<if test="word != null">
+				WHERE company_name LIKE CONCAT("%", #{word}, "%")
+			</if>
+	</select>
+	
+<!--select 회사 조회 페이징  -->
+	<select id="selectCompanyListByPage" parameterType="java.util.Map" resultType="ksmart.project.test26.service.Company">
+		SELECT 
+			company_id AS companyId
+			, company_name AS companyName 
+		FROM company
+			<if test="word != null">
+				WHERE company_name LIKE CONCAT("%", #{word}, "%")
+			</if>
+		LIMIT #{startRow}, #{rowPerPage}
+	</select>
