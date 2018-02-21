@@ -4,6 +4,32 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="ksmart.project.test26.mapper.CompanyMapper">
+	<resultMap type="ksmart.project.test26.service.CompanyAndCompanyFile" id="CompanyAndCompanyFileMap">
+		<id column="company_id" property="companyId"/><!--프라이머리키 -->
+		<result column="company_name" property="companyName"/>
+		<collection property="list" ofType="ksmart.project.test26.service.CompanyFile">
+			<id column="company_file_id" property="companyFileId"/>
+			<result column="file_name" property="fileName"/>
+			<result column="file_ext" property="fileExt"/>
+			<result column="file_size" property="fileSize"/>
+		</collection>
+	</resultMap>
+	
+	
+	<!--select 회사 파일 조회  -->
+	<select id="selectCompanyJoinFile" parameterType="int" resultMap="CompanyAndCompanyFileMap">
+		SELECT 
+			c.company_id 
+			,c.company_name 
+			,f.company_file_id 
+			,f.file_name 
+			,f.file_ext 
+			,f.file_size 
+		FROM company c INNER JOIN company_file f 
+		ON c.company_id = f.company_id 
+		WHERE c.company_id=#{coampanyId}
+	</select>
+	
 	<!--insert 회사 파일 추가  -->
 		<insert id="insertComapnyFile" parameterType="ksmart.project.test26.service.CompanyFile">
 			INSERT INTO company_file(
@@ -15,7 +41,7 @@
 				#{companyId}
 				,#{fileName}
 				,#{fileExt}
-				,#fileSize}
+				,#{fileSize}
 			)
 		</insert>
 	

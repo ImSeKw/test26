@@ -16,17 +16,21 @@ public class CompanyDao {
 	@Autowired
 	private SqlSessionTemplate sqlsessiontemplate;
 	private static final Logger logger = LoggerFactory.getLogger(CompanyDao.class);
+	// 경로설정 중복처리
+		private final String NAMESPACE ="ksmart.project.test26.mapper.CompanyMapper.";
 	
+	//회사 및 파일 수정 form
+	public CompanyAndCompanyFile selectCompanyJoinFile(int companyId){
+			logger.debug("{} : companyId selectCompanyJoinFile CompanyDao",companyId);
+			return sqlsessiontemplate.selectOne(NAMESPACE +"selectCompanyJoinFile",companyId);
+	}
+		
 	//회사파일 추가 Action
-		public void insertComapnyFile(CompanyFile companyFile) {
+	public void insertComapnyFile(CompanyFile companyFile) {
 			logger.debug("{} : CompanyFile insertCompanyFile CompanyDao", companyFile);
 			sqlsessiontemplate.insert(NAMESPACE+"insertComapnyFile", companyFile);
 		}
 		
-	
-	// 경로설정 중복처리
-	private final String NAMESPACE ="ksmart.project.test26.mapper.CompanyMapper.";
-	
 	//전체회사 수(페이징)
 	public int selectCompanyCountByPage(Map map) {
 		logger.debug("selectCompanyCountByPage CompanyDao.java");

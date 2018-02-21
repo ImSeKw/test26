@@ -20,6 +20,12 @@ public class CompanyService {
 	@Autowired
 	CompanyDao companyDao;
 	private static final Logger logger = LoggerFactory.getLogger(CompanyService.class);
+	//회사 및 파일 수정 form
+	public CompanyAndCompanyFile selectCompanyJoinFile(int companyId) {
+		logger.debug("{} :  companyId selectCompanyJoinFile CompanySevice",companyId);
+		return companyDao.selectCompanyJoinFile(companyId);
+	}
+	
 	//회사 페이징
 	public Map<String, Object> selectCompanyListAndCountByPage(int currentPage, int pagePerRow, String word){
 		logger.debug("{} : currentPage selectCompanyListAndCountByPage CompanySevice", currentPage);
