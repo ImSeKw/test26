@@ -23,7 +23,7 @@ public class CountryService {
 	
 	// 도시 조회(페이징)
 	public Map<String, Object> selectCountryListAndCountByPage(int currentPage, int pagePerRow, String word) {
-		logger.debug("{} : CountryService selectCountryListAndCountByPage currentPage", currentPage);
+		logger.debug("{} : CountryService selectCountryListAndCountByPage currentPage", currentPage); 
 		logger.debug("{} : CountryService selectCountryListAndCountByPage pagePerRow", pagePerRow);
 		logger.debug("{} : CountryService selectCountryListAndCountByPage word", word);
 		// 쿼리문의 시작 페이지
