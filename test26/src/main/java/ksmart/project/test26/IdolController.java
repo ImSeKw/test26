@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import ksmart.project.test26.service.Idol;
+import ksmart.project.test26.service.IdolCommand;
 import ksmart.project.test26.service.IdolService;
 
 @Controller
@@ -93,14 +94,14 @@ public class IdolController {
 		return "redirect:/idol/idolList";
 	}
 	
-	// 입력 Action
+	// 아이돌 추가 및 File 추가 Action
 	@RequestMapping(value = "/idol/insertIdol", method = RequestMethod.POST)
-	public String insertIdol(Idol idol) {
-		idolService.insertIdol(idol);
+	public String insertIdol(IdolCommand idolCommand) {
+		idolService.insertIdol(idolCommand);
 		return "redirect:/idol/idolList";
 	}
 
-	// 입력 Form
+	// 추가 Form
 	@RequestMapping(value = "/idol/insertIdol", method = RequestMethod.GET)
 	public String insertIdol(HttpSession httpSession) {
 		String view = null;

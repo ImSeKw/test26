@@ -21,6 +21,12 @@ public class CityService {
 	CityDao cityDao;
 	private static final Logger logger = LoggerFactory.getLogger(CityService.class);
 	
+	// 도시 및 파일 수정 Form
+	public CityAndCityFile selectCityJoinFile(int cityId) {
+		logger.debug("{} : <cityId selectCityJoinFile CityService", cityId);
+		return cityDao.selectCityJoinFile(cityId);
+	}
+	
 	// 도시 조회(페이징)
 	public Map<String, Object> selectCityListAndCountByPage(int currentPage, int pagePerRow, String word) {
 		logger.debug("{} : <currentPage selectCityListAndCountByPage CityService", currentPage);
@@ -76,12 +82,11 @@ public class CityService {
 	// 도시 수정 Form
 	public City updateCity(int cityId) {
 		logger.debug("{} : <cityId updateCity CityService", cityId);
-		cityDao.updateCity(cityId);
-		return null;
+		return cityDao.updateCity(cityId);
 	}
 	
 	// 도시 추가 및 도시 파일 추가 Action
-	public void insertCity(CityCommand cityCommand) {
+	public void insertCity(CityCommand cityCommand, String path) {
 		logger.debug("{} : <city.getCityName() insertCity CityService", cityCommand.getCityName());
 		logger.debug("{} : <cityCommand.getFile().size() insertCity CityService", cityCommand.getFile().size());
 		// 도시명 셋팅 후 Id값 받기
@@ -107,10 +112,11 @@ public class CityService {
 			cityFile.setCityId(cityId);
 			cityFile.setFileName(fileName);
 			cityFile.setFileExt(fileExt);
-			cityFile.setFileSize(file.getSize());			
+			cityFile.setFileSize(file.getSize());
 			// 저장
 			cityDao.insertCityFile(cityFile);
-			File temp = new File("c:\\upload\\" + fileName);
+			File temp = new File(path + fileName + "." + fileExt); // resource로 변경하기
+			logger.debug("{} : ^temp insertCity CityService", temp);
 			try { file.transferTo(temp); } catch (IllegalStateException e) { e.printStackTrace(); } catch (IOException e) { e.printStackTrace(); }
 		}
 	}

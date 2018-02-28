@@ -1,14 +1,18 @@
 package ksmart.project.test26.service;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 @Service
 @Transactional
@@ -17,7 +21,7 @@ public class IdolService {
 	IdolDao idolDao;
 	private static final Logger logger = LoggerFactory.getLogger(IdolService.class);
 	
-	// 도시 조회(페이징)
+	// 아이돌 조회(페이징)
 	public Map<String, Object> selectIdolListAndCountByPage(int currentPage, int pagePerRow, String word) {
 		logger.debug("{} : <currentPage selectIdolListAndCountByPage IdolService", currentPage);
 		logger.debug("{} : <pagePerRow selectIdolListAndCountByPage IdolService", pagePerRow);
@@ -52,14 +56,41 @@ public class IdolService {
 		return returnMap;
 	}
 	
+	//아이돌 추가 및 File추가 Action
+	public void insertIdol(IdolCommand idolCommand) {
+		Idol idol = new Idol();
+		idol.setIdolName(idolCommand.getIdolName());
+		int idolID = idolDao.insertIdol(idol);
+		logger.debug("{} : <--idolID insertidol IdolService", idolID);
+		for(MultipartFile file : idolCommand.getFile()) {
+			// 1. DB에 입력
+			IdolFile idolFile = new IdolFile();
+			// 중복되지 않는 이름
+			UUID uuid = UUID.randomUUID();
+			String fileName = uuid.toString();
+			logger.debug("{} : <--fileName insertIdol IdolService", fileName);
+			// 확장자 추출
+			String originalName = file.getOriginalFilename();
+			int fileExtNumber = originalName.indexOf(".");
+			String fileExt = originalName.substring(fileExtNumber + 1);
+			logger.debug("{} : <--fileExt insertIdol IdolService", fileExt);
+			logger.debug("{} : <--file.getSize() insertIdol IdolService", file.getSize());
+			// 셋팅
+			idolFile.setIdolID(idolID);
+			idolFile.setFileName(fileName);
+			idolFile.setFileExt(fileExt);
+			idolFile.setFileSize(file.getSize());
+			// 저장
+			idolDao.insertIdolFile(idolFile);
+			File temp = new File("c:\\upload\\" + fileName);
+			try { file.transferTo(temp); } catch (IllegalStateException e) { e.printStackTrace(); } catch (IOException e) { e.printStackTrace(); }
+		}
+		
+	}
+	
 	//아이돌 조회
 	public List<Idol> selectIdolList(){
 		return idolDao.selectIdolList();
-	}
-	
-	//아이돌 추가 Action
-	public int insertIdol(Idol idol) {
-		return idolDao.insertIdol(idol);
 	}
 	
 	//아이돌 수정을 위한 아이디 select

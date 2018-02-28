@@ -19,10 +19,10 @@ public class CityDao {
 	// 경로설정 중복처리
 	private final String NAMESPACE = "ksmart.project.test26.mapper.CityMapper.";
 	
-	// 도시 파일 수정
-	public List<CityFile> selectCityIdByFile(int cityId) {
-		logger.debug("{} : <cityId selectCityIdByFile CityDao", cityId);
-		return sqlSessionTemplate.selectList(NAMESPACE + "selectCityIdByFile", cityId);
+	// 도시 및 파일 수정 Form
+	public CityAndCityFile selectCityJoinFile(int cityId) {
+		logger.debug("{} : <cityId selectCityJoinFile CityDao", cityId);
+		return sqlSessionTemplate.selectOne(NAMESPACE + "selectCityJoinFile", cityId);
 	}
 	
 	// 도시 파일 추가 Action

@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import ksmart.project.test26.service.City;
+import ksmart.project.test26.service.CityAndCityFile;
 import ksmart.project.test26.service.CityCommand;
+import ksmart.project.test26.service.CityFile;
 import ksmart.project.test26.service.CityService;
 
 @Controller
@@ -23,6 +25,31 @@ public class CityController {
 	@Autowired
 	CityService cityService;
 	private static final Logger logger = LoggerFactory.getLogger(CityController.class);
+	
+	// 도시 및 파일 수정 Form
+	@RequestMapping(value = "/city/updateCity", method = RequestMethod.GET)
+	public String selectCityJoinFile(HttpSession httpSession, Model model, @RequestParam(value = "cityId") int cityId) {
+		logger.debug("{} : <httpSession selectCityJoinFile CityController", httpSession);
+		logger.debug("{} : model selectCityJoinFile CityController", model);
+		logger.debug("{} : <cityId selectCityJoinFile CityController", cityId);
+		String view = null;
+		if(httpSession.getAttribute("loginMember") == null) {
+			view = "redirect:/";
+		} else {
+			// id와 name과 list 받기
+			CityAndCityFile cityAndCityFile = cityService.selectCityJoinFile(cityId);
+			logger.debug("{} : >cityAndCityFile selectCityJoinFile CityController", cityAndCityFile);
+			model.addAttribute("cityAndCityFile", cityAndCityFile);
+			// 절대경로 셋팅
+			String rootPath = httpSession.getServletContext().getRealPath("/");
+			String attachPath = "resources/upload/city/";
+			String path = rootPath + attachPath;
+			logger.debug("{} : ^path selectCityJoinFile CityController", path);
+			model.addAttribute("path", path);
+			view = "city/updateCity";
+		}
+		return view;
+	}
 	
 	// 도시 조회(페이징)
 	@RequestMapping(value = "/city/cityList", method = RequestMethod.GET)
@@ -79,7 +106,7 @@ public class CityController {
 	}
 	
 	// 도시 수정 Form
-	@RequestMapping(value = "/city/updateCity", method = RequestMethod.GET)
+	@RequestMapping(value = "/city/updateCityDiscard", method = RequestMethod.GET)
 	public String updateCity(HttpSession httpSession, Model model, @RequestParam(value = "cityId") int cityId) {
 		logger.debug("{} : <httpSession updateCity CityController", httpSession);
 		logger.debug("{} : <model updateCity CityController", model);
@@ -89,9 +116,8 @@ public class CityController {
 		if(httpSession.getAttribute("loginMember") == null) {
 			view = "redirect:/city/cityList";
 		} else if(httpSession.getAttribute("loginMember") != null) {
-			City reCity = cityService.updateCity(cityId);
-			logger.debug("{} : >reCity updateCity CityController", reCity);
-			model.addAttribute("city", reCity);
+			City city = cityService.updateCity(cityId);
+			model.addAttribute("city", city);
 			view = "city/updateCity";
 		}
 		logger.debug("{} : >view updateCity CityController", view);
@@ -100,16 +126,22 @@ public class CityController {
 	
 	// 도시 추가 및 도시 파일 추가 Action
 	@RequestMapping(value = "/city/insertCity", method = RequestMethod.POST)
-	public String insertCity(CityCommand cityCommand) {
+	public String insertCity(CityCommand cityCommand, HttpSession httpSession) {
+		String rootPath = httpSession.getServletContext().getRealPath("/");
+//		String rootPath = CityController.class.getResource("").getPath();
+		String attachPath = "resources/upload/city/";
+		String path = rootPath + attachPath;
+		logger.debug("{} : /resources 경로", path);
 		logger.debug("{} : <cityCommand insertCity CityController", cityCommand);
-		cityService.insertCity(cityCommand);
+		cityService.insertCity(cityCommand, path);
 		return "redirect:/city/cityList";
 	}
 	
 	// 도시 추가 Form
 	@RequestMapping(value = "/city/insertCity", method = RequestMethod.GET)
 	public String insertCity(HttpSession httpSession) {
-		logger.debug("{} : <httpSession insertCity CityController", httpSession);
+		String path = httpSession.getServletContext().getRealPath("/");
+		logger.debug("{} : 경로", path);
 		String view = null;
 		// 로그인 처리
 		if(httpSession.getAttribute("loginMember") == null) {

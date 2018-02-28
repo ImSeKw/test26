@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import ksmart.project.test26.service.Company;
+import ksmart.project.test26.service.CompanyAndCompanyFile;
+import ksmart.project.test26.service.CompanyCommand;
 import ksmart.project.test26.service.CompanyService;
 
 @Controller
@@ -23,6 +25,30 @@ public class CompanyController {
 	private CompanyService companyService;
 	private static final Logger logger = LoggerFactory.getLogger(CompanyController.class);
 	
+	//회사 및 파일 수정 Form
+	@RequestMapping(value ="/company/updateCompany",method=RequestMethod.GET)
+	public String selectCompanyJoinFile(HttpSession httpSession,Model model, @RequestParam(value="companyId") int companyId) {
+		logger.debug("{} : httpSession selectCompanyJoinFile CompanyController",httpSession);
+		logger.debug("{} : model selectCompanyJoinFile CompanyController",model);
+		logger.debug("{} : companyId selectCompanyJoinFile CompanyController",companyId);
+		String view =null;
+		if(httpSession.getAttribute("loginMember") ==null) {
+			view ="redirect:/";
+		}else {
+			//아이디,이름 ,리스트 받기
+			CompanyAndCompanyFile companyAndCompanyFile=companyService.selectCompanyJoinFile(companyId);
+			logger.debug("{} : companyAndCompanyFile selectCompanyJoinFile CompanyController",companyAndCompanyFile);
+			logger.debug("{} : getCompanyName() companyAndCompanyFile selectCompanyJoinFile CompanyController",companyAndCompanyFile.getCompanyName());
+			model.addAttribute("companyAndCompanyFile", companyAndCompanyFile);
+			//경로 셋팅
+			String rootPath = httpSession.getServletContext().getRealPath("/");
+			String attachPath = "resources/upload/company";
+			String path = rootPath + attachPath;
+			logger.debug("{} : ^path selectCompanyJoinFile CompanyController", path);
+			view="company/updateCompany";
+		}
+		return view;
+	}
 	//회사 조회(페이징)
 	@RequestMapping(value="/company/companyList",method=RequestMethod.GET)
 	public String selectCompanyListAndCountByPage(Model model,@RequestParam(value="currentPage",required =false, defaultValue="1") int currentPage
@@ -61,6 +87,10 @@ public class CompanyController {
 	// 회사 입력 Form
 	@RequestMapping(value="/company/insertCompany", method = RequestMethod.GET)
 	public String addcompany(HttpSession httpSession) {
+		String rootPath = httpSession.getServletContext().getRealPath("/");
+		String attachPath = "resources/upload/company";
+		String path = rootPath + attachPath;
+		logger.debug("{} : 1insertcompany CompanyController.java",  path);
 		String view = null;
 		// 로그인 접근 처리
 		if(httpSession.getAttribute("loginMember") == null) {
@@ -72,16 +102,21 @@ public class CompanyController {
 		return view;
 	}
 	
-	// 회사 입력 Action
-	@RequestMapping(value="/company/insertCompany",method = RequestMethod.POST)
-	public String addcompany(Company company) {
-		logger.debug("{} : insertcompany CompanyController.java", company.getCompanyName());
-		companyService.insertCompany(company);
+	// 회사 추가 및 회사파일 추가  Action
+	@RequestMapping(value="/company/insertCompany", method = RequestMethod.POST)
+	public String addcompany(CompanyCommand companyCommand,HttpSession httpSession) {
+		logger.debug("insertCompany Action CompanyController.java");
+		String rootPath = httpSession.getServletContext().getRealPath("/");
+		String attachPath = "resources/upload/company";
+		String path = rootPath + attachPath;
+		logger.debug("{} : insertcompany CompanyController.java", companyCommand);
+		logger.debug("{} : 2insertcompany CompanyController.java",  path);
+		companyService.insertCompany(companyCommand,path);
 		return "redirect:/company/companyList";
 	}
 	
 	// 회사 수정 Form
-	@RequestMapping(value="/company/updateCompany",method = RequestMethod.GET)
+	@RequestMapping(value="/company/updateCompanyDiscard",method = RequestMethod.GET)
 	public String companyId(HttpSession httpSession, Model model, @RequestParam(value="companyId",required=true) int companyId) {
 		String view = null;
 		// 로그인 접근 처리

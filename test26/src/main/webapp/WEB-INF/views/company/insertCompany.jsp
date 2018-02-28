@@ -13,7 +13,7 @@
 			})
 			/* 취소버튼 경로 설정 */
 			$('#cancelButton').click(function(){
-				document.location.href="<%= request.getContextPath() %>/company/companyList"
+				document.location.href='<%= request.getContextPath() %>/company/companyList'
 			});
 		});
 	</script>
@@ -33,10 +33,11 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-8 mx-auto text-center">
-				<form action="${pageContext.request.contextPath}/company/insertCompany" method="post" id="companyAdd">
+				<form action="${pageContext.request.contextPath}/company/insertCompany" enctype="multipart/form-data" method="post" id="companyAdd">
 					<h3 class="mb-3 n-white"></h3>
 					<input type="text" name="companyName" id="companyName" class="mb-3 bg-white input-black" placeholder="이곳에 회사 이름을 입력하세요">
 					<br>
+					<input type="file" name="file">
 					<button type="button" id="insertButton" class="btn btn-none n-black">
 						<i class="fa fa-check-circle fa-2x"></i>
 					</button>
