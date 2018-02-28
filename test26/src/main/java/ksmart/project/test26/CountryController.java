@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import ksmart.project.test26.service.Country;
+import ksmart.project.test26.service.CountryCommand;
 import ksmart.project.test26.service.CountryService;
 
 @Controller
@@ -23,6 +24,8 @@ public class CountryController {
 	CountryService countryService;
 	private static final Logger logger = LoggerFactory.getLogger(CountryController.class);
 	
+	
+
 	// 도시 조회(페이징)
 	@RequestMapping(value = "/country/countryList", method = RequestMethod.GET)
 	public String selectCountryListAndCountByPage(Model model, HttpSession httpSession
@@ -59,12 +62,12 @@ public class CountryController {
 	
 	// 도시 삭제
 	@RequestMapping(value = "/country/deleteCountry", method = RequestMethod.GET)
-	public String deleteCountry(HttpSession httpSession, Country country) {
+	public String deleteCountry(HttpSession httpSession, int countryId) {
 		logger.debug("{} : CountryController deleteCountry httpSession", httpSession);
-		logger.debug("{} : CountryController deleteCountry country", country);
+		logger.debug("{} : CountryController deleteCountry countryId", countryId);
 		// 로그인 처리
 		if(httpSession.getAttribute("loginMember") != null) {
-			countryService.deleteCountry(country);
+			countryService.deleteCountry(countryId);
 		}
 		return "redirect:/country/countryList";
 	}
@@ -74,13 +77,8 @@ public class CountryController {
 	public String updateCountry(Country country) {
 		logger.debug("{} : CountryController updateCountry country", country);
 		countryService.updateCountry(country);
-		return "redirect:/country/updateCountry";
+		return "redirect:/country/countryList";
 	}
-	
-	
-	
-	
-	
 	// 도시 수정 Form
 	@RequestMapping(value = "/country/updateCountry", method = RequestMethod.GET)
 	public String updateCountry(HttpSession httpSession, Model model, @RequestParam(value = "countryId") int countryId) {
@@ -103,9 +101,9 @@ public class CountryController {
 	
 	// 도시 추가 Action
 	@RequestMapping(value = "/country/insertCountry", method = RequestMethod.POST)
-	public String insertCountry(Country country) {
-		logger.debug("{} : CountryController insertCountry CountryController", country);
-		countryService.insertCountry(country);
+	public String insertCountry(CountryCommand countryCommand) {
+		logger.debug("{} : CountryController insertCountry countryCommand", countryCommand);
+		countryService.insertCountry(countryCommand);
 		return "redirect:/country/countryList";
 	}
 	

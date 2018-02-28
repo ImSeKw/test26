@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <jsp:include page="/WEB-INF/views/module/headerOne.jsp"></jsp:include>
 <jsp:include page="/WEB-INF/views/module/headerTwo.jsp"></jsp:include>
@@ -30,7 +30,7 @@
 		<div class="col-lg-4"></div>
 		<div class="col col-md-auto col-lg-4 text-center">
 			<h2 class="text-center"></h2>
-			<form method="post"	action="${pageContext.request.contextPath}/country/insertCountry">
+			<form method="post"	action="${pageContext.request.contextPath}/country/insertCountry" enctype="multipart/form-data" method="post" id="countryAdd">
 				<table class="table table-hover">
 					<thead class="mdb-color darken-3">
 						<tr class="text-white">
@@ -41,6 +41,9 @@
 						<tr>
 							<td><input type="text" name="countryName" id="countryName" placeholder="이곳에 나라 이름을 입력하세요"></td>
 						</tr>
+						<tr>
+							<td>나라 사진 : <input type="file" name="file" multiple="multiple"></td>
+						</tr>		
 						<tr>
 							<td>
 								<button type="submit" id="insertButton" class="btn rgba-blue-strong">

@@ -30,7 +30,7 @@
 		<div class="col-lg-4"></div>
 		<div class="col col-md-auto col-lg-4 text-center">
 			<h2 class="text-center"></h2>
-			<form action="${pageContext.request.contextPath}/country/updateCountry" method="post" id="countryUpdate">
+			<form action="${pageContext.request.contextPath}/country/updateCountry?countId=${country.countryId}" method="post" id="countryUpdate">
 				<input type="hidden" name="countryId" value="${country.countryId}">
 				<table class="table table-hover">
 					<thead class="mdb-color darken-3">

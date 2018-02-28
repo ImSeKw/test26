@@ -1,14 +1,18 @@
 package ksmart.project.test26.service;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 @Service
 @Transactional
@@ -54,9 +58,9 @@ public class CountryService {
 	}
 	
 	// 도시 삭제 Action
-	public void deleteCountry(Country country) {
-		logger.debug("{} : CountryService deleteCountry country", country);
-		countryDao.deleteCountry(country);
+	public void deleteCountry(int countryId) {
+		logger.debug("{} : CountryService deleteCountry countryId", countryId);
+		countryDao.deleteCountry(countryId);
 	}
 	
 	// 도시 수정 Action
@@ -72,9 +76,47 @@ public class CountryService {
 	}
 	
 	// 도시 추가 Action
-	public void insertCountry(Country country) {
-		logger.debug("{} : CountryService updateCountry country", country);
-		countryDao.insertCountry(country);
+	public void insertCountry(CountryCommand countryCommand) {
+		logger.debug("{} : CountryService insertCountry countryCommand.getCountryName()", countryCommand.getCountryName());
+
+		logger.debug("{} : CountryService insertCountry countryCommand.getFile().size()", countryCommand.getFile().size());
+		//도시명 셋팅 후 Id값 받기
+		Country country = new Country();
+		country.setCountryName(countryCommand.getCountryName());		
+		int countryId = countryDao.insertCountry(country);
+		logger.debug("{} : CountryService insertCountry country", country);
+		// 여러개의 파일 insert
+		for(MultipartFile file : countryCommand.getFile()) {
+			// 파일 하나당 한번의 DTO
+			CountryFile countryFile = new CountryFile();
+			//16진수 랜덤 숫자 이용
+			UUID uuid = UUID.randomUUID();
+			String fileName = uuid.toString();		
+			logger.debug("{} : CountryService insertCountry fileName", fileName);
+			
+			//오리지날이름에서 마지막
+			String originalName = file.getOriginalFilename();
+			int fileExtNumber = originalName.indexOf(".");
+			String fileExt = originalName.substring(fileExtNumber + 1);
+			logger.debug("{} : CountryService insertCountry fileExt", fileExt);
+			logger.debug("{} : CountryService insertCountry file.getSize()", file.getSize());
+			countryFile.setCountryId(countryId);
+			countryFile.setFileName(fileName);
+			countryFile.setFileExt(fileExt);
+			countryFile.setFileSize(file.getSize());			
+			//2. 파일을 저장
+			countryDao.insertCountryFile(countryFile);
+			File temp = new File("c\\upload\\"+fileName);
+			try {
+				file.transferTo(temp);
+			} catch(IllegalStateException e){
+				e.printStackTrace();
+			} catch(IOException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		
 	}
 	
 	// 도시 전체 조회

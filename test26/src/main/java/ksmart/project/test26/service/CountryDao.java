@@ -32,9 +32,9 @@ public class CountryDao {
 	}
 	
 	// 도시 삭제 Action
-	public void deleteCountry(Country country) {
-		logger.debug("{} : CountryDao deleteCountry country", country);
-		sqlSessionTemplate.delete(NAMESPACE + "deleteCountry", country);
+	public void deleteCountry(int countryId) {
+		logger.debug("{} : CountryDao deleteCountry countryId", countryId);
+		sqlSessionTemplate.delete(NAMESPACE + "deleteCountry", countryId);
 	}
 	
 	// 도시 수정 Action
@@ -49,12 +49,19 @@ public class CountryDao {
 		return sqlSessionTemplate.selectOne(NAMESPACE + "selectCountryId", countryId);
 	}
 	
+	
 	// 도시 추가 Action
-	public void insertCountry(Country country) {
+	public int insertCountry(Country country) {
 		logger.debug("{} : CountryDao insertCountry country", country);
 		sqlSessionTemplate.insert(NAMESPACE + "insertCountry", country);
+		return 0;
 	}
 	
+	// 파일 업로드 Action 
+	public void insertCountryFile(CountryFile countryFile) {
+		logger.debug("{} : CountryDao insertCountry countryFile", countryFile);
+		sqlSessionTemplate.insert(NAMESPACE + "insertCountryFileUpload", countryFile);
+	}
 	// 도시 전체 조회
 	public List<Country> selectCountryList() {
 		logger.debug("CountryDao selectCountryList");
